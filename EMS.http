@@ -1,0 +1,12 @@
+### Get all monthly attendance data by employee id EMP001 - EMP250
+GET http://localhost:5000/employees?employment.joiningDate_lt=2020-01-31
+### Get department wise employee
+GET http://localhost:5000/employees?employment.departmentId=DEPT001
+
+
+### Get all month attendance data
+GET http://localhost:5000/monthlyAttendance?employeeId=EMP093
+
+
+### Get all departments
+GET http://localhost:5000/departments
