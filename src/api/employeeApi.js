@@ -36,6 +36,6 @@ export const employeeApi = {
 		const res = await fetch(
 			`${API_URL}?personalInfo.email=${email}&employeeCode=${code}`,
 		);
-		return res.json();
+		return res;
 	},
 };

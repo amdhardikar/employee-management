@@ -16,7 +16,7 @@ export const AuthProvider = ({ children }) => {
 
 	const login = async (email, employeeCode) => {
 		try {
-			email = email.toLowerCase;
+			email = email.toLowerCase();
 			const response = await employeeApi.getByEmailAndEmployeeCode(
 				email,
 				employeeCode,

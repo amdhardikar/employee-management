@@ -44,6 +44,9 @@ const EmployeeTable = ({ employees, onView }) => {
 									<p className="font-medium text-slate-900">
 										{employee.personalInfo?.fullName}
 									</p>
+									<p className="text-xs text-slate-500">
+										{employee.employeeCode} | {employee.employeeId}
+									</p>
 								</div>
 							</div>
 						</TableCell>
