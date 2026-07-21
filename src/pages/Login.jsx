@@ -21,9 +21,12 @@ const Login = () => {
 
 		if (submitting) return;
 		setError("");
-		setSubmitting(true);
+      setSubmitting(true);
+      
+		const normalizedEmail = email.trim().toLowerCase();
+		const normalizedEmpCode = empCode.trim().toUpperCase();
 
-		const result = await login(email, empCode);
+		const result = await login(normalizedEmail, normalizedEmpCode);
 
 		setSubmitting(false);
 
@@ -77,9 +80,7 @@ const Login = () => {
 								autoComplete="email"
 								placeholder="firstname.lastname@company.com"
 								value={email}
-								onChange={(e) =>
-									setEmail(e.target.value.toLowerCase())
-								}
+								onChange={(e) => setEmail(e.target.value)}
 								className="w-full rounded-sm border border-slate-300 bg-slate-50 py-2.5 pr-3 pl-10 text-sm transition placeholder:text-slate-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none sm:text-sm"
 							/>
 						</div>
@@ -103,9 +104,7 @@ const Login = () => {
 								autoComplete="off"
 								placeholder="EMS-2026-001"
 								value={empCode}
-								onChange={(e) =>
-									setEmpCode(e.target.value.toLowerCase())
-								}
+								onChange={(e) => setEmpCode(e.target.value)}
 								className="w-full rounded-sm border border-slate-300 bg-slate-50 py-2.5 pr-3 pl-10 text-sm transition placeholder:text-slate-500 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500 focus:outline-none sm:text-sm"
 							/>
 						</div>

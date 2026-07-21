@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
 
 	const login = async (email, employeeCode) => {
 		try {
-			email = email.toLowerCase();
 			const response = await employeeApi.getByEmailAndEmployeeCode(
 				email,
 				employeeCode,
@@ -35,7 +34,10 @@ export const AuthProvider = ({ children }) => {
 					profileImage: loggedInUser.personalInfo.profileImage,
 				};
 
-				localStorage.setItem("ems_session", JSON.stringify(sessionData));
+				localStorage.setItem(
+					"ems_session",
+					JSON.stringify(sessionData),
+				);
 				setUser(sessionData);
 				return { success: true };
 			} else {
