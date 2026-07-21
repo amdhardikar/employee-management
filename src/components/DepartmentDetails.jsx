@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import {
+	Users,
+	BadgeCheck,
+	CalendarMinus,
+	UserCheck,
+	FileText,
+	UserX,
+} from "lucide-react";
 
 import {
 	loadDepartmentDetails,
 	loadDepartmentEmployees,
 } from "../utils/departmentDetails.util";
 
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "./common/DataTable";
 import PageLoader from "./common/PageLoader";
-import { STATUS_COLORS } from "../constants/EMSconstants";
+import EmptyState from "./common/EmptyState";
+import StatCard from "./StatCard";
+import DepartmentDetailsTable from "./DepartmentDetailsTable";
+import DepartmentEmployeeCard from "./DepartmentEmployeeCard";
+import { useDepartmentSummary } from "../hooks/useDepartmentSummary";
+import NotFound from "./common/NotFound";
 
 const DepartmentDetails = () => {
 	const { id } = useParams();
@@ -25,15 +30,14 @@ const DepartmentDetails = () => {
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-      const fetchData = async () => {
-         try {
-            setLoading(true);
+		const fetchData = async () => {
+			try {
+				setLoading(true);
 				const departmentData = await loadDepartmentDetails(id);
-            const employeeData = await loadDepartmentEmployees(id);
+				const employeeData = await loadDepartmentEmployees(id);
 
 				setDepartment(departmentData[0]);
-            setEmployees(employeeData);
-            
+				setEmployees(employeeData);
 			} catch (error) {
 				console.error(error);
 			} finally {
@@ -44,149 +48,131 @@ const DepartmentDetails = () => {
 		fetchData();
 	}, [id]);
 
+	const summary = useDepartmentSummary(employees);
+
 	if (loading) {
 		return <PageLoader text="Loading department details..." />;
 	}
 
-	const totalEmployees = employees.length;
-
-	const activeEmployees = employees.filter(
-		(emp) => emp.employment.status === "Active",
-	).length;
-
-	const absentEmployees = employees.filter(
-		(emp) => emp.employment.status === "On Leave",
-	).length;
-
-	const contractEmployees = employees.filter(
-		(emp) => emp.employment.employeeType === "Contract",
-	).length;
-
-	const permanentEmployees = employees.filter(
-		(emp) =>
-			emp.employment.employeeType === "Intern" ||
-			emp.employment.employeeType === "Full time",
-	).length;
-
-	const resignedEmployees = employees.filter(
-		(emp) => emp.employment.status === "Resigned",
-	).length;
+	if (!department) {
+		return (
+			<NotFound
+				title="Department Not Found"
+				message={`No department exists with ID "${id}".`}
+			/>
+		);
+	}
 
 	return (
 		<>
 			{/* Department Summary */}
-			<div className="bg-white p-6">
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-					<div className="space-y-3">
-						<h2 className="text-xl font-semibold text-slate-900">
+			<div className="rounded-sm bg-white p-4 md:p-6">
+				<div className="md:flex md:items-center md:justify-between">
+					<div className="flex items-center justify-between md:block">
+						<h2 className="text-lg font-semibold text-slate-900 md:text-xl">
 							{department?.name}
 						</h2>
 
-						<p className="text-slate-500">
+						<p className="mt-1 text-sm text-slate-500">
 							Department ID: {department?.departmentId}
 						</p>
 					</div>
 
-					<div className="flex flex-wrap items-center justify-end  divide-x divide-slate-200">
-						<div className="px-6 py-4">
-							<div className="text-sm text-slate-500">Employees</div>
-							<div className="text-2xl font-semibold">
-								{totalEmployees}
-							</div>
-						</div>
+					<div className="hidden md:flex md:flex-wrap md:items-center md:justify-end md:divide-x md:divide-slate-200">
+						<StatCard
+							label="Employees"
+							value={summary.totalEmployees}
+						/>
+						<StatCard
+							label="Active"
+							value={summary.activeEmployees}
+						/>
+						<StatCard
+							label="On Leave"
+							value={summary.absentEmployees}
+						/>
+						<StatCard
+							label="Resigned"
+							value={summary.resignedEmployees}
+						/>
+						<StatCard
+							label="Permanent"
+							value={summary.permanentEmployees}
+						/>
+						<StatCard
+							label="Contract"
+							value={summary.contractEmployees}
+						/>
+					</div>
 
-						<div className="px-6 py-4">
-							<div className="text-sm text-slate-500">Active</div>
-							<div className="text-2xl font-semibold">
-								{activeEmployees}
-							</div>
-						</div>
+					<div className="mt-4 grid grid-cols-3 gap-3 md:hidden">
+						<StatCard
+							label="Employees"
+							value={summary.totalEmployees}
+							icon={<Users className="h-4 w-4" />}
+						/>
 
-						<div className="px-6 py-4">
-							<div className="text-sm text-slate-500">On Leave</div>
-							<div className="text-2xl font-semibold">
-								{absentEmployees}
-							</div>
-						</div>
+						<StatCard
+							label="Active"
+							value={summary.activeEmployees}
+							icon={
+								<BadgeCheck className="h-4 w-4 text-green-600" />
+							}
+						/>
 
-						<div className="px-6 py-4">
-							<div className="text-sm text-slate-500">Resigned</div>
-							<div className="text-2xl font-semibold">
-								{resignedEmployees}
-							</div>
-						</div>
+						<StatCard
+							label="On Leave"
+							value={summary.absentEmployees}
+							icon={
+								<CalendarMinus className="h-4 w-4 text-amber-600" />
+							}
+						/>
 
-						<div className="px-6 py-4">
-							<div className="text-sm text-slate-500">Permanent</div>
-							<div className="text-2xl font-semibold">
-								{permanentEmployees}
-							</div>
-						</div>
+						<StatCard
+							label="Resigned"
+							value={summary.resignedEmployees}
+							icon={<UserX className="h-4 w-4 text-red-600" />}
+						/>
 
-						<div className="px-6 py-4">
-							<div className="text-sm text-slate-500">Contract</div>
-							<div className="text-2xl font-semibold">
-								{contractEmployees}
-							</div>
-						</div>
+						<StatCard
+							label="Permanent"
+							value={summary.permanentEmployees}
+							icon={
+								<UserCheck className="h-4 w-4 text-blue-600" />
+							}
+						/>
+
+						<StatCard
+							label="Contract"
+							value={summary.contractEmployees}
+							icon={
+								<FileText className="h-4 w-4 text-violet-600" />
+							}
+						/>
 					</div>
 				</div>
 			</div>
 
 			{/* Employee Table */}
-			<div className="p-5 overflow-y-auto border-t border-slate-200">
-				<Table>
-					<TableHead>
-						<TableRow>
-							<TableHeader className="text-left">
-								Employee Code
-							</TableHeader>
-							<TableHeader className="text-left">Name</TableHeader>
-							<TableHeader className="text-left">
-								Designation
-							</TableHeader>
-							<TableHeader className="text-left">Type</TableHeader>
-							<TableHeader className="text-left">Location</TableHeader>
-							<TableHeader className="text-left">Manager</TableHeader>
-							<TableHeader className="text-center">Status</TableHeader>
-						</TableRow>
-					</TableHead>
+			<div className="overflow-y-auto border-t border-slate-200 p-5">
+				{employees.length > 0 ? (
+					<>
+						<div className="hidden md:block">
+							<DepartmentDetailsTable employees={employees} />
+						</div>
 
-					<TableBody>
-						{employees.map((employee) => (
-							<TableRow key={employee.id}>
-								<TableCell>{employee.employeeId}</TableCell>
-
-								<TableCell>{employee.personalInfo.fullName}</TableCell>
-
-								<TableCell>{employee.employment.designation}</TableCell>
-
-								<TableCell>
-									{employee.employment.employeeType}
-								</TableCell>
-
-								<TableCell>
-									{employee.employment.workLocation}
-								</TableCell>
-
-								<TableCell>
-									{employee.employment.manager?.name}
-								</TableCell>
-
-								<TableCell>
-									<span
-										className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
-											STATUS_COLORS[employee.employment?.status] ||
-											"bg-slate-100 text-slate-700"
-										}`}
-									>
-										{employee.employment?.status}
-									</span>
-								</TableCell>
-							</TableRow>
-						))}
-					</TableBody>
-				</Table>
+						<div className="grid gap-4 md:hidden">
+							{employees.map((employee) => (
+								<DepartmentEmployeeCard
+									key={employee.id}
+									employee={employee}
+								/>
+							))}
+						</div>
+					</>
+				) : (
+					<EmptyState />
+				)}
 			</div>
 		</>
 	);

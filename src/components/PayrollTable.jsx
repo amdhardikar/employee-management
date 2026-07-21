@@ -22,7 +22,6 @@ const PayrollTable = ({ payrolls }) => {
 					<TableHeader className="text-left">Net Salary</TableHeader>
 					<TableHeader className="text-left">Month</TableHeader>
 					<TableHeader className="text-left">Status</TableHeader>
-					<TableHeader className="text-center">Actions</TableHeader>
 				</TableRow>
 			</TableHead>
 
@@ -78,14 +77,6 @@ const PayrollTable = ({ payrolls }) => {
 							>
 								{employee.recentPayslip?.status}
 							</span>
-						</TableCell>
-
-						<TableCell>
-							<div className="flex justify-center gap-2">
-								<button className="rounded-md border p-2 hover:bg-slate-100">
-									<Eye className="h-4 w-4" />
-								</button>
-							</div>
 						</TableCell>
 					</TableRow>
 				))}

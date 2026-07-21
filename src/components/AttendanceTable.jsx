@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Eye } from "lucide-react";
 import {
 	Table,
@@ -37,7 +38,7 @@ const AttendanceTable = ({ employees, onView }) => {
 								/>
 
 								<div>
-									<p className="font-medium">
+									<p className="font-medium  text-slate-900">
 										{employee.personalInfo?.fullName}
 									</p>
 									<span className="text-sm text-slate-400">
@@ -51,7 +52,7 @@ const AttendanceTable = ({ employees, onView }) => {
 
 						<TableCell>
 							<div className="flex items-center gap-2">
-								<div className="h-2 w-24 rounded-full bg-slate-200">
+								<div className="h-2 w-20 lg:w-24 rounded-full bg-slate-200">
 									<div
 										className="h-2 rounded-full bg-green-500"
 										style={{
@@ -105,6 +106,11 @@ const AttendanceTable = ({ employees, onView }) => {
 			</TableBody>
 		</Table>
 	);
+};
+
+AttendanceTable.propTypes = {
+	employees: PropTypes.array.isRequired,
+	onView: PropTypes.func.isRequired,
 };
 
 export default AttendanceTable;

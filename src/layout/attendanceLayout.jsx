@@ -4,9 +4,9 @@ import Header from "../components/common/Header";
 const AttendanceLayout = () => {
 	return (
 		<div className="flex h-full flex-col">
-			<div className="sticky top-0 z-20 bg-slate-50 ">
+			{/* <div className="sticky top-0 z-20 bg-slate-50 ">
 				<Header />
-			</div>
+			</div> */}
 			<Outlet />
 		</div>
 	);

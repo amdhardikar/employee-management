@@ -1,4 +1,3 @@
-import { Eye } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +11,7 @@ import {
 	getAttendanceDepartments,
 } from "../utils/attendance.util";
 import { useAttendanceFilters } from "../hooks/useAttendanceFilter";
+import AttendanceCard from "../components/AttendanceCard";
 
 const Attendance = () => {
 	const [employees, setEmployees] = useState([]);
@@ -23,18 +23,17 @@ const Attendance = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		const loadData = async () => {
+			try {
+				setLoading(true);
+				const data = await loadAttendance();
+				setEmployees(data);
+			} finally {
+				setLoading(false);
+			}
+		};
 		loadData();
 	}, []);
-
-	const loadData = async () => {
-		try {
-			setLoading(true);
-			const data = await loadAttendance();
-			setEmployees(data);
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	const departments = getAttendanceDepartments(employees);
 
@@ -54,24 +53,38 @@ const Attendance = () => {
 
 	return (
 		<>
-			<div className="sticky top-0 z-20 bg-slate-50">
+			<div className="sticky top-0 z-10 bg-slate-50 shadow-sm">
 				<Filters
 					search={search}
 					department={department}
 					departments={departments}
-					onSearchChange={(e) => setSearch(e.target.value)}
-					onDepartmentChange={(e) => setDepartment(e.target.value)}
 					showSearch
 					showDepartment
 					showStatus={false}
+					onSearchChange={(e) => setSearch(e.target.value)}
+					onDepartmentChange={(e) => setDepartment(e.target.value)}
 				/>
 			</div>
 			<div className="p-5 overflow-y-auto border-t border-slate-200">
 				{filteredAttendance.length > 0 ? (
-					<AttendanceTable
-						employees={filteredAttendance}
-						onView={handleViewEmployee}
-					/>
+					<>
+						<div className="hidden md:block">
+							<AttendanceTable
+								employees={filteredAttendance}
+								onView={handleViewEmployee}
+							/>
+						</div>
+
+						<div className="grid gap-4 md:hidden">
+							{filteredAttendance.map((employee) => (
+								<AttendanceCard
+									key={employee.employeeId}
+									employee={employee}
+									onView={handleViewEmployee}
+								/>
+							))}
+						</div>
+					</>
 				) : (
 					<EmptyState />
 				)}

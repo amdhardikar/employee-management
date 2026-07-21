@@ -9,4 +9,4 @@ GET http://localhost:5000/monthlyAttendance?employeeId=EMP093
 
 
 ### Get all departments
-GET http://localhost:5000/departments
+GET http://localhost:5000/departments  

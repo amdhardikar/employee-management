@@ -1,4 +1,5 @@
 import { Eye } from "lucide-react";
+import PropTypes from "prop-types";
 import { STATUS_COLORS } from "../constants/EMSconstants";
 import {
 	Table,
@@ -16,8 +17,6 @@ const EmployeeTable = ({ employees, onView }) => {
 				<TableRow>
 					<TableHeader className="text-left">Employee</TableHeader>
 					<TableHeader className="text-left">Designation</TableHeader>
-
-					<TableHeader className="text-left">Location</TableHeader>
 					<TableHeader className="text-left">Email</TableHeader>
 					<TableHeader className="text-left">Phone</TableHeader>
 					<TableHeader className="text-left">Status</TableHeader>
@@ -51,13 +50,22 @@ const EmployeeTable = ({ employees, onView }) => {
 							</div>
 						</TableCell>
 
-						<TableCell>{employee.employment?.designation}</TableCell>
+						<TableCell>
+							<p className="font-medium text-slate-900">
+								{employee.employment?.designation}
+							</p>
+							<p className="text-xs text-slate-500">
+								{employee.employment?.departmentName}
+							</p>
+						</TableCell>
 
-						<TableCell>{employee.employment?.workLocation}</TableCell>
+						<TableCell className="max-w-55] truncate">
+							{employee.personalInfo?.email}
+						</TableCell>
 
-						<TableCell>{employee.personalInfo?.email}</TableCell>
-
-						<TableCell>{employee.personalInfo?.phone}</TableCell>
+						<TableCell className="whitespace-nowrap">
+							{employee.personalInfo?.phone}
+						</TableCell>
 
 						<TableCell>
 							<span
@@ -85,6 +93,11 @@ const EmployeeTable = ({ employees, onView }) => {
 			</TableBody>
 		</Table>
 	);
+};
+
+EmployeeTable.propTypes = {
+	employees: PropTypes.array.isRequired,
+	onView: PropTypes.func.isRequired,
 };
 
 export default EmployeeTable;

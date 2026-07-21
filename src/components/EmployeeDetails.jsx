@@ -1,104 +1,114 @@
 import { useEffect, useState } from "react";
-import { useOutletContext, useParams, useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
+import { useParams } from "react-router-dom";
 import { employeeApi } from "../api/employeeApi";
-import {
-	Mail,
-	Phone,
-	MapPin,
-	Building2,
-	Briefcase,
-	Wallet,
-	Shield,
-	X,
-} from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import PageLoader from "./common/PageLoader";
 import { STATUS_COLORS } from "../constants/EMSconstants";
+import NotFound from "./common/NotFound";
 
 const EmployeeDetails = () => {
 	const { id } = useParams();
-	const { setActions } = useOutletContext();
 	const [employee, setEmployee] = useState(null);
-	const navigate = useNavigate();
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		setActions([
-			{
-				label: "Close",
-				icon: <X className="h-4 w-4" />,
-				onClick: () => navigate("/employees"),
-			},
-		]);
+		const loadEmployee = async () => {
+			try {
+				setLoading(true);
+
+				const data = await employeeApi.getById(id);
+
+				if (data?.length > 0) {
+					setEmployee(data[0]);
+				} else {
+					setEmployee(null);
+				}
+			} finally {
+				setLoading(false);
+			}
+		};
 		loadEmployee();
 	}, []);
-
-	const loadEmployee = async () => {
-		try {
-			setLoading(true);
-
-			const data = await employeeApi.getById(id);
-			setEmployee(data[0]);
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	if (loading) {
 		return <PageLoader text="Loading employee details..." />;
 	}
 
+	if (!employee) {
+		return (
+			<NotFound
+				title="Employee Not Found"
+				message={`No employee exists with ID "${id}".`}
+			/>
+		);
+	}
+
 	return (
-		<div className="space-y-6 p-4 md:p-6">
-			<div className=" bg-white p-6 shadow-sm">
-				<div className="flex flex-col gap-6 md:flex-row">
+		<div className="space-y-4 p-4 md:space-y-6 md:p-6">
+			<div className="rounded-sm border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+				<div className="flex items-start gap-4">
 					<img
 						src={employee.personalInfo.profileImage}
-						alt=""
-						className="h-28 w-28 rounded-full object-cover"
+						alt={employee.personalInfo.fullName}
+						className="h-16 w-16 shrink-0 rounded-full object-cover md:h-24 md:w-24"
 					/>
 
-					<div className="flex-1">
-						<div className="flex flex-wrap items-center gap-3">
-							<h1 className="text-2xl font-bold">
-								{employee.personalInfo.fullName}
-							</h1>
+					<div className="min-w-0 flex-1">
+						<h1 className="text-lg font-semibold text-slate-900 md:text-2xl">
+							{employee.personalInfo.fullName}
+						</h1>
+						<div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
+							<div className="flex items-center gap-2">
+								<Mail className="h-4 w-4 shrink-0 text-slate-600" />
 
-							<span
-								className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
-									STATUS_COLORS[employee.employment?.status] ||
-									"bg-slate-100 text-slate-700"
-								}`}
-							>
-								{employee.employment?.status}
+								<span className="text-sm break-all text-slate-600">
+									{employee.personalInfo.email}
+								</span>
+							</div>
+
+							<div className="flex items-center gap-2">
+								<Phone className="h-4 w-4 shrink-0 text-slate-600" />
+
+								<span className="text-sm text-slate-600">
+									{employee.personalInfo.phone}
+								</span>
+							</div>
+						</div>
+
+						<div className="mt-2 flex gap-2 md:hidden">
+							<span className="text-sm text-slate-600">
+								{employee.employment.designation}
+							</span>
+
+							<span className="inline text-slate-600">|</span>
+
+							<span className="text-sm text-slate-600">
+								{employee.employeeCode}
 							</span>
 						</div>
 
-						<p className="mt-1 text-slate-500">
-							{employee.employment.designation}
-						</p>
+						<div className="mt-2 hidden md:flex md:flex-wrap md:items-center md:gap-2">
+							<span className="text-sm text-slate-600">
+								{employee.employment.designation}
+							</span>
 
-						<p className="text-sm text-slate-400">
-							{employee.employeeCode}
-						</p>
+							<span className="inline text-slate-600">|</span>
 
-						<div className="mt-4 flex flex-wrap gap-5 text-sm">
-							<div className="flex items-center gap-2">
-								<Mail size={16} />
-								{employee.personalInfo.email}
-							</div>
-
-							<div className="flex items-center gap-2">
-								<Phone size={16} />
-								{employee.personalInfo.phone}
-							</div>
+							<span className="text-sm text-slate-600">
+								{employee.employeeCode}
+							</span>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div className="grid gap-6 lg:grid-cols-2">
+			<div className="grid gap-4 md:gap-6 lg:grid-cols-2">
 				<SectionCard title="Personal Information">
-					<InfoRow label="Gender" value={employee.personalInfo.gender} />
+					<InfoRow
+						label="Gender"
+						value={employee.personalInfo.gender}
+					/>
 					<InfoRow
 						label="Date of Birth"
 						value={new Date(
@@ -176,7 +186,9 @@ const EmployeeDetails = () => {
 
 					<InfoRow
 						label="Manager"
-						value={employee.employment.manager?.name || "Not Assigned"}
+						value={
+							employee.employment.manager?.name || "Not Assigned"
+						}
 					/>
 				</SectionCard>
 
@@ -227,7 +239,11 @@ const EmployeeDetails = () => {
 
 					<InfoRow
 						label="Promotion Eligible"
-						value={employee.performance.promotionEligible ? "Yes" : "No"}
+						value={
+							employee.performance.promotionEligible
+								? "Yes"
+								: "No"
+						}
 					/>
 
 					<InfoRow
@@ -251,7 +267,10 @@ const EmployeeDetails = () => {
 						label="IFSC Code"
 						value={employee.bankDetails.ifscCode}
 					/>
-					<InfoRow label="Branch" value={employee.bankDetails.branch} />
+					<InfoRow
+						label="Branch"
+						value={employee.bankDetails.branch}
+					/>
 				</SectionCard>
 
 				<SectionCard title="Leave Balance">
@@ -290,23 +309,30 @@ const EmployeeDetails = () => {
 						label="Net Salary"
 						value={`₹${employee.recentPayslip.netSalary.toLocaleString()}`}
 					/>
-					<InfoRow label="Status" value={employee.recentPayslip.status} />
+					<InfoRow
+						label="Status"
+						value={employee.recentPayslip.status}
+					/>
 				</SectionCard>
 
 				<SectionCard title="Address">
 					<div className="space-y-4">
 						<div>
-							<p className=" text-slate-500">Current Address</p>
+							<p className="text-sm text-slate-500">
+								Current Address
+							</p>
 
-							<p className="mt-1.5 ">
+							<p className="mt-1.5 text-sm">
 								{employee.address.currentAddress.street},
 								{employee.address.currentAddress.city}
 							</p>
 						</div>
 
 						<div>
-							<p className=" text-slate-500">Permanent Address</p>
-							<p className="mt-1.5 ">
+							<p className="text-sm text-slate-500">
+								Permanent Address
+							</p>
+							<p className="mt-1.5 text-sm">
 								{employee.address.permanentAddress.street},
 								{employee.address.permanentAddress.city}
 							</p>
@@ -315,12 +341,18 @@ const EmployeeDetails = () => {
 				</SectionCard>
 
 				<SectionCard title="Emergency Contact">
-					<InfoRow label="Name" value={employee.emergencyContact.name} />
+					<InfoRow
+						label="Name"
+						value={employee.emergencyContact.name}
+					/>
 					<InfoRow
 						label="Relationship"
 						value={employee.emergencyContact.relationship}
 					/>
-					<InfoRow label="Phone" value={employee.emergencyContact.phone} />
+					<InfoRow
+						label="Phone"
+						value={employee.emergencyContact.phone}
+					/>
 				</SectionCard>
 			</div>
 
@@ -329,7 +361,7 @@ const EmployeeDetails = () => {
 					{employee.performance.skills.map((skill) => (
 						<span
 							key={skill}
-							className="rounded-full bg-slate-100 px-3 py-1 text-sm"
+							className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium md:text-sm"
 						>
 							{skill}
 						</span>
@@ -338,13 +370,13 @@ const EmployeeDetails = () => {
 			</SectionCard>
 
 			<SectionCard title="Documents">
-				<div className="space-y-3">
+				<div className="">
 					{employee.documents.map((doc) => (
 						<div
 							key={doc.id}
-							className="flex items-center justify-between border-b-2 p-3 border-gray-200 last:border-none"
+							className="flex flex-row items-center justify-between gap-2 border-b border-slate-200 py-3 last:border-none"
 						>
-							<span>{doc.type}</span>
+							<span className="text-sm">{doc.type}</span>
 
 							<span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-700">
 								{doc.status}
@@ -359,18 +391,23 @@ const EmployeeDetails = () => {
 
 function InfoRow({ label, value }) {
 	return (
-		<div className="flex justify-between py-2 last:border-none">
-			<span className="text-slate-500">{label}</span>
-			<span className="font-medium">{value}</span>
+		<div className="flex flex-col gap-1 py-2 sm:flex-row sm:items-center sm:justify-between">
+			<span className="text-sm text-slate-500">{label}</span>
+
+			<span className="wrap-break-words text-sm font-medium text-slate-900 sm:text-right">
+				{value}
+			</span>
 		</div>
 	);
 }
 
 function SectionCard({ title, children, action }) {
 	return (
-		<div className=" border-slate-200 bg-white p-6 shadow-sm">
-			<div className="mb-5 flex items-center justify-between">
-				<h3 className="text-lg font-semibold text-slate-900">{title}</h3>
+		<div className="rounded-sm border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+			<div className="mb-2 flex items-center justify-between">
+				<h3 className="text-base font-semibold text-slate-900 md:text-lg">
+					{title}
+				</h3>
 
 				{action}
 			</div>
@@ -379,5 +416,16 @@ function SectionCard({ title, children, action }) {
 		</div>
 	);
 }
+
+InfoRow.propTypes = {
+	label: PropTypes.string.isRequired,
+	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+};
+
+SectionCard.propTypes = {
+	title: PropTypes.string.isRequired,
+	children: PropTypes.node.isRequired,
+	action: PropTypes.node,
+};
 
 export default EmployeeDetails;

@@ -1,7 +1,18 @@
-const EmptyState = () => {
+const EmptyState = ({
+	title = "No Data Found",
+	message = "There is no data available to display.",
+}) => {
 	return (
-		<div className="rounded-2xl border border-slate-200 bg-white p-10 text-center">
-			<p className="text-slate-500">No employees found</p>
+		<div className="p-10">
+			<div className="flex min-h-75 flex-col items-center justify-center text-center">
+				<div>
+					<h2 className="text-lg font-semibold text-slate-900">
+						{title}
+					</h2>
+
+					<p className="mt-1 text-sm text-slate-500">{message}</p>
+				</div>
+			</div>
 		</div>
 	);
 };

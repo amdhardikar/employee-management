@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Eye, Star } from "lucide-react";
 import {
 	Table,
@@ -9,8 +10,7 @@ import {
 } from "./common/DataTable";
 
 const DepartmentTable = ({ departments = [], employees = [], onView }) => {
-   const getDepartmentStats = (departmentId) => {
-
+	const getDepartmentStats = (departmentId) => {
 		const departmentEmployees = employees.filter(
 			(emp) => emp.employment?.departmentId === departmentId,
 		);
@@ -85,7 +85,7 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 						<TableRow key={department.departmentId}>
 							<TableCell>
 								<div>
-									<p className="font-medium text-slate-900">
+									<p className="text-sm font-medium text-slate-900">
 										{department.name}
 									</p>
 
@@ -107,7 +107,7 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 
 							<TableCell className="text-center">
 								<div className="flex items-center justify-center gap-2">
-									<Star className="h-[1.2rem] w-[1.2rem] b text-amber-300 fill-yellow-500" />{" "}
+									<Star className="h-[1.2rem] w-[1.2rem] text-amber-300 fill-yellow-500" />{" "}
 									<span>{stats.avgRating}</span>
 								</div>
 							</TableCell>
@@ -117,11 +117,17 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 									{stats.locations.slice(0, 2).map((location) => (
 										<span
 											key={location}
-											className="rounded bg-slate-100 px-2 py-1 text-xs"
+											className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700"
 										>
 											{location}
 										</span>
 									))}
+
+									{stats.locations.length > 2 && (
+										<span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700">
+											+{stats.locations.length - 2}
+										</span>
+									)}
 								</div>
 							</TableCell>
 
@@ -145,6 +151,12 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 			</TableBody>
 		</Table>
 	);
+};
+
+DepartmentTable.propTypes = {
+	departments: PropTypes.array.isRequired,
+	employees: PropTypes.array.isRequired,
+	onView: PropTypes.func.isRequired,
 };
 
 export default DepartmentTable;

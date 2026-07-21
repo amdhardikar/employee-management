@@ -32,14 +32,14 @@ const Breadcrumb = () => {
 	});
 
 	return (
-		<nav aria-label="Breadcrumb">
+		<nav aria-label="Breadcrumb ">
 			<ol className="flex items-center gap-2 text-sm text-slate-500">
 				<li>
 					<NavLink
 						to="/dashboard"
 						className="flex items-center hover:text-slate-900"
 					>
-						<Home size={18} />
+						<Home size={16} />
 					</NavLink>
 				</li>
 
@@ -48,16 +48,16 @@ const Breadcrumb = () => {
 
 					return (
 						<li key={item.label} className="flex items-center gap-2">
-							<ChevronRight size={18} />
+							<ChevronRight size={16} />
 
 							{isLast ? (
-								<span className="font-medium text-[18px] text-slate-900">
+								<span className="font-medium  text-slate-900">
 									{item.label}
 								</span>
 							) : (
 								<NavLink
 									to={item.path}
-									className="text-[18px] hover:text-slate-900"
+									className="hover:text-slate-900"
 								>
 									{item.label}
 								</NavLink>

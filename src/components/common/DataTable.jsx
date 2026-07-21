@@ -20,14 +20,16 @@ export const TableRow = ({ children, className = "" }) => (
 
 export const TableHeader = ({ children, className = "" }) => (
 	<th
-		className={`px-4 py-3 text-xs font-semibold uppercase tracking-wider text-slate-900 ${className}`}
+		className={`px-4 py-3 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-slate-900 ${className}`}
 	>
 		{children}
 	</th>
 );
 
 export const TableCell = ({ children, className = "" }) => (
-	<td className={`px-4 py-3 text-base text-slate-700 ${className}`}>
+	<td
+		className={`px-3 lg:px-4 py-3 text-xs lg:text-sm text-slate-700 ${className}`}
+	>
 		{children}
 	</td>
 );

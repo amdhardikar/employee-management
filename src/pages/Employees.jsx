@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Filters from "../components/common/Filters";
-import EmployeeList from "../components/EmployeeList";
 import EmployeeTable from "../components/EmployeeTable";
 
 import EmptyState from "../components/common/EmptyState";
@@ -14,6 +13,7 @@ import {
 	loadEmployees,
 } from "../utils/employee.util";
 import { useEmployeeFilters } from "../hooks/useEmployeeFilters";
+import EmployeeCard from "../components/EmployeeCard";
 
 const Employees = () => {
 	const [employees, setEmployees] = useState([]);
@@ -57,28 +57,42 @@ const Employees = () => {
 
 	return (
 		<>
-			<div className="sticky top-0 z-20 bg-slate-50">
+			<div className="sticky top-0 z-10 bg-white shadow-sm">
 				<Filters
 					search={search}
 					department={department}
 					status={status}
 					statusList={statusList}
 					departments={departments}
-					onSearchChange={(e) => setSearch(e.target.value)}
-					onDepartmentChange={(e) => setDepartment(e.target.value)}
-					onStatusChange={(e) => setStatus(e.target.value)}
 					showSearch
 					showDepartment
 					showStatus
+					onSearchChange={(e) => setSearch(e.target.value)}
+					onDepartmentChange={(e) => setDepartment(e.target.value)}
+					onStatusChange={(e) => setStatus(e.target.value)}
 				/>
 			</div>
 
 			<div className="p-5 overflow-y-auto border-t border-slate-200">
 				{filteredEmployees.length > 0 ? (
-					<EmployeeTable
-						employees={filteredEmployees}
-						onView={handleViewEmployee}
-					/>
+					<>
+						<div className="hidden md:block">
+							<EmployeeTable
+								employees={filteredEmployees}
+								onView={handleViewEmployee}
+							/>
+						</div>
+
+						<div className="grid gap-4 md:hidden">
+							{filteredEmployees.map((employee) => (
+								<EmployeeCard
+									key={employee.id}
+									employee={employee}
+									onView={handleViewEmployee}
+								/>
+							))}
+						</div>
+					</>
 				) : (
 					<EmptyState />
 				)}

@@ -11,10 +11,10 @@ export const ATTENDANCE_STATUS_COLORS = {
 	Leave: "bg-amber-100 text-amber-700",
 };
 
-export const WORKMODE_COLORS = {
-	Onsite: "bg-blue-100 text-blue-700",
-	Remote: "bg-green-100 text-green-700",
-	Hybrid: "bg-yellow-100 text-yellow-700",
+export const ATTENDANCE_PERCENTAGE_COLORS = {
+	EXCELLENT: "bg-green-100 text-green-700",
+	AVERAGE: "bg-yellow-100 text-yellow-700",
+	POOR: "bg-red-100 text-red-700",
 };
 
 export const PAYROLL_STATUS_COLORS = {

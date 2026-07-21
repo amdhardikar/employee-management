@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import { Users, UserPlus, Briefcase, Calendar } from "lucide-react";
-import { employeeApi } from "../api/employeeApi";
-import { departmentApi } from "../api/departmentApi";
+import {
+	loadDashboardData,
+	getRecentEmployees,
+	getDepartmentStats,
+	getEmployeeStatus,
+} from "../utils/dashboard.util";
+import { useDashboardSummary } from "../hooks/useDashboardSummary";
+import PageLoader from "../components/common/PageLoader";
 
 const Dashboard = () => {
 	const [employees, setEmployees] = useState([]);
@@ -10,111 +16,59 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const empData = await employeeApi.getAll();
-			const deptData = await departmentApi.getAll();
+			try {
+				setLoading(true);
 
-			setEmployees(empData);
-			setDepartments(deptData);
-			setLoading(false);
+				const { employees, departments } = await loadDashboardData();
+
+				setEmployees(employees);
+				setDepartments(departments);
+			} finally {
+				setLoading(false);
+			}
 		};
 
 		fetchData();
 	}, []);
 
-	// Dashboard Stats
-	const totalEmployees = employees.length;
-
-	const activeEmployees = employees.filter(
-		(emp) => emp.employment.status === "Active",
-	).length;
-
-	const totalDepartments = departments.length;
-
-	const avgAttendance =
-		employees.length > 0
-			? Math.round(
-					employees.reduce(
-						(sum, emp) => sum + emp.attendance.attendancePercentage,
-						0,
-					) / employees.length,
-				)
-			: 0;
-
+	const summary = useDashboardSummary(employees, departments);
+	const recentEmployees = getRecentEmployees(employees);
+	const { departmentStats, maxDeptCount } = getDepartmentStats(
+		employees,
+		departments,
+	);
+   const employeeStatus = getEmployeeStatus(employees);
+   
 	const stats = [
 		{
 			title: "Total Employees",
-			value: totalEmployees,
+			value: summary.totalEmployees,
 			icon: <Users size={28} />,
 		},
 		{
 			title: "Active Employees",
-			value: activeEmployees,
+			value: summary.activeEmployees,
 			icon: <UserPlus size={28} />,
 		},
 		{
 			title: "Departments",
-			value: totalDepartments,
+			value: summary.totalDepartments,
 			icon: <Briefcase size={28} />,
 		},
 		{
 			title: "Attendance",
-			value: `${avgAttendance}%`,
+			value: `${summary.avgAttendance}%`,
 			icon: <Calendar size={28} />,
 		},
 	];
 
-	// Recent Employees
-	const recentEmployees = [...employees]
-		.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-		.slice(0, 5);
-
-	// Department Overview
-	const departmentStats = departments.map((dept) => ({
-		name: dept.name,
-		count: employees.filter(
-			(emp) => emp.employment.departmentId === dept.departmentId,
-		).length,
-	}));
-
-	const maxDeptCount = Math.max(...departmentStats.map((d) => d.count), 1);
-
-	// Employee Status
-	const employeeStatus = {
-		active: employees.filter((e) => e.employment.status === "Active").length,
-		onLeave: employees.filter((e) => e.employment.status === "On Leave")
-			.length,
-		resigned: employees.filter((e) => e.employment.status === "Resigned")
-			.length,
-	};
-
-	// Payroll
-	const monthlyPayroll = employees.reduce(
-		(sum, emp) => sum + emp.salary.netSalary,
-		0,
-	);
-
-	// Average Rating
-	const avgRating =
-		employees.length > 0
-			? (
-					employees.reduce(
-						(sum, emp) => sum + emp.performance.currentRating,
-						0,
-					) / employees.length
-				).toFixed(1)
-			: 0;
-
 	if (loading) {
-		return (
-			<div className="h-screen flex items-center justify-center">
-				Loading Dashboard...
-			</div>
-		);
+		return <PageLoader text="Loading dashboard..."/>;
 	}
 
 	return (
 		<div className="flex h-screen bg-linear-to-br from-slate-50 via-white to-indigo-50/30">
-			<main className="flex-1 p-8 overflow-auto">
+			<main className="flex-1 p-8">
 				{/* Header */}
 				<div className="mb-8">
 					<h2 className="text-3xl font-bold text-gray-800">Dashboard</h2>
@@ -220,7 +174,7 @@ const Dashboard = () => {
 
 						<div className="text-center py-8">
 							<h2 className="text-5xl font-bold text-green-600">
-								{avgAttendance}%
+								{summary.avgAttendance}%
 							</h2>
 
 							<p className="text-gray-500 mt-2">
@@ -267,7 +221,7 @@ const Dashboard = () => {
 
 						<div className="text-center py-6">
 							<h2 className="text-4xl font-bold text-indigo-600">
-								₹{monthlyPayroll.toLocaleString("en-IN")}
+								₹{summary.monthlyPayroll.toLocaleString("en-IN")}
 							</h2>
 
 							<p className="text-gray-500 mt-2">
@@ -284,7 +238,7 @@ const Dashboard = () => {
 
 						<div className="text-center py-6">
 							<h2 className="text-5xl font-bold text-orange-500">
-								{avgRating}
+								{summary.avgRating}
 							</h2>
 
 							<p className="text-gray-500 mt-2">
