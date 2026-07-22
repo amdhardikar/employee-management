@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AuthContext } from "./AuthContext";
 import { employeeApi } from "../api/employeeApi";
+import PropTypes from "prop-types";
 
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children }) => {
 				};
 			}
 		} catch (error) {
-			console.log("Error :", error);
+			console.error("Error:", error);
 			return { success: false, message: "Server connection error." };
 		}
 	};
@@ -62,4 +63,8 @@ export const AuthProvider = ({ children }) => {
 			{!loading && children}
 		</AuthContext.Provider>
 	);
+};
+
+AuthProvider.propTypes = {
+	children: PropTypes.node.isRequired,
 };

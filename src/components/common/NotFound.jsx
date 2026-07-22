@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
 const NotFound = ({
@@ -26,6 +27,11 @@ const NotFound = ({
 			</div>
 		</div>
 	);
+};
+
+NotFound.propTypes = {
+	title: PropTypes.string,
+	message: PropTypes.string,
 };
 
 export default NotFound;

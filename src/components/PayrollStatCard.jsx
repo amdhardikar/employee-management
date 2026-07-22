@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const PayrollStatCard = ({ title, value, icon }) => {
+const PayrollStatCard = ({ title, value }) => {
 	return (
 		<div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition-shadow hover:shadow-md">
 			<div className="flex items-center justify-between">

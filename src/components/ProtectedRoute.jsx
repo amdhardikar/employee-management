@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Navigate, useLocation, Outlet } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
+import PropTypes from "prop-types";
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
 	const { user, loading } = useContext(AuthContext);
@@ -24,4 +25,10 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 
 	return children ? children : <Outlet />;
 };
+
+ProtectedRoute.propTypes = {
+	children: PropTypes.node,
+	allowedRoles: PropTypes.arrayOf(PropTypes.string),
+};
+
 export default ProtectedRoute;

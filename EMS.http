@@ -1,12 +1,101 @@
-### Get all monthly attendance data by employee id EMP001 - EMP250
-GET http://localhost:5000/employees?employment.joiningDate_lt=2020-01-31
-### Get department wise employee
-GET http://localhost:5000/employees?employment.departmentId=DEPT001
+@baseUrl = http://localhost:5000
 
+################################################################################
 
-### Get all month attendance data
-GET http://localhost:5000/monthlyAttendance?employeeId=EMP093
+# DEPARTMENTS
 
+################################################################################
 
 ### Get all departments
-GET http://localhost:5000/departments  
+GET {{baseUrl}}/departments
+
+### Get department by departmentId
+GET {{baseUrl}}/departments?departmentId=DEPT001
+
+################################################################################
+
+# EMPLOYEES
+
+################################################################################
+
+### Get all employees
+GET {{baseUrl}}/employees
+
+### Get employee by employeeId
+GET {{baseUrl}}/employees?employeeId=EMP001
+
+### Get employees by department
+GET {{baseUrl}}/employees?employment.departmentId=DEPT001
+
+### Login - employee by email and employee code
+GET {{baseUrl}}/employees?personalInfo.email=lionel.bergnaum@company.com&employeeCode=EMS-2026-001
+
+### Employees joined before Jan 2020
+GET {{baseUrl}}/employees?employment.joiningDate_lt=2022-01-31
+
+### Employees joined after Jan 2020
+GET {{baseUrl}}/employees?employment.joiningDate_gt=2025-11-01
+
+### Employees by designation
+GET {{baseUrl}}/employees?employment.designation=Backend Developer
+
+### Employees by employment status
+GET {{baseUrl}}/employees?employment.status=Resigned
+
+### Employees by employee type
+GET {{baseUrl}}/employees?employment.employeeType=Intern
+
+### Employees by work location
+GET {{baseUrl}}/employees?employment.workLocation=Mumbai
+
+### Employees by manager id
+GET {{baseUrl}}/employees?employment.manager.employeeId=EMP002
+
+
+### Search employee by full name
+GET {{baseUrl}}/employees?personalInfo.fullName=Kraig Gutkowski
+
+### Search employee by email
+GET {{baseUrl}}/employees?personalInfo.email=kraig.gutkowski@company.com
+
+### Paginated employees
+GET {{baseUrl}}/employees?_page=1&_per_page=2
+
+### Sort employees by joining date descending
+GET {{baseUrl}}/employees?_sort=-employment.joiningDate
+
+### Sort employees by name ascending
+GET {{baseUrl}}/employees?_sort=personalInfo.fullName
+
+################################################################################
+
+# ATTENDANCE
+
+################################################################################
+
+### Get all attendance records
+GET {{baseUrl}}/monthlyAttendance
+
+### Get attendance by employee id
+GET {{baseUrl}}/monthlyAttendance?employeeId=EMP001
+
+### Latest attendance by employee
+GET {{baseUrl}}/monthlyAttendance?employeeId=EMP001&_sort=-createdAt
+
+### Attendance by month
+GET {{baseUrl}}/monthlyAttendance?monthName=January
+
+### Attendance by year
+GET {{baseUrl}}/monthlyAttendance?year=2026
+
+### Attendance by month and year
+GET {{baseUrl}}/monthlyAttendance?monthName=January&year=2025
+
+### Attendance records sorted by date descending
+GET {{baseUrl}}/monthlyAttendance?_sort=-createdAt
+
+### Attendance records sorted by createdAt descending
+GET {{baseUrl}}/monthlyAttendance?_sort=-createdAt
+
+### Attendance records with pagination
+GET {{baseUrl}}/monthlyAttendance?_page=1&_per_page=2

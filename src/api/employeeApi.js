@@ -11,7 +11,6 @@ export const employeeApi = {
 
 		return managers;
 	},
-
 	getAll: async (filter) => {
 		if (filter) {
 			const res = await fetch(`${API_URL}?${filter}`);
@@ -21,17 +20,14 @@ export const employeeApi = {
 			return res.json();
 		}
 	},
-
 	getById: async (id) => {
 		const res = await fetch(`${API_URL}?employeeId=${id}`);
 		return res.json();
 	},
-
 	getByDepartment: async (id) => {
 		const res = await fetch(`${API_URL}?employment.departmentId=${id}`);
 		return res.json();
 	},
-
 	getByEmailAndEmployeeCode: async (email, code) => {
 		const res = await fetch(
 			`${API_URL}?personalInfo.email=${email}&employeeCode=${code}`,
@@ -39,3 +35,5 @@ export const employeeApi = {
 		return res;
 	},
 };
+
+

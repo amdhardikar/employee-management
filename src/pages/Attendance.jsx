@@ -48,7 +48,7 @@ const Attendance = () => {
 	};
 
 	if (loading) {
-		return <PageLoader text="Loading attendance details..." />;
+		return <PageLoader text="Loading attendance..." />;
 	}
 
 	return (
@@ -68,14 +68,14 @@ const Attendance = () => {
 			<div className="p-5 overflow-y-auto border-t border-slate-200">
 				{filteredAttendance.length > 0 ? (
 					<>
-						<div className="hidden md:block">
+						<div className="hidden lg:block">
 							<AttendanceTable
 								employees={filteredAttendance}
 								onView={handleViewEmployee}
 							/>
 						</div>
 
-						<div className="grid gap-4 md:hidden">
+						<div className="grid gap-4 lg:hidden">
 							{filteredAttendance.map((employee) => (
 								<AttendanceCard
 									key={employee.employeeId}

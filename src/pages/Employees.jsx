@@ -39,7 +39,7 @@ const Employees = () => {
 	};
 
 	const handleViewEmployee = (employee) => {
-		navigate(`/employee/${employee.employeeId}`);
+		navigate(`/employees/${employee.employeeId}`);
 	};
 
 	const filteredEmployees = useEmployeeFilters({
@@ -76,14 +76,14 @@ const Employees = () => {
 			<div className="p-5 overflow-y-auto border-t border-slate-200">
 				{filteredEmployees.length > 0 ? (
 					<>
-						<div className="hidden md:block">
+						<div className="hidden lg:block">
 							<EmployeeTable
 								employees={filteredEmployees}
 								onView={handleViewEmployee}
 							/>
 						</div>
 
-						<div className="grid gap-4 md:hidden">
+						<div className="grid gap-4 lg:hidden">
 							{filteredEmployees.map((employee) => (
 								<EmployeeCard
 									key={employee.id}

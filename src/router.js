@@ -8,7 +8,7 @@ export const appRoutes = [
 		breadcrumb: "Employees",
 	},
 	{
-		path: "/employee/:id",
+		path: "/employees/:id",
 		breadcrumb: "Employee Details",
 		parent: "/employees",
 	},
@@ -17,7 +17,7 @@ export const appRoutes = [
 		breadcrumb: "Departments",
 	},
 	{
-		path: "/department/:id",
+		path: "/departments/:id",
 		breadcrumb: "Departments Details",
 		parent: "/departments",
 	},

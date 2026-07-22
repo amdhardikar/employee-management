@@ -62,7 +62,24 @@ const DepartmentEmployeeCard = ({ employee }) => {
 };
 
 DepartmentEmployeeCard.propTypes = {
-	employees: PropTypes.array.isRequired,
+	employee: PropTypes.shape({
+		employeeId: PropTypes.string,
+
+		personalInfo: PropTypes.shape({
+			fullName: PropTypes.string,
+		}),
+
+		employment: PropTypes.shape({
+			status: PropTypes.string,
+			designation: PropTypes.string,
+			employeeType: PropTypes.string,
+			workLocation: PropTypes.string,
+
+			manager: PropTypes.shape({
+				name: PropTypes.string,
+			}),
+		}),
+	}).isRequired,
 };
 
 export default DepartmentEmployeeCard;

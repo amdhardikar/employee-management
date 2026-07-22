@@ -1,6 +1,10 @@
+import PropTypes from "prop-types";
+
 export const Table = ({ children }) => (
 	<div className="overflow-x-auto rounded-lg border border-slate-200 bg-white">
-		<table className="min-w-full divide-y divide-slate-200">{children}</table>
+		<table className="min-w-full divide-y divide-slate-200">
+			{children}
+		</table>
 	</div>
 );
 
@@ -13,14 +17,14 @@ export const TableBody = ({ children }) => (
 );
 
 export const TableRow = ({ children, className = "" }) => (
-	<tr className={`hover:bg-slate-50 transition-colors ${className}`}>
+	<tr className={`transition-colors hover:bg-slate-50 ${className}`}>
 		{children}
 	</tr>
 );
 
 export const TableHeader = ({ children, className = "" }) => (
 	<th
-		className={`px-4 py-3 text-[11px] md:text-xs font-semibold uppercase tracking-wider text-slate-900 ${className}`}
+		className={`px-4 py-3 text-[11px] font-semibold tracking-wider text-slate-900 uppercase md:text-xs ${className}`}
 	>
 		{children}
 	</th>
@@ -28,8 +32,35 @@ export const TableHeader = ({ children, className = "" }) => (
 
 export const TableCell = ({ children, className = "" }) => (
 	<td
-		className={`px-3 lg:px-4 py-3 text-xs lg:text-sm text-slate-700 ${className}`}
+		className={`px-3 py-3 text-xs text-slate-700 lg:px-4 lg:text-sm ${className}`}
 	>
 		{children}
 	</td>
 );
+
+Table.propTypes = {
+	children: PropTypes.node,
+};
+
+TableHead.propTypes = {
+	children: PropTypes.node,
+};
+
+TableBody.propTypes = {
+	children: PropTypes.node,
+};
+
+TableRow.propTypes = {
+	children: PropTypes.node,
+	className: PropTypes.string,
+};
+
+TableHeader.propTypes = {
+	children: PropTypes.node,
+	className: PropTypes.string,
+};
+
+TableCell.propTypes = {
+	children: PropTypes.node,
+	className: PropTypes.string,
+};

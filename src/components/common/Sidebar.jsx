@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
 	LayoutDashboard,
 	Users,
@@ -22,7 +22,8 @@ const Sidebar = ({ isOpen, onClose }) => {
 	];
 
 	const { logout } = useContext(AuthContext);
-	const navigate = useNavigate();
+   const navigate = useNavigate();
+   const location = useLocation();
 
 	const handleLogout = () => {
 		logout();
@@ -33,21 +34,21 @@ const Sidebar = ({ isOpen, onClose }) => {
 		<>
 			{isOpen && (
 				<div
-					className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+					className="fixed inset-0 z-40 bg-black/50 xl:hidden"
 					onClick={onClose}
 				/>
 			)}
 			<aside
-				className={`fixed inset-y-0 left-0 z-50 w-64 lg:static bg-gray-900 text-white flex flex-col transform transition-transform duration-300 ${isOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 `}
+				className={`fixed inset-y-0 left-0 z-50 flex w-64 transform flex-col bg-gray-900 text-white transition-transform duration-300 xl:static ${isOpen ? "translate-x-0" : "-translate-x-full"} xl:translate-x-0`}
 			>
-				<div className="flex items-center justify-around md:justify-center border-b border-slate-700 p-4 lg:p-6">
-					<h1 className="font-bold text-base md:text-lg lg:text-xl">
+				<div className="flex items-center justify-around border-b border-slate-700 p-4 lg:p-6 xl:justify-center">
+					<h1 className="text-lg font-bold xl:text-xl">
 						EMS Dashboard
 					</h1>
 
 					<button
 						onClick={onClose}
-						className="rounded-lg p-2 hover:bg-slate-700 lg:hidden"
+						className="rounded-lg p-2 hover:bg-slate-700 xl:hidden"
 						aria-label="Close Menu"
 					>
 						<X size={20} />
@@ -59,24 +60,21 @@ const Sidebar = ({ isOpen, onClose }) => {
 					<ul className="space-y-2">
 						{navItems.map(({ path, label, icon }) => {
 							const Icon = icon;
+							const active = location.pathname.startsWith(path);
 							return (
 								<li key={path}>
 									<NavLink
 										to={path}
-										onClick={() => {
-											if (window.innerWidth < 768) {
-												onClose();
-											}
-										}}
-										className={({ isActive }) =>
-											`flex items-center justify-start lg:justify-start gap-3 px-4 py-3 rounded-lg transition ${
-												isActive
+										onClick={onClose}
+										className={() =>
+											`flex items-center justify-start gap-3 rounded-lg px-4 py-3 transition lg:justify-start ${
+												active
 													? "bg-gray-700 text-white"
 													: "hover:bg-gray-800"
 											}`
 										}
 									>
-										<Icon className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
+										<Icon className="h-4 w-4 shrink-0 md:h-5 md:w-5" />
 										<span className="text-xs md:text-sm">
 											{label}
 										</span>
@@ -88,12 +86,12 @@ const Sidebar = ({ isOpen, onClose }) => {
 				</nav>
 
 				{/* Logout Button */}
-				<div className="p-4 border-t border-slate-700">
+				<div className="border-t border-slate-700 p-4">
 					<button
 						onClick={handleLogout}
-						className="flex items-center justify-start w-full gap-3 px-4 py-3 font-medium transition rounded-lg lg:justify-start hover:bg-rose-500/10 hover:text-rose-400"
+						className="flex w-full items-center justify-start gap-3 rounded-lg px-4 py-3 font-medium transition hover:bg-rose-500/10 hover:text-rose-400 lg:justify-start"
 					>
-						<LogOut className="w-4 h-4 md:w-5 md:h-5 shrink-0" />
+						<LogOut className="h-4 w-4 shrink-0 md:h-5 md:w-5" />
 						<span className="text-xs md:text-sm">Logout</span>
 					</button>
 				</div>

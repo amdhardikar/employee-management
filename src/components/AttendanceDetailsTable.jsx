@@ -80,7 +80,7 @@ const AttendanceDetailsTable = ({ attendance }) => {
 };
 
 AttendanceDetailsTable.propTypes = {
-	employees: PropTypes.array.isRequired,
+	attendance: PropTypes.array.isRequired,
 };
 
 export default AttendanceDetailsTable;

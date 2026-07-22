@@ -1,4 +1,5 @@
 import { Eye } from "lucide-react";
+import PropTypes from "prop-types";
 
 import {
 	Table,
@@ -17,11 +18,13 @@ const PayrollTable = ({ payrolls }) => {
 				<TableRow>
 					<TableHeader className="text-left">Employee</TableHeader>
 					<TableHeader className="text-left">Department</TableHeader>
-					<TableHeader className="text-left">Gross Salary</TableHeader>
+					<TableHeader className="text-left">
+						Gross Salary
+					</TableHeader>
 					<TableHeader className="text-left">Deductions</TableHeader>
 					<TableHeader className="text-left">Net Salary</TableHeader>
 					<TableHeader className="text-left">Month</TableHeader>
-					<TableHeader className="text-left">Status</TableHeader>
+					<TableHeader className="text-right">Status</TableHeader>
 				</TableRow>
 			</TableHead>
 
@@ -42,20 +45,25 @@ const PayrollTable = ({ payrolls }) => {
 									</p>
 
 									<p className="text-xs text-slate-500">
-										{employee.employeeCode} | {employee.employeeId}
+										{employee.employeeCode} |{" "}
+										{employee.employeeId}
 									</p>
 								</div>
 							</div>
 						</TableCell>
 
-						<TableCell>{employee.employment.departmentName}</TableCell>
-
 						<TableCell>
-							₹{employee.recentPayslip.grossSalary.toLocaleString()}
+							{employee.employment.departmentName}
 						</TableCell>
 
 						<TableCell>
-							₹{employee.recentPayslip.deductions.toLocaleString()}
+							₹
+							{employee.recentPayslip.grossSalary.toLocaleString()}
+						</TableCell>
+
+						<TableCell>
+							₹
+							{employee.recentPayslip.deductions.toLocaleString()}
 						</TableCell>
 
 						<TableCell className="font-semibold text-emerald-600">
@@ -67,7 +75,7 @@ const PayrollTable = ({ payrolls }) => {
 							{employee.recentPayslip.year}
 						</TableCell>
 
-						<TableCell>
+						<TableCell className="text-right">
 							<span
 								className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
 									PAYROLL_STATUS_COLORS[
@@ -83,6 +91,36 @@ const PayrollTable = ({ payrolls }) => {
 			</TableBody>
 		</Table>
 	);
+};
+
+PayrollTable.propTypes = {
+	payrolls: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+				.isRequired,
+
+			employeeId: PropTypes.string,
+			employeeCode: PropTypes.string,
+
+			personalInfo: PropTypes.shape({
+				fullName: PropTypes.string,
+				profileImage: PropTypes.string,
+			}).isRequired,
+
+			employment: PropTypes.shape({
+				departmentName: PropTypes.string,
+			}).isRequired,
+
+			recentPayslip: PropTypes.shape({
+				grossSalary: PropTypes.number,
+				deductions: PropTypes.number,
+				netSalary: PropTypes.number,
+				month: PropTypes.string,
+				year: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+				status: PropTypes.string,
+			}).isRequired,
+		}),
+	).isRequired,
 };
 
 export default PayrollTable;

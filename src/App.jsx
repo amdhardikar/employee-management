@@ -34,7 +34,10 @@ function App() {
 
 					<Route element={<EmployeeLayout />}>
 						<Route path="/employees" element={<Employees />} />
-						<Route path="/employee/:id" element={<EmployeeDetails />} />
+						<Route
+							path="/employees/:id"
+							element={<EmployeeDetails />}
+						/>
 						{/* <Route path="/employee/edit/:id" element={<EmployeeEdit />} /> */}
 						{/* <Route path="/employee/new" element={<EmployeeNew />} /> */}
 					</Route>
@@ -42,7 +45,7 @@ function App() {
 					<Route element={<DepartmentLayout />}>
 						<Route path="/departments" element={<Departments />} />
 						<Route
-							path="/department/:id"
+							path="/departments/:id"
 							element={<DepartmentDetails />}
 						/>
 					</Route>
@@ -58,7 +61,10 @@ function App() {
 					</Route>
 				</Route>
 
-				<Route path="*" element={<Navigate to="/dashboard" replace />} />
+				<Route
+					path="*"
+					element={<Navigate to="/dashboard" replace />}
+				/>
 			</Routes>
 		</>
 	);

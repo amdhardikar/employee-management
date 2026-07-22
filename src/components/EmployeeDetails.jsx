@@ -29,7 +29,7 @@ const EmployeeDetails = () => {
 			}
 		};
 		loadEmployee();
-	}, []);
+	}, [id]);
 
 	if (loading) {
 		return <PageLoader text="Loading employee details..." />;

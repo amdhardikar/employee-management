@@ -7,7 +7,6 @@ import PageLoader from "../components/common/PageLoader";
 import { loadEmployees, getEmployeeDepartments } from "../utils/payroll.util";
 
 import { IndianRupee, Users, CheckCircle, Clock } from "lucide-react";
-import StatCard from "../components/StatCard";
 import PayrollCard from "../components/PayrollCard";
 import { useFilteredPayroll } from "../hooks/usePayRollFilters";
 
@@ -66,11 +65,11 @@ const Payroll = () => {
 			<div className="p-5 overflow-y-auto border-t border-slate-200">
 				{filteredPayroll.length ? (
 					<>
-						<div className="hidden md:block">
+						<div className="hidden lg:block">
 							<PayrollTable payrolls={filteredPayroll} />
 						</div>
 
-						<div className="grid gap-4 md:hidden">
+						<div className="grid gap-4 lg:hidden">
 							{filteredPayroll.map((employee) => (
 								<PayrollCard key={employee.id} employee={employee} />
 							))}

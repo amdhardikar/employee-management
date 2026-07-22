@@ -16,7 +16,7 @@ import {
 
 import PageLoader from "./common/PageLoader";
 import EmptyState from "./common/EmptyState";
-import StatCard from "./StatCard";
+import StatCard from "./common/StatCard";
 import DepartmentDetailsTable from "./DepartmentDetailsTable";
 import DepartmentEmployeeCard from "./DepartmentEmployeeCard";
 import { useDepartmentSummary } from "../hooks/useDepartmentSummary";
@@ -66,10 +66,10 @@ const DepartmentDetails = () => {
 	return (
 		<>
 			{/* Department Summary */}
-			<div className="rounded-sm bg-white p-4 md:p-6">
-				<div className="md:flex md:items-center md:justify-between">
-					<div className="flex items-center justify-between md:block">
-						<h2 className="text-lg font-semibold text-slate-900 md:text-xl">
+			<div className="bg-white px-6 py-3">
+				<div className="grid grid-cols-1 md:grid-cols-[30%_70%]">
+					<div className="flex justify-between py-3 sm:flex-col sm:justify-center">
+						<h2 className="text-lg font-semibold text-slate-900 xl:text-xl">
 							{department?.name}
 						</h2>
 
@@ -78,7 +78,7 @@ const DepartmentDetails = () => {
 						</p>
 					</div>
 
-					<div className="hidden md:flex md:flex-wrap md:items-center md:justify-end md:divide-x md:divide-slate-200">
+					<div className="hidden lg:flex lg:flex-wrap lg:items-center lg:justify-end lg:divide-x lg:divide-slate-200">
 						<StatCard
 							label="Employees"
 							value={summary.totalEmployees}
@@ -105,7 +105,7 @@ const DepartmentDetails = () => {
 						/>
 					</div>
 
-					<div className="mt-4 grid grid-cols-3 gap-3 md:hidden">
+					<div className="mt-4 grid grid-cols-3 gap-3 lg:hidden">
 						<StatCard
 							label="Employees"
 							value={summary.totalEmployees}
@@ -157,11 +157,11 @@ const DepartmentDetails = () => {
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
 				{employees.length > 0 ? (
 					<>
-						<div className="hidden md:block">
+						<div className="hidden lg:block">
 							<DepartmentDetailsTable employees={employees} />
 						</div>
 
-						<div className="grid gap-4 md:hidden">
+						<div className="grid gap-4 lg:hidden">
 							{employees.map((employee) => (
 								<DepartmentEmployeeCard
 									key={employee.id}

@@ -1,4 +1,5 @@
 import { Loader2 } from "lucide-react";
+import PropTypes from "prop-types";
 
 const PageLoader = ({ text = "Loading..." }) => {
 	return (
@@ -18,6 +19,10 @@ const PageLoader = ({ text = "Loading..." }) => {
 			</div>
 		</div>
 	);
+};
+
+PageLoader.propTypes = {
+	text: PropTypes.string,
 };
 
 export default PageLoader;

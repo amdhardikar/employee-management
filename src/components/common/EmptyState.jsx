@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const EmptyState = ({
 	title = "No Data Found",
 	message = "There is no data available to display.",
@@ -15,6 +17,11 @@ const EmptyState = ({
 			</div>
 		</div>
 	);
+};
+
+EmptyState.propTypes = {
+	title: PropTypes.string,
+	message: PropTypes.string,
 };
 
 export default EmptyState;

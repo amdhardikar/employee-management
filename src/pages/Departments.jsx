@@ -33,7 +33,7 @@ const Departments = () => {
 	}, []);
 
 	const handleViewDepartment = (department) => {
-		navigate(`/department/${department.departmentId}`);
+		navigate(`/departments/${department.departmentId}`);
 	};
 
 	if (loading) {
@@ -44,7 +44,7 @@ const Departments = () => {
 		<div className="p-5 overflow-y-auto border-t border-slate-200">
 			{departments?.length > 0 ? (
 				<>
-					<div className="hidden md:block">
+					<div className="hidden lg:block">
 						<DepartmentTable
 							departments={departments}
 							employees={employees}
@@ -52,7 +52,7 @@ const Departments = () => {
 						/>
 					</div>
 
-					<div className="grid gap-4 md:hidden">
+					<div className="grid gap-4 lg:hidden">
 						{departments.map((department) => (
 							<DepartmentCard
 								key={department.departmentId}

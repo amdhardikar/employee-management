@@ -32,7 +32,7 @@ const Breadcrumb = () => {
 	});
 
 	return (
-		<nav aria-label="Breadcrumb ">
+		<nav aria-label="Breadcrumb">
 			<ol className="flex items-center gap-2 text-sm text-slate-500">
 				<li>
 					<NavLink
