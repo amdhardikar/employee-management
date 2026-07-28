@@ -1,10 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+
 import { employeeApi } from "../api/employeeApi";
 import { departmentApi } from "../api/departmentApi";
-import DepartmentTable from "../components/DepartmentTable";
+
+import DepartmentTable from "../components/department/DepartmentTable";
+import DepartmentCard from "../components/department/DepartmentCard";
 import PageLoader from "../components/common/PageLoader";
-import { useNavigate } from "react-router-dom";
-import DepartmentCard from "../components/DepartmentCard";
 import EmptyState from "../components/common/EmptyState";
 
 const Departments = () => {
@@ -19,7 +21,7 @@ const Departments = () => {
 				setLoading(true);
 
 				const [employeesData, departmentsData] = await Promise.all([
-					employeeApi.getAll("_sort=-departmentId"),
+					employeeApi.getAll(),
 					departmentApi.getAll(),
 				]);
 
@@ -41,7 +43,7 @@ const Departments = () => {
 	}
 
 	return (
-		<div className="p-5 overflow-y-auto border-t border-slate-200">
+		<div className="overflow-y-auto border-t border-slate-200 p-5">
 			{departments?.length > 0 ? (
 				<>
 					<div className="hidden lg:block">

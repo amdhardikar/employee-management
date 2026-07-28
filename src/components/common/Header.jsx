@@ -1,26 +1,25 @@
 import { Menu } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { openSidebar } from "../../store/uiSlice";
 import Breadcrumb from "./Breadcrumb";
-import PropTypes from "prop-types";
 
-const Header = ({ openSidebar }) => {
+const Header = () => {
+	const dispatch = useDispatch();
+
 	return (
-		<div className="bg-white px-5 py-5 shadow-sm">
-			<div className="flex flex-row items-center gap-4 xl:flex-row xl:items-center xl:justify-between">
+		<div className="bg-white px-5 py-3 shadow-sm">
+			<div className="flex flex-row items-center gap-4 xl:justify-between">
 				<button
-					onClick={openSidebar}
-					className="rounded-lg p-2 hover:bg-slate-100 xl:hidden"
+					onClick={() => dispatch(openSidebar())}
+					className="cursor-pointer rounded-lg hover:bg-slate-100 xl:hidden"
 				>
-					<Menu size={22} />
+					<Menu size={16} />
 				</button>
 
 				<Breadcrumb />
 			</div>
 		</div>
 	);
-};
-
-Header.propTypes = {
-  openSidebar: PropTypes.func.isRequired,
 };
 
 export default Header;

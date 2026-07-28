@@ -34,4 +34,9 @@ export const appRoutes = [
 		path: "/payroll",
 		breadcrumb: "Payroll",
 	},
+	{
+		path: "/payroll/:id",
+      breadcrumb: "Payroll Details",
+      parent: "/payroll"
+	},
 ];

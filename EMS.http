@@ -19,7 +19,10 @@ GET {{baseUrl}}/departments?departmentId=DEPT001
 ################################################################################
 
 ### Get all employees
-GET {{baseUrl}}/employees
+GET {{baseUrl}}/employees?q="ems"
+
+### Get employees with pagination
+GET {{baseUrl}}/employees?_sort=employment.departmentId
 
 ### Get employee by employeeId
 GET {{baseUrl}}/employees?employeeId=EMP001

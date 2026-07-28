@@ -6,10 +6,11 @@ import Departments from "./pages/Departments";
 import Attendance from "./pages/Attendance";
 import Payroll from "./pages/Payroll";
 
-import EmployeeDetails from "./components/EmployeeDetails";
-import AttendanceDetails from "./components/AttendanceDetails";
-import DepartmentDetails from "./components/DepartmentDetails";
-import ProtectedRoute from "./components/ProtectedRoute";
+import EmployeeDetails from "./components/employee/EmployeeDetails";
+import AttendanceDetails from "./components/attendance/AttendanceDetails";
+import DepartmentDetails from "./components/department/DepartmentDetails";
+import PayrollDetails from "./components/payroll/PayrollDetails";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 
 import MainLayout from "./layout/mainLayout";
 import EmployeeLayout from "./layout/employeeLayout";
@@ -58,6 +59,10 @@ function App() {
 					</Route>
 					<Route element={<PayslipLayout />}>
 						<Route path="/payroll" element={<Payroll />} />
+						<Route
+							path="/payroll/:id"
+							element={<PayrollDetails />}
+						/>
 					</Route>
 				</Route>
 

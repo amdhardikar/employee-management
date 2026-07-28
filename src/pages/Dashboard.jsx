@@ -1,70 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Users, UserPlus, Briefcase, Calendar } from "lucide-react";
-import {
-	loadDashboardData,
-	getRecentEmployees,
-	getDepartmentStats,
-	getEmployeeStatus,
-} from "../utils/dashboard.util";
-import { useDashboardSummary } from "../hooks/useDashboardSummary";
 import PageLoader from "../components/common/PageLoader";
+import { fetchDashboard } from "../store/dashboardSlice";
 
 const Dashboard = () => {
-	const [employees, setEmployees] = useState([]);
-	const [departments, setDepartments] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const dispatch = useDispatch();
+
+	const { data: dashboard, loading } = useSelector(
+		(state) => state.dashboard,
+	);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				setLoading(true);
-
-				const { employees, departments } = await loadDashboardData();
-
-				setEmployees(employees);
-				setDepartments(departments);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchData();
-	}, []);
-
-	const summary = useDashboardSummary(employees, departments);
-	const recentEmployees = getRecentEmployees(employees);
-	const { departmentStats, maxDeptCount } = getDepartmentStats(
-		employees,
-		departments,
-	);
-	const employeeStatus = getEmployeeStatus(employees);
-
-	const stats = [
-		{
-			title: "Total Employees",
-			value: summary.totalEmployees,
-			icon: <Users size={28} />,
-		},
-		{
-			title: "Active Employees",
-			value: summary.activeEmployees,
-			icon: <UserPlus size={28} />,
-		},
-		{
-			title: "Departments",
-			value: summary.totalDepartments,
-			icon: <Briefcase size={28} />,
-		},
-		{
-			title: "Attendance",
-			value: `${summary.avgAttendance}%`,
-			icon: <Calendar size={28} />,
-		},
-	];
+		dispatch(fetchDashboard());
+	}, [dispatch]);
 
 	if (loading) {
 		return <PageLoader text="Loading dashboard..." />;
 	}
+
+	const stats = [
+		{
+			title: "Total Employees",
+			value: dashboard.stats.totalEmployees,
+			icon: <Users size={28} />,
+		},
+		{
+			title: "Active Employees",
+			value: dashboard.stats.activeEmployees,
+			icon: <UserPlus size={28} />,
+		},
+		{
+			title: "Departments",
+			value: dashboard.stats.totalDepartments,
+			icon: <Briefcase size={28} />,
+		},
+		{
+			title: "Attendance",
+			value: `${dashboard.stats.avgAttendance}%`,
+			icon: <Calendar size={28} />,
+		},
+	];
 
 	return (
 		<>
@@ -112,7 +88,7 @@ const Dashboard = () => {
 							</h3>
 
 							<div className="space-y-4">
-								{recentEmployees.map((emp) => (
+								{dashboard.recentEmployees.map((emp) => (
 									<div
 										key={emp.id}
 										className="flex items-center justify-between border-b pb-3"
@@ -151,7 +127,7 @@ const Dashboard = () => {
 							</h3>
 
 							<div className="space-y-4">
-								{departmentStats.map((item) => (
+								{dashboard.departmentStats.map((item) => (
 									<div key={item.name}>
 										<div className="mb-1 flex justify-between">
 											<span>{item.name}</span>
@@ -162,11 +138,7 @@ const Dashboard = () => {
 											<div
 												className="h-2 rounded-full bg-blue-500"
 												style={{
-													width: `${
-														(item.count /
-															maxDeptCount) *
-														100
-													}%`,
+													width: `${(item.count / dashboard.maxDeptCount) * 100}%`,
 												}}
 											/>
 										</div>
@@ -183,7 +155,7 @@ const Dashboard = () => {
 
 							<div className="py-8 text-center">
 								<h2 className="text-5xl font-bold text-green-600">
-									{summary.avgAttendance}%
+									{dashboard.stats.avgAttendance}%
 								</h2>
 
 								<p className="mt-2 text-gray-500">
@@ -202,21 +174,21 @@ const Dashboard = () => {
 								<div className="flex justify-between">
 									<span>Active</span>
 									<span className="font-semibold text-green-600">
-										{employeeStatus.active}
+										{dashboard.employeeStatus.active}
 									</span>
 								</div>
 
 								<div className="flex justify-between">
 									<span>On Leave</span>
 									<span className="font-semibold text-yellow-600">
-										{employeeStatus.onLeave}
+										{dashboard.employeeStatus.onLeave}
 									</span>
 								</div>
 
 								<div className="flex justify-between">
 									<span>Resigned</span>
 									<span className="font-semibold text-red-600">
-										{employeeStatus.resigned}
+										{dashboard.employeeStatus.resigned}
 									</span>
 								</div>
 							</div>
@@ -231,7 +203,7 @@ const Dashboard = () => {
 							<div className="py-6 text-center">
 								<h2 className="text-4xl font-bold text-indigo-600">
 									₹
-									{summary.monthlyPayroll.toLocaleString(
+									{dashboard.stats.monthlyPayroll?.toLocaleString(
 										"en-IN",
 									)}
 								</h2>
@@ -250,7 +222,7 @@ const Dashboard = () => {
 
 							<div className="py-6 text-center">
 								<h2 className="text-5xl font-bold text-orange-500">
-									{summary.avgRating}
+									{dashboard.stats.avgRating}
 								</h2>
 
 								<p className="mt-2 text-gray-500">

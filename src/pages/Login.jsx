@@ -1,39 +1,40 @@
-import React, { useState, useContext } from "react";
-import { useNavigate, useLocation } from "react-router";
+import { useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { Lock, Mail, AlertCircle } from "lucide-react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store/authSlice";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [empCode, setEmpCode] = useState("");
-	const [error, setError] = useState("");
-	const [submitting, setSubmitting] = useState(false);
 
-	const { login, user } = useContext(AuthContext);
 	const navigate = useNavigate();
 	const location = useLocation();
+	const dispatch = useDispatch();
+
+	const { user, loading, error } = useSelector((state) => state.auth);
+
+	console.log(location.state);
+	console.log(location.state?.from?.pathname);
 
 	const redirectPath = location.state?.from?.pathname || "/dashboard";
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (submitting) return;
-		setError("");
-      setSubmitting(true);
-      
-		const normalizedEmail = email.trim().toLowerCase();
+		// const normalizedEmail = email.trim().toLowerCase();
 		const normalizedEmpCode = empCode.trim().toUpperCase();
 
-		const result = await login(normalizedEmail, normalizedEmpCode);
+		const result = await dispatch(
+			login({
+				email: email,
+				employeeCode: normalizedEmpCode,
+			}),
+		);
 
-		setSubmitting(false);
-
-		if (result.success) {
+		if (login.fulfilled.match(result)) {
 			navigate(redirectPath, { replace: true });
-		} else {
-			setError(result.message);
 		}
 	};
 
@@ -43,7 +44,7 @@ const Login = () => {
 
 	return (
 		<div className="flex min-h-dvh items-center justify-center bg-slate-100 px-4 py-6">
-			<div className="w-full max-w-md sm:p-8">
+			<div className="w-full max-w-md p-8">
 				<h2 className="text-center text-lg font-bold text-slate-800 sm:text-2xl">
 					EMS Portal Login
 				</h2>
@@ -112,10 +113,10 @@ const Login = () => {
 
 					<button
 						type="submit"
-						disabled={submitting}
+						disabled={loading}
 						className="w-full rounded-sm bg-indigo-600 py-2.5 text-sm font-semibold text-white transition hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 disabled:cursor-not-allowed disabled:opacity-50 sm:text-sm"
 					>
-						{submitting ? "Authenticating..." : "Sign In"}
+						{loading ? "Authenticating..." : "Sign In"}
 					</button>
 				</form>
 			</div>
