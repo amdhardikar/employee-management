@@ -3,34 +3,37 @@ const LOG_LEVELS = {
 	INFO: 1,
 	WARN: 2,
 	ERROR: 3,
+	NONE: 4,
 };
 
-const CURRENT_LOG_LEVEL = LOG_LEVELS.ERROR;
+const CURRENT_LOG_LEVEL = import.meta.env.MODE === "development" ? LOG_LEVELS.DEBUG : LOG_LEVELS.ERROR;
 
-class Logger {
-	static debug(message, ...args) {
-		if (CURRENT_LOG_LEVEL <= LOG_LEVELS.DEBUG) {
+const shouldLog = (level) => level >= CURRENT_LOG_LEVEL;
+
+export const logger = {
+	debug: (message, ...args) => {
+		if (shouldLog(LOG_LEVELS.DEBUG)) {
 			console.debug(`[DEBUG] ${message}`, ...args);
 		}
-	}
+	},
 
-	static info(message, ...args) {
-		if (CURRENT_LOG_LEVEL <= LOG_LEVELS.INFO) {
+	info: (message, ...args) => {
+		if (shouldLog(LOG_LEVELS.INFO)) {
 			console.info(`[INFO] ${message}`, ...args);
 		}
-	}
+	},
 
-	static warn(message, ...args) {
-		if (CURRENT_LOG_LEVEL <= LOG_LEVELS.WARN) {
+	warn: (message, ...args) => {
+		if (shouldLog(LOG_LEVELS.WARN)) {
 			console.warn(`[WARN] ${message}`, ...args);
 		}
-	}
+	},
 
-	static error(message, ...args) {
-		if (CURRENT_LOG_LEVEL <= LOG_LEVELS.ERROR) {
+	error: (message, ...args) => {
+		if (shouldLog(LOG_LEVELS.ERROR)) {
 			console.error(`[ERROR] ${message}`, ...args);
 		}
-	}
-}
+	},
+};
 
-export default Logger;
+export default logger;

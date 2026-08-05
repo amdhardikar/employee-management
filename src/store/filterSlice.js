@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import logger from "../logging/logger";
 
 const createDefaultFilters = (overrides = {}) => ({
 	tablePage: 1,
@@ -36,6 +37,8 @@ const filterSlice = createSlice({
 		setFilters(state, action) {
 			const { module, ...filters } = action.payload;
 
+			logger.debug(`Updating ${module} filters`, filters);
+
 			state[module] = {
 				...state[module],
 				...filters,
@@ -45,18 +48,21 @@ const filterSlice = createSlice({
 		resetFilters(state, action) {
 			const module = action.payload;
 
+			logger.info(`Resetting ${module} filters`);
+
 			state[module] = {
 				...initialState[module],
 			};
 		},
 
 		resetAllFilters() {
+			logger.info("Resetting all filters");
+
 			return initialState;
 		},
 	},
 });
 
-export const { setFilters, resetFilters, resetAllFilters } =
-	filterSlice.actions;
+export const { setFilters, resetFilters, resetAllFilters } = filterSlice.actions;
 
 export default filterSlice.reducer;

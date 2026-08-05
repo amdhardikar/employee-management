@@ -66,9 +66,9 @@ const PayrollDetailsTable = ({ payroll }) => {
 						</TableCell>
 
 						<TableCell className="text-center">
-							{new Date(item.paymentDate).toLocaleDateString(
+							{item.paymentDate ? new Date(item.paymentDate).toLocaleDateString(
 								"en-IN",
-							)}
+							) : "-"}
 						</TableCell>
 
 						<TableCell className="text-center">

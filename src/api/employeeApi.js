@@ -1,3 +1,5 @@
+import logger from "../logging/logger";
+
 const API_URL = "http://localhost:5000/employees";
 
 const DEFAULT_HEADERS = {
@@ -6,16 +8,27 @@ const DEFAULT_HEADERS = {
 
 export const employeeApi = {
 	getAll: async () => {
-		const res = await fetch(API_URL, {
-			method: "GET",
-			headers: DEFAULT_HEADERS,
-		});
+		try {
+			logger.debug("Fetching all employees");
 
-		if (!res.ok) {
-			throw new Error("Failed to load all employees");
+			const res = await fetch(API_URL, {
+				method: "GET",
+				headers: DEFAULT_HEADERS,
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to fetch employees. Status: ${res.status}`);
+				throw new Error("Failed to load all employees");
+			}
+
+			const data = await res.json();
+			logger.info(`Employees loaded successfully. Count: ${data.length}`);
+
+			return data;
+		} catch (error) {
+			logger.error("Error fetching all employees", error);
+			throw error;
 		}
-
-		return res.json();
 	},
 
 	getEmployees: async ({
@@ -27,147 +40,230 @@ export const employeeApi = {
 		sort = "employeeId",
 		order = "desc",
 	} = {}) => {
-		const params = new URLSearchParams();
+		try {
+			logger.debug(`Fetching employees (page=${page}, pageSize=${pageSize})`);
 
-		// Pagination
-		params.append("_page", page);
-		params.append("_limit", pageSize);
+			const params = new URLSearchParams();
 
-		// Sorting
-		params.append("_sort", sort);
-		params.append("_order", order);
+			// Pagination
+			params.append("_page", page);
+			params.append("_limit", pageSize);
 
-		// Search
-		if (search.trim()) {
-			params.append("search", search.trim());
+			// Sorting
+			params.append("_sort", sort);
+			params.append("_order", order);
+
+			// Search
+			if (search.trim()) {
+				params.append("search", search.trim());
+			}
+
+			// Department filter
+			if (department !== "all") {
+				params.append("employment.departmentName", department);
+			}
+
+			// Status filter
+			if (status !== "all") {
+				params.append("employment.status", status);
+			}
+
+			const res = await fetch(`${API_URL}?${params.toString()}`, {
+				method: "GET",
+				headers: DEFAULT_HEADERS,
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to fetch employees by filters. Status: ${res.status}`);
+				throw new Error("Failed to fetch employees by filters");
+			}
+
+			const data = await res.json();
+			const totalItems = Number(res.headers.get("X-Total-Count"));
+			logger.info(`Employees fetched successfully. Records: ${data.length}, Total: ${totalItems}`);
+
+			return {
+				data,
+				page,
+				pages: Math.ceil(totalItems / pageSize),
+				items: totalItems,
+			};
+		} catch (error) {
+			logger.error("Error fetching employees", error);
+			throw error;
 		}
-
-		// Department filter
-		if (department !== "all") {
-			params.append("employment.departmentName", department);
-		}
-
-		// Status filter
-		if (status !== "all") {
-			params.append("employment.status", status);
-		}
-
-		const res = await fetch(`${API_URL}?${params.toString()}`, {
-			method: "GET",
-			headers: DEFAULT_HEADERS,
-		});
-
-		if (!res.ok) {
-			throw new Error("Failed to fetch employees by filters");
-		}
-
-		const data = await res.json();
-		const totalItems = Number(res.headers.get("X-Total-Count"));
-
-		return {
-			data,
-			page,
-			pages: Math.ceil(totalItems / pageSize),
-			items: totalItems,
-		};
 	},
 
 	getManagers: async () => {
-		const res = await fetch(`${API_URL}/?employment.manager.id=null`, {
-			method: "GET",
-			headers: DEFAULT_HEADERS,
-		});
+		try {
+			logger.debug("Fetching managers");
 
-		if (!res.ok) {
-			throw new Error("Failed to load employee managers");
+			const res = await fetch(`${API_URL}/?employment.manager.id=null`, {
+				method: "GET",
+				headers: DEFAULT_HEADERS,
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to fetch managers. Status: ${res.status}`);
+				throw new Error("Failed to load employee managers");
+			}
+
+			const employees = await res.json();
+			logger.info(`Managers loaded successfully. Count: ${employees.length}`);
+
+			return employees.map((emp) => ({
+				id: emp.id,
+				name: emp.personalInfo.fullName,
+			}));
+		} catch (error) {
+			logger.error("Error fetching managers", error);
+			throw error;
 		}
-
-		const employees = await res.json();
-
-		return employees.map((emp) => ({
-			id: emp.id,
-			name: emp.personalInfo.fullName,
-		}));
 	},
 
 	getById: async (id) => {
-		const res = await fetch(`${API_URL}?employeeId=${id}`, {
-			method: "GET",
-			headers: DEFAULT_HEADERS,
-		});
+		try {
+			logger.debug(`Fetching employee: ${id}`);
+			const res = await fetch(`${API_URL}?employeeId=${id}`, {
+				method: "GET",
+				headers: DEFAULT_HEADERS,
+			});
 
-		if (!res.ok) {
-			throw new Error("Failed to load employee by id");
+			if (!res.ok) {
+				logger.error(`Failed to fetch employee: ${id}. Status: ${res.status}`);
+				throw new Error("Failed to load employee by id");
+			}
+
+			const data = await res.json();
+			logger.info(`Employee loaded successfully. Employee ID: ${id}`);
+
+			return data[0];
+		} catch (error) {
+			logger.error(`Error fetching employee: ${id}`, error);
+			throw error;
 		}
-		const data = await res.json();
-
-		return data[0];
 	},
 
 	getByDepartment: async (id) => {
-		const res = await fetch(`${API_URL}?employment.departmentId=${id}`, {
-			method: "GET",
-			headers: DEFAULT_HEADERS,
-		});
+		try {
+			logger.debug(`Fetching employees for department: ${id}`);
 
-		if (!res.ok) {
-			throw new Error("Failed to load department wise employees");
+			const res = await fetch(`${API_URL}?employment.departmentId=${id}`, {
+				method: "GET",
+				headers: DEFAULT_HEADERS,
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to fetch employees for department: ${id}. Status: ${res.status}`);
+				throw new Error("Failed to load department wise employees");
+			}
+
+			const data = await res.json();
+
+			logger.info(`Department employees loaded successfully. Department: ${id}, Count: ${data.length}`);
+
+			return data;
+		} catch (error) {
+			logger.error(`Error fetching employees for department: ${id}`, error);
+			throw error;
 		}
-
-		return res.json();
 	},
 
 	getByEmailAndEmployeeCode: async (email, code) => {
-		const res = await fetch(`${API_URL}?email=${email}&employeeCode=${code}`, {
-			method: "GET",
-			headers: DEFAULT_HEADERS,
-		});
+		try {
+			logger.debug(`Authenticating employee. Employee Code: ${code}`);
 
-		if (!res.ok) {
-			throw new Error("Failed to authenticate user");
+			const res = await fetch(`${API_URL}?email=${email}&employeeCode=${code}`, {
+				method: "GET",
+				headers: DEFAULT_HEADERS,
+			});
+
+			if (!res.ok) {
+				logger.error(`Authentication failed for employee code: ${code}. Status: ${res.status}`);
+				throw new Error("Failed to authenticate user");
+			}
+
+			logger.info(`Authentication request completed for employee code: ${code}`);
+
+			return res;
+		} catch (error) {
+			logger.error(`Error authenticating employee code: ${code}`, error);
+			throw error;
 		}
-
-		return res;
 	},
 
 	createEmployee: async (employee) => {
-		const res = await fetch(API_URL, {
-			method: "POST",
-			headers: DEFAULT_HEADERS,
-			body: JSON.stringify(employee),
-		});
+		try {
+			logger.debug("Creating employee");
 
-		if (!res.ok) {
-			throw new Error("Failed to create employee");
+			const res = await fetch(API_URL, {
+				method: "POST",
+				headers: DEFAULT_HEADERS,
+				body: JSON.stringify(employee),
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to create employee. Status: ${res.status}`);
+				throw new Error("Failed to create employee");
+			}
+
+			const data = await res.json();
+
+			logger.info(`Employee created successfully. Employee ID: ${data.employeeId}`);
+
+			return data;
+		} catch (error) {
+			logger.error("Error creating employee", error);
+			throw error;
 		}
-
-		return res.json();
 	},
 
 	updateEmployee: async (id, employee) => {
-		const res = await fetch(`${API_URL}/${id}`, {
-			method: "PATCH",
-			headers: DEFAULT_HEADERS,
-			body: JSON.stringify(employee),
-		});
+		try {
+			logger.debug(`Updating employee: ${id}`);
 
-		if (!res.ok) {
-			throw new Error("Failed to update employee");
+			const res = await fetch(`${API_URL}/${id}`, {
+				method: "PATCH",
+				headers: DEFAULT_HEADERS,
+				body: JSON.stringify(employee),
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to update employee: ${id}. Status: ${res.status}`);
+				throw new Error("Failed to update employee");
+			}
+
+			const data = await res.json();
+
+			logger.info(`Employee updated successfully. ID: ${id}`);
+
+			return data;
+		} catch (error) {
+			logger.error(`Error updating employee: ${id}`, error);
+			throw error;
 		}
-
-		return res.json();
 	},
 
 	removeEmployee: async (id) => {
-		const res = await fetch(`${API_URL}/${id}`, {
-			method: "DELETE",
-			headers: DEFAULT_HEADERS,
-		});
+		try {
+			logger.debug(`Deleting employee: ${id}`);
 
-		if (!res.ok) {
-			throw new Error("Failed to delete employee");
+			const res = await fetch(`${API_URL}/${id}`, {
+				method: "DELETE",
+				headers: DEFAULT_HEADERS,
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to delete employee: ${id}. Status: ${res.status}`);
+				throw new Error("Failed to delete employee");
+			}
+
+			logger.info(`Employee deleted successfully. ID: ${id}`);
+
+			return true;
+		} catch (error) {
+			logger.error(`Error deleting employee: ${id}`, error);
+			throw error;
 		}
-
-		return true;
 	},
 };
