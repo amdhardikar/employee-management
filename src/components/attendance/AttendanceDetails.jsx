@@ -1,12 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-	CalendarDays,
-	CheckCircle2,
-	XCircle,
-	Clock3,
-	TrendingUp,
-} from "lucide-react";
+import { CalendarDays, CheckCircle2, XCircle, Clock3, TrendingUp } from "lucide-react";
 
 import AttendanceDetailsTable from "./AttendanceDetailsTable";
 import AttendanceMonthCard from "./AttendanceMonthCard";
@@ -32,7 +26,6 @@ const AttendanceDetailsPage = () => {
 				const attendanceData = await attendanceApi.getByEmployeeId(id);
 				const employeeData = await employeeApi.getById(id);
 
-				console.log(employeeData);
 				setAttendance(attendanceData);
 				setEmployee(employeeData[0]);
 			} catch (error) {
@@ -52,12 +45,7 @@ const AttendanceDetailsPage = () => {
 	}
 
 	if (attendance.length == 0) {
-		return (
-			<NotFound
-				title="Attendance details Not Found"
-				message={`No employee exists with ID "${id}".`}
-			/>
-		);
+		return <NotFound title="Attendance details Not Found" message={`No employee exists with ID "${id}".`} />;
 	}
 
 	return (
@@ -80,67 +68,39 @@ const AttendanceDetailsPage = () => {
 								</h2>
 
 								<div className="mt-2 space-y-1 text-sm text-slate-600">
-									<span>
-										{employee?.employment?.departmentName}
-									</span>{" "}
-									|{" "}
-									<span>
-										{employee?.employment?.designation}
-									</span>
-									<p className="break-all">
-										{employee?.email}
-									</p>
+									<span>{employee?.employment?.departmentName}</span> |{" "}
+									<span>{employee?.employment?.designation}</span>
+									<p className="break-all">{employee?.email}</p>
 								</div>
 							</div>
 						</div>
 					</div>
 
 					<div className="hidden py-3 lg:flex lg:flex-wrap lg:items-center lg:justify-end lg:divide-x lg:divide-slate-200">
-						<StatCard
-							label="Attendance"
-							value={`${summary.avgAttendance}%`}
-						/>
-						<StatCard
-							label="Working"
-							value={summary.totalWorkingDays}
-						/>
-						<StatCard
-							label="Present"
-							value={summary.totalPresentDays}
-						/>
-						<StatCard
-							label="Absent"
-							value={summary.totalAbsentDays}
-						/>
-						<StatCard
-							label="Late"
-							value={summary.totalLateEntries}
-						/>
+						<StatCard label="Attendance" value={`${summary.avgAttendance}%`} />
+						<StatCard label="Working" value={summary.totalWorkingDays} />
+						<StatCard label="Present" value={summary.totalPresentDays} />
+						<StatCard label="Absent" value={summary.totalAbsentDays} />
+						<StatCard label="Late" value={summary.totalLateEntries} />
 					</div>
 
 					<div className="mt-0 grid grid-cols-3 gap-3 py-3 lg:hidden">
 						<StatCard
 							label="Attendance"
 							value={`${summary.avgAttendance}%`}
-							icon={
-								<TrendingUp className="h-4 w-4 text-green-600" />
-							}
+							icon={<TrendingUp className="h-4 w-4 text-green-600" />}
 						/>
 
 						<StatCard
 							label="Working"
 							value={summary.totalWorkingDays}
-							icon={
-								<CalendarDays className="h-4 w-4 text-blue-600" />
-							}
+							icon={<CalendarDays className="h-4 w-4 text-blue-600" />}
 						/>
 
 						<StatCard
 							label="Present"
 							value={summary.totalPresentDays}
-							icon={
-								<CheckCircle2 className="h-4 w-4 text-green-600" />
-							}
+							icon={<CheckCircle2 className="h-4 w-4 text-green-600" />}
 						/>
 
 						<StatCard
@@ -159,25 +119,15 @@ const AttendanceDetailsPage = () => {
 			</div>
 
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
-				{/* Monthly Attendance Table */}
-				{attendance.length > 0 ? (
-					<>
-						<div className="hidden lg:block">
-							<AttendanceDetailsTable attendance={attendance} />
-						</div>
+				<div className="hidden lg:block">
+					<AttendanceDetailsTable attendance={attendance} />
+				</div>
 
-						<div className="grid gap-4 lg:hidden">
-							{attendance.map((item) => (
-								<AttendanceMonthCard
-									key={item.id}
-									item={item}
-								/>
-							))}
-						</div>
-					</>
-				) : (
-					<EmptyState />
-				)}
+				<div className="grid gap-4 lg:hidden">
+					{attendance.map((item) => (
+						<AttendanceMonthCard key={item.id} item={item} />
+					))}
+				</div>
 			</div>
 		</>
 	);

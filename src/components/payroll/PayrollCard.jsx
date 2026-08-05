@@ -6,11 +6,13 @@ import {
 	CardTitle,
 	CardSubtitle,
 	CardContent,
-   CardItem,
-   CardGrid
+	CardItem,
+	CardGrid,
+	CardAction,
 } from "../common/InfoCard";
+import { Eye } from "lucide-react";
 
-const PayrollCard = ({ employee }) => {
+const PayrollCard = ({ employee, onView }) => {
 	const payslip = employee.recentPayslip;
 
 	return (
@@ -24,24 +26,17 @@ const PayrollCard = ({ employee }) => {
 					/>
 
 					<div className="min-w-0 flex-1">
-						<CardTitle className="text-sm">
-							{employee.personalInfo?.fullName}
-						</CardTitle>
-
-						<CardSubtitle>
-							{employee.employment?.departmentName}
+						<CardTitle className="text-sm">{employee.fullName}</CardTitle>
+						<CardSubtitle className="mt-1">
+							{employee.employeeCode} | {employee.employeeId}
 						</CardSubtitle>
+						<CardSubtitle>{employee.employment?.departmentName}</CardSubtitle>
 					</div>
 				</div>
 
-				<span
-					className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
-						PAYROLL_STATUS_COLORS[payslip.status] ||
-						"bg-slate-100 text-slate-700"
-					}`}
-				>
-					{payslip.status}
-				</span>
+				<CardAction onClick={() => onView(employee)}>
+					<Eye className="h-4 w-4" />
+				</CardAction>
 			</CardHeader>
 
 			<CardContent>
@@ -65,7 +60,6 @@ const PayrollCard = ({ employee }) => {
 						value={`₹${payslip.deductions.toLocaleString()}`}
 						valueClassName="text-emerald-600 font-semibold"
 					/>
-
 				</CardGrid>
 			</CardContent>
 		</Card>
@@ -74,6 +68,7 @@ const PayrollCard = ({ employee }) => {
 
 PayrollCard.propTypes = {
 	employee: PropTypes.object.isRequired,
+	onView: PropTypes.func,
 };
 
 export default PayrollCard;

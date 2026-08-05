@@ -46,14 +46,13 @@ const Employees = () => {
 		[debouncedSearch, query.department, query.status],
 	);
 
-	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } =
-		useEmployeeListing({
-			fetchEmployees,
-			isDesktop,
-			tablePage: query.tablePage,
-			cardPage: query.cardPage,
-			pageSize: query.pageSize,
-		});
+	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } = useEmployeeListing({
+		fetchEmployees,
+		isDesktop,
+		tablePage: query.tablePage,
+		cardPage: query.cardPage,
+		pageSize: query.pageSize,
+	});
 
 	useEffect(() => {
 		if (!loading && restoreFocus.current) {
@@ -76,11 +75,44 @@ const Employees = () => {
 		navigate(`/employees/${employee.employeeId}`);
 	};
 
+	const onEditHandler = (employee) => {
+		navigate(`/employees/edit/${employee.employeeId}`);
+	};
+
+	const onDeleteHandler = async (employee) => {
+		await employeeApi.removeEmployee(employee.id);
+		window.location.reload();
+	};
+
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
 
 	if (loading) {
-		return <PageLoader text="Loading employees..." />;
+		return (
+			<>
+				<div className="sticky top-0 z-10 bg-white shadow-sm">
+					<Filters
+						searchRef={searchRef}
+						search={query.search}
+						department={query.department}
+						status={query.status}
+						statusList={statusList}
+						departments={departments}
+						showSearch
+						showDepartment
+						showStatus
+						onSearchChange={onSearchChangeHandler}
+						onDepartmentChange={onDepartmentChangeHandler}
+						onStatusChange={onStatusChangeHandler}
+						onSearchFocus={() => (restoreFocus.current = true)}
+						onSearchBlur={() => (restoreFocus.current = false)}
+						newButton={true}
+					/>
+				</div>
+
+				<PageLoader text="Loading employees..." />
+			</>
+		);
 	}
 
 	return (
@@ -101,6 +133,7 @@ const Employees = () => {
 					onStatusChange={onStatusChangeHandler}
 					onSearchFocus={() => (restoreFocus.current = true)}
 					onSearchBlur={() => (restoreFocus.current = false)}
+					newButton={true}
 				/>
 			</div>
 
@@ -110,6 +143,8 @@ const Employees = () => {
 						<EmployeeTable
 							employees={tableEmployees}
 							onView={onViewHandler}
+							onEdit={onEditHandler}
+							onDelete={onDeleteHandler}
 						/>
 
 						<Pagination
@@ -126,11 +161,7 @@ const Employees = () => {
 				{hasCardData && (
 					<div className="grid gap-4 lg:hidden">
 						{cardEmployees.map((employee) => (
-							<EmployeeCard
-								key={employee.id}
-								employee={employee}
-								onView={onViewHandler}
-							/>
+							<EmployeeCard key={employee.id} employee={employee} onView={onViewHandler} />
 						))}
 
 						{query.cardPage < pagination.totalPages && (

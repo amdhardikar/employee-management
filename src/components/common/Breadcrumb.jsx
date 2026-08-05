@@ -37,6 +37,7 @@ const Breadcrumb = () => {
 				<li>
 					<NavLink
 						to="/dashboard"
+						aria-label="Home"
 						className="flex items-center hover:text-slate-900"
 					>
 						<Home size={16} />
@@ -47,11 +48,14 @@ const Breadcrumb = () => {
 					const isLast = index === breadcrumbs.length - 1;
 
 					return (
-						<li key={item.label} className="flex items-center gap-2">
+						<li
+							key={item.label}
+							className="flex items-center gap-2"
+						>
 							<ChevronRight size={16} />
 
 							{isLast ? (
-								<span className="font-medium  text-slate-900">
+								<span className="font-medium text-slate-900">
 									{item.label}
 								</span>
 							) : (

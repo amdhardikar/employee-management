@@ -1,18 +1,15 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
-import { Mail, Phone } from "lucide-react";
 import PageLoader from "../common/PageLoader";
-import { STATUS_COLORS } from "../../constants/EMSconstants";
 import NotFound from "../common/NotFound";
 import { payrollApi } from "../../api/payrollApi";
-import { employeeApi } from "../../api/employeeApi";
+// import { employeeApi } from "../../api/employeeApi";
 import PayrollDetailsTable from "./PayrollDetailsTable";
-import EmptyState from "../common/EmptyState";
+import PayrollDetailCard from "./PayrollDetailCard";
 
 const PayrollDetails = () => {
 	const { id } = useParams();
-	const [employee, setEmployee] = useState([]);
+	// const [employee, setEmployee] = useState([]);
 	const [payroll, setPayroll] = useState([]);
 	const [loading, setLoading] = useState(true);
 
@@ -21,11 +18,13 @@ const PayrollDetails = () => {
 			try {
 				setLoading(true);
 				const payrollData = await payrollApi.getByEmployeeId(id);
-				const employeeData = await employeeApi.getById(id);
+				// const employeeData = await employeeApi.getById(id);
 
-				console.log(payrollData, employeeData);
 				setPayroll(payrollData);
-				setEmployee(employeeData);
+				// setEmployee(employeeData);
+			} catch (error) {
+				setPayroll([]);
+				console.log("Error:", error);
 			} finally {
 				setLoading(false);
 			}
@@ -34,30 +33,24 @@ const PayrollDetails = () => {
 	}, [id]);
 
 	if (loading) {
-		return <PageLoader text="Loading employee details..." />;
+		return <PageLoader text="Loading payroll details..." />;
 	}
 
-	if (!payroll) {
-		return (
-			<NotFound
-				title="Employee Not Found"
-				message={`No employee exists with ID "${id}".`}
-			/>
-		);
+	if (payroll.length === 0) {
+		return <NotFound title="Payroll Not Found" message={`No payroll records exist for employee "${id}".`} />;
 	}
 
 	return (
 		<div className="overflow-y-auto border-t border-slate-200 p-5">
-			{/* Monthly Attendance Table */}
-			{payroll.length > 0 ? (
-				<>
-					<div className="hidden lg:block">
-						<PayrollDetailsTable payroll={payroll} />
-					</div>
-				</>
-			) : (
-				<EmptyState />
-			)}
+			<div className="hidden lg:block">
+				<PayrollDetailsTable payroll={payroll} />
+			</div>
+
+			<div className="grid gap-4 lg:hidden">
+				{payroll.map((item) => (
+					<PayrollDetailCard key={item.id} item={item} />
+				))}
+			</div>
 		</div>
 	);
 };

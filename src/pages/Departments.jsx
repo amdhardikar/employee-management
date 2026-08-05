@@ -27,6 +27,8 @@ const Departments = () => {
 
 				setEmployees(employeesData);
 				setDepartments(departmentsData);
+			} catch (error) {
+				console.error(error);
 			} finally {
 				setLoading(false);
 			}
@@ -36,6 +38,10 @@ const Departments = () => {
 
 	const handleViewDepartment = (department) => {
 		navigate(`/departments/${department.departmentId}`);
+	};
+
+	const handleEditDepartment = (department) => {
+		navigate(`/departments/edit/${department.departmentId}`);
 	};
 
 	if (loading) {
@@ -51,6 +57,7 @@ const Departments = () => {
 							departments={departments}
 							employees={employees}
 							onView={handleViewDepartment}
+							onEdit={handleEditDepartment}
 						/>
 					</div>
 

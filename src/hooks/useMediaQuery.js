@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
-const useMediaQuery = (query) => {
-	const getMatches = () => {
-		if (typeof window === "undefined") return false;
+export function getMatches(query) {
+	if (typeof window === "undefined") return false;
 
-		return window.matchMedia(query).matches;
-	};
+	return window.matchMedia(query).matches;
+}
 
-	const [matches, setMatches] = useState(getMatches);
+export default function useMediaQuery(query) {
+	const [matches, setMatches] = useState(() => getMatches(query));
 
 	useEffect(() => {
 		const mediaQuery = window.matchMedia(query);
@@ -16,9 +16,7 @@ const useMediaQuery = (query) => {
 			setMatches(event.matches);
 		};
 
-		// Set initial value
 		setMatches(mediaQuery.matches);
-
 		mediaQuery.addEventListener("change", handleChange);
 
 		return () => {
@@ -27,6 +25,4 @@ const useMediaQuery = (query) => {
 	}, [query]);
 
 	return matches;
-};
-
-export default useMediaQuery;
+}

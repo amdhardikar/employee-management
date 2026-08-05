@@ -6,10 +6,12 @@
 	"scripts": {
 		"dev": "vite",
 		"api": "nodemon ./server/server.js",
-		"start": "concurrently \"npm run api\" \"npm run dev\"",
 		"build": "vite build",
 		"lint": "eslint .",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"coverage": "vitest --coverage"
 	},
 	"dependencies": {
 		"@reduxjs/toolkit": "^2.12.0",
@@ -25,17 +27,26 @@
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.25.0",
+		"@testing-library/jest-dom": "^7.0.0",
+		"@testing-library/react": "^16.3.2",
+		"@testing-library/user-event": "^14.6.1",
 		"@types/react": "^19.1.2",
 		"@types/react-dom": "^19.1.2",
 		"@vitejs/plugin-react": "^4.4.1",
+		"@vitest/coverage-v8": "^4.1.10",
+		"@vitest/ui": "^4.1.10",
 		"concurrently": "^10.0.3",
 		"eslint": "^9.25.0",
 		"eslint-plugin-react": "^7.37.5",
 		"eslint-plugin-react-hooks": "^5.2.0",
 		"eslint-plugin-react-refresh": "^0.4.19",
 		"globals": "^16.0.0",
+		"jsdom": "^29.1.1",
+		"msw": "^2.15.0",
+		"nodemon": "^3.1.14",
 		"prettier": "^3.9.5",
 		"prettier-plugin-tailwindcss": "^0.8.1",
-		"vite": "^6.3.5"
+		"vite": "^6.3.5",
+		"vitest": "^4.1.10"
 	}
 }

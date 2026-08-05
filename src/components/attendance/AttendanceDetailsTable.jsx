@@ -1,6 +1,4 @@
-import { Eye } from "lucide-react";
 import PropTypes from "prop-types";
-import { STATUS_COLORS } from "../../constants/EMSconstants";
 import {
 	Table,
 	TableHead,

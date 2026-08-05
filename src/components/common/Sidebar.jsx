@@ -29,7 +29,7 @@ const Sidebar = () => {
 	const isOpen = useSelector((state) => state.ui.sidebarOpen);
 
 	const handleLogout = () => {
-      dispatch(closeSidebar());
+		dispatch(closeSidebar());
 		navigate("/login", { replace: true });
 		dispatch(logout());
 	};
@@ -37,6 +37,7 @@ const Sidebar = () => {
 		<>
 			{isOpen && (
 				<div
+					data-testid="sidebar-overlay"
 					className="fixed inset-0 z-40 cursor-pointer bg-black/50 xl:hidden"
 					onClick={() => dispatch(closeSidebar())}
 				/>
@@ -92,6 +93,7 @@ const Sidebar = () => {
 				<div className="border-t border-slate-700 p-4">
 					<button
 						onClick={handleLogout}
+						aria-label="Logout"
 						className="flex w-full cursor-pointer items-center justify-start gap-3 rounded-sm px-4 py-3 font-medium transition hover:bg-rose-500/10 hover:text-rose-400 lg:justify-start"
 					>
 						<LogOut className="h-4 w-4 shrink-0 md:h-5 md:w-5" />

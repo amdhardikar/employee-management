@@ -68,7 +68,6 @@ const Attendance = () => {
 	});
 
 	const onViewHandler = (employee) => {
-		console.log(employee);
 		navigate(`/attendance/${employee.employeeId}`);
 	};
 

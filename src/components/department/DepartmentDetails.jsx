@@ -153,7 +153,6 @@ const DepartmentDetails = () => {
 				</div>
 			</div>
 
-			{/* Employee Table */}
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
 				{employees.length > 0 ? (
 					<>

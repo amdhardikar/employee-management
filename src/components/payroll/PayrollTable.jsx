@@ -1,14 +1,7 @@
 import { Eye } from "lucide-react";
 import PropTypes from "prop-types";
 
-import {
-	Table,
-	TableHead,
-	TableHeader,
-	TableBody,
-	TableRow,
-	TableCell,
-} from "../common/DataTable";
+import { Table, TableHead, TableHeader, TableBody, TableRow, TableCell } from "../common/DataTable";
 import { PAYROLL_STATUS_COLORS } from "../../constants/EMSconstants";
 
 const PayrollTable = ({ payrolls, onView }) => {
@@ -19,9 +12,7 @@ const PayrollTable = ({ payrolls, onView }) => {
 					<TableHeader className="text-left">Employee</TableHeader>
 					<TableHeader className="text-left">Department</TableHeader>
 					<TableHeader className="text-left">CTC</TableHeader>
-					<TableHeader className="text-left">
-						Monthly Gross
-					</TableHeader>
+					<TableHeader className="text-left">Monthly Gross</TableHeader>
 					<TableHeader className="text-left">Net Salary</TableHeader>
 					<TableHeader className="text-left">Deduction</TableHeader>
 					<TableHeader className="text-left"></TableHeader>
@@ -40,13 +31,10 @@ const PayrollTable = ({ payrolls, onView }) => {
 								/>
 
 								<div>
-									<p className="font-medium">
-										{employee.fullName}
-									</p>
+									<p className="font-medium">{employee.fullName}</p>
 
 									<p className="text-xs text-slate-500">
-										{employee.employeeCode} |{" "}
-										{employee.employeeId}
+										{employee.employeeCode} | {employee.employeeId}
 									</p>
 								</div>
 							</div>
@@ -54,28 +42,18 @@ const PayrollTable = ({ payrolls, onView }) => {
 
 						<TableCell>
 							{employee.employment.departmentName}
-							<p className="text-xs text-slate-500">
-								{employee.employment.designation}
-							</p>
+							<p className="text-xs text-slate-500">{employee.employment.designation}</p>
 						</TableCell>
 
-						<TableCell>
-							₹{employee.salary.employeeCTC.toLocaleString()}
-						</TableCell>
+						<TableCell>₹{employee.salary.employeeCTC.toLocaleString()}</TableCell>
 
-						<TableCell>
-							₹{employee.salary.monthlyGross.toLocaleString()}
-						</TableCell>
+						<TableCell>₹{employee.salary.monthlyGross.toLocaleString()}</TableCell>
 
-						<TableCell className="font-semibold">
-							₹{employee.salary.netSalary.toLocaleString()}
-						</TableCell>
+						<TableCell className="font-semibold">₹{employee.salary.netSalary.toLocaleString()}</TableCell>
 
 						<TableCell>
 							₹{employee.salary.pf}
-							<p className="text-xs">
-								₹{employee.salary.professionalTax}
-							</p>
+							<p className="text-xs">₹{employee.salary.professionalTax}</p>
 						</TableCell>
 						<TableCell>
 							<div className="flex justify-center gap-2">
@@ -97,8 +75,7 @@ const PayrollTable = ({ payrolls, onView }) => {
 PayrollTable.propTypes = {
 	payrolls: PropTypes.arrayOf(
 		PropTypes.shape({
-			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-				.isRequired,
+			id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 
 			employeeId: PropTypes.string,
 			employeeCode: PropTypes.string,
@@ -122,6 +99,7 @@ PayrollTable.propTypes = {
 			}).isRequired,
 		}),
 	).isRequired,
+	onView: PropTypes.func,
 };
 
 export default PayrollTable;

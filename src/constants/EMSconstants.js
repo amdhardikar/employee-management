@@ -25,18 +25,19 @@ export const PAYROLL_STATUS_COLORS = {
 
 export const EMPLOYEE_DEFAULT_VALUES = {
 	id: "",
+	employeeId: "",
 	employeeCode: "",
+	fullName: "",
+	email: "",
 
 	personalInfo: {
 		firstName: "",
 		lastName: "",
-		fullName: "",
 		gender: "",
 		dateOfBirth: "",
 		maritalStatus: "",
 		bloodGroup: "",
-		nationality: "Indian",
-		email: "",
+		nationality: "",
 		phone: "",
 		alternatePhone: "",
 		profileImage: "",
@@ -47,7 +48,7 @@ export const EMPLOYEE_DEFAULT_VALUES = {
 			street: "",
 			city: "",
 			state: "",
-			country: "India",
+			country: "",
 			pincode: "",
 		},
 
@@ -55,39 +56,41 @@ export const EMPLOYEE_DEFAULT_VALUES = {
 			street: "",
 			city: "",
 			state: "",
-			country: "India",
+			country: "",
 			pincode: "",
 		},
 	},
 
 	employment: {
+		designationId: "",
+		designationGlobalId: "",
 		designation: "",
 		departmentId: "",
+		departmentGlobalId: "",
 		departmentName: "",
-		employeeType: "Full Time",
+		orgRole: "",
+		employeeType: "",
 		joiningDate: "",
+		workMode: "",
 		workLocation: "",
-		workMode: "Onsite",
 		status: "Active",
 		probationEndDate: "",
-
-		manager: {
-			id: null,
-			name: null,
+		probationStatus: "",
+		lead: {
+			id: "",
+			employeeId: "",
+			name: "",
 		},
-	},
-
-	salary: {
-		employeeCTC: 0,
-		monthlyGross: 0,
-		basic: 0,
-		hra: 0,
-		specialAllowance: 0,
-		pf: 1800,
-		professionalTax: 200,
-		otherDeductions: 0,
-		netSalary: 0,
-		currency: "INR",
+		manager: {
+			id: "",
+			employeeId: "",
+			name: "",
+		},
+		hr: {
+			id: "",
+			employeeId: "",
+			name: "",
+		},
 	},
 
 	bankDetails: {
@@ -102,12 +105,4 @@ export const EMPLOYEE_DEFAULT_VALUES = {
 		relationship: "",
 		phone: "",
 	},
-
-	performance: {
-		currentRating: 0,
-		promotionEligible: false,
-		skills: [],
-	},
-
-	documents: [],
 };

@@ -73,7 +73,6 @@ const DepartmentDetailsTable = ({ employees }) => {
 
 DepartmentDetailsTable.propTypes = {
 	employees: PropTypes.array.isRequired,
-	onView: PropTypes.func.isRequired,
 };
 
 export default DepartmentDetailsTable;

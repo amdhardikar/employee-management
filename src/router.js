@@ -8,8 +8,18 @@ export const appRoutes = [
 		breadcrumb: "Employees",
 	},
 	{
+		path: "/employees/new",
+		breadcrumb: "New",
+		parent: "/employees",
+	},
+	{
 		path: "/employees/:id",
-		breadcrumb: "Employee Details",
+		breadcrumb: "Details",
+		parent: "/employees",
+	},
+	{
+		path: "/employees/edit/:id",
+		breadcrumb: "Edit",
 		parent: "/employees",
 	},
 	{
@@ -18,7 +28,12 @@ export const appRoutes = [
 	},
 	{
 		path: "/departments/:id",
-		breadcrumb: "Departments Details",
+		breadcrumb: "Details",
+		parent: "/departments",
+	},
+	{
+		path: "/departments/edit/:id",
+		breadcrumb: "Edit",
 		parent: "/departments",
 	},
 	{
@@ -27,7 +42,7 @@ export const appRoutes = [
 	},
 	{
 		path: "/attendance/:id",
-		breadcrumb: "Attendance Details",
+		breadcrumb: "Details",
 		parent: "/attendance",
 	},
 	{
@@ -36,7 +51,7 @@ export const appRoutes = [
 	},
 	{
 		path: "/payroll/:id",
-      breadcrumb: "Payroll Details",
-      parent: "/payroll"
+		breadcrumb: "Details",
+		parent: "/payroll",
 	},
 ];

@@ -15,7 +15,7 @@ export const CardHeader = ({ children, className = "" }) => (
 );
 
 export const CardTitle = ({ children, className = "" }) => (
-	<h3 className={`font-semibold text-slate-900 ${className}`}>{children}</h3>
+	<h3 className={`font-semibold text-slate-700 ${className}`}>{children}</h3>
 );
 
 export const CardSubtitle = ({ children, className = "" }) => (

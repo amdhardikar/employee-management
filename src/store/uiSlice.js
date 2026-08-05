@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const getStoredTheme = () => localStorage.getItem("theme") || "light";
+// const getStoredTheme = () => localStorage.getItem("theme") || "light";
 
 const initialState = {
 	sidebarOpen: false,
 	loading: false,
-	theme: getStoredTheme(),
+	// theme: getStoredTheme(),
 };
 
 const uiSlice = createSlice({
@@ -20,17 +20,17 @@ const uiSlice = createSlice({
 			state.sidebarOpen = false;
 		},
 
-		setTheme(state, action) {
-			state.theme = action.payload;
-			localStorage.setItem("theme", action.payload);
-		},
+		// setTheme(state, action) {
+		// 	state.theme = action.payload;
+		// 	localStorage.setItem("theme", action.payload);
+		// },
 
-		resetUI() {
-			return initialState;
-		},
+		// resetUI() {
+		// 	return initialState;
+		// },
 	},
 });
 
-export const { openSidebar, closeSidebar, setTheme, resetUI } = uiSlice.actions;
+export const { openSidebar, closeSidebar } = uiSlice.actions;
 
 export default uiSlice.reducer;

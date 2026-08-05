@@ -1,50 +1,30 @@
 import PropTypes from "prop-types";
-import { Eye, Star } from "lucide-react";
-import {
-	Table,
-	TableHead,
-	TableHeader,
-	TableBody,
-	TableRow,
-	TableCell,
-} from "../common/DataTable";
+import { Eye, Pencil, Star, Trash } from "lucide-react";
+import { Table, TableHead, TableHeader, TableBody, TableRow, TableCell } from "../common/DataTable";
 
-const DepartmentTable = ({ departments = [], employees = [], onView }) => {
+const DepartmentTable = ({ departments = [], employees = [], onView , onEdit}) => {
 	const getDepartmentStats = (departmentId) => {
-		const departmentEmployees = employees.filter(
-			(emp) => emp.employment?.departmentId === departmentId,
-		);
+		const departmentEmployees = employees.filter((emp) => emp.employment?.departmentId === departmentId);
 
-		const activeEmployees = departmentEmployees.filter(
-			(emp) => emp.employment?.status === "Active",
-		).length;
+		const activeEmployees = departmentEmployees.filter((emp) => emp.employment?.status === "Active").length;
 
 		const avgRating =
 			departmentEmployees.length > 0
 				? (
-						departmentEmployees.reduce(
-							(sum, emp) =>
-								sum + (emp.performance?.currentRating || 0),
-							0,
-						) / departmentEmployees.length
+						departmentEmployees.reduce((sum, emp) => sum + (emp.performance?.currentRating || 0), 0) /
+						departmentEmployees.length
 					).toFixed(1)
 				: 0;
 
 		const avgCTC =
 			departmentEmployees.length > 0
 				? Math.round(
-						departmentEmployees.reduce(
-							(sum, emp) => sum + (emp.salary?.employeeCTC || 0),
-							0,
-						) / departmentEmployees.length,
+						departmentEmployees.reduce((sum, emp) => sum + (emp.salary?.employeeCTC || 0), 0) /
+							departmentEmployees.length,
 					)
 				: 0;
 
-		const locations = [
-			...new Set(
-				departmentEmployees.map((emp) => emp.employment?.workLocation),
-			),
-		];
+		const locations = [...new Set(departmentEmployees.map((emp) => emp.employment?.workLocation))];
 
 		return {
 			totalEmployees: departmentEmployees.length,
@@ -71,9 +51,7 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 					<TableHeader className="text-left">Department</TableHeader>
 					<TableHeader className="text-center">Employees</TableHeader>
 					<TableHeader className="text-center">Active</TableHeader>
-					<TableHeader className="text-center">
-						Avg Rating
-					</TableHeader>
+					<TableHeader className="text-center">Avg Rating</TableHeader>
 					<TableHeader className="text-left">Locations</TableHeader>
 					<TableHeader className="text-right">Avg CTC</TableHeader>
 					<TableHeader className="text-center">Actions</TableHeader>
@@ -88,19 +66,13 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 						<TableRow key={department.departmentId}>
 							<TableCell>
 								<div>
-									<p className="text-sm font-medium text-slate-900">
-										{department.name}
-									</p>
+									<p className="text-sm font-medium text-slate-900">{department.name}</p>
 
-									<p className="text-xs text-slate-500">
-										{department.departmentId}
-									</p>
+									<p className="text-xs text-slate-500">{department.departmentId}</p>
 								</div>
 							</TableCell>
 
-							<TableCell className="text-center font-medium">
-								{stats.totalEmployees}
-							</TableCell>
+							<TableCell className="text-center font-medium">{stats.totalEmployees}</TableCell>
 
 							<TableCell className="text-center">
 								<span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
@@ -117,16 +89,14 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 
 							<TableCell>
 								<div className="flex flex-wrap gap-1">
-									{stats.locations
-										.slice(0, 2)
-										.map((location) => (
-											<span
-												key={location}
-												className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700"
-											>
-												{location}
-											</span>
-										))}
+									{stats.locations.slice(0, 2).map((location) => (
+										<span
+											key={location}
+											className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700"
+										>
+											{location}
+										</span>
+									))}
 
 									{stats.locations.length > 2 && (
 										<span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-700">
@@ -136,17 +106,21 @@ const DepartmentTable = ({ departments = [], employees = [], onView }) => {
 								</div>
 							</TableCell>
 
-							<TableCell className="text-right">
-								{formatCurrency(stats.avgCTC)}
-							</TableCell>
+							<TableCell className="text-right">{formatCurrency(stats.avgCTC)}</TableCell>
 
 							<TableCell>
 								<div className="flex justify-center gap-2">
 									<button
 										onClick={() => onView?.(department)}
-										className="rounded-md border border-slate-200 p-2 hover:bg-slate-100"
+										className="rounded-md border border-slate-200 p-2 hover:bg-blue-100 hover:text-blue-700 hover:cursor-pointer"
 									>
 										<Eye className="h-4 w-4" />
+									</button>
+									<button
+										onClick={() => onEdit?.(department)}
+										className="rounded-md border border-slate-200 p-2 hover:bg-green-100 hover:text-green-700 hover:cursor-pointer"
+									>
+										<Pencil className="h-4 w-4" />
 									</button>
 								</div>
 							</TableCell>
@@ -162,6 +136,7 @@ DepartmentTable.propTypes = {
 	departments: PropTypes.array.isRequired,
 	employees: PropTypes.array.isRequired,
 	onView: PropTypes.func.isRequired,
+	onEdit: PropTypes.func.isRequired
 };
 
 export default DepartmentTable;

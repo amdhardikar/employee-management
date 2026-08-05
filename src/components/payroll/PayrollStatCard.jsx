@@ -7,9 +7,7 @@ const PayrollStatCard = ({ title, value }) => {
 				<div>
 					<p className="text-sm text-slate-500">{title}</p>
 
-					<h3 className="mt-2 text-xl font-bold text-slate-900 md:text-2xl">
-						{value}
-					</h3>
+					<h3 className="mt-2 text-xl font-bold text-slate-900 md:text-2xl">{value}</h3>
 				</div>
 			</div>
 		</div>
@@ -19,7 +17,6 @@ const PayrollStatCard = ({ title, value }) => {
 PayrollStatCard.propTypes = {
 	title: PropTypes.string.isRequired,
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-	icon: PropTypes.node,
 };
 
 export default PayrollStatCard;

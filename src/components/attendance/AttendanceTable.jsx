@@ -1,13 +1,6 @@
 import PropTypes from "prop-types";
 import { Eye } from "lucide-react";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "../common/DataTable";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../common/DataTable";
 
 const AttendanceTable = ({ employees, onView }) => {
 	return (
@@ -16,9 +9,7 @@ const AttendanceTable = ({ employees, onView }) => {
 				<TableRow>
 					<TableHeader className="text-left">Employee</TableHeader>
 					<TableHeader className="text-left">Department</TableHeader>
-					<TableHeader className="text-left">
-						Attendance %
-					</TableHeader>
+					<TableHeader className="text-left">Attendance %</TableHeader>
 					<TableHeader className="text-center">Present</TableHeader>
 					<TableHeader className="text-center">Absent</TableHeader>
 					<TableHeader className="text-left">Leave</TableHeader>
@@ -40,19 +31,15 @@ const AttendanceTable = ({ employees, onView }) => {
 								/>
 
 								<div>
-									<p className="font-medium text-slate-900">
-										{employee.fullName}
-									</p>
+									<p className="font-medium text-slate-900">{employee.fullName}</p>
 									<span className="text-xs text-slate-500">
-                              { employee.employeeCode}	 | {employee.employeeId} 
+										{employee.employeeCode} | {employee.employeeId}
 									</span>
 								</div>
 							</div>
 						</TableCell>
 
-						<TableCell>
-							{employee.employment?.departmentName}
-						</TableCell>
+						<TableCell>{employee.employment?.departmentName}</TableCell>
 
 						<TableCell>
 							<div className="flex items-center gap-2">
@@ -66,45 +53,35 @@ const AttendanceTable = ({ employees, onView }) => {
 								</div>
 
 								<span className="text-sm font-medium">
-									{employee.attendance?.attendancePercentage}%
+									{employee.attendance?.attendancePercentage || 0}%
 								</span>
 							</div>
 						</TableCell>
 
-						<TableCell className="text-center">
-							{employee.attendance?.totalPresentDays || 0}
-						</TableCell>
+						<TableCell className="text-center">{employee.attendance?.totalPresentDays || 0}</TableCell>
 
-						<TableCell className="text-center">
-							{employee.attendance?.totalAbsentDays || 0}
-						</TableCell>
+						<TableCell className="text-center">{employee.attendance?.totalAbsentDays || 0}</TableCell>
 
-						<TableCell className="text-center">
-							{employee.attendance?.totalLeaveDays || 0}
-						</TableCell>
+						<TableCell className="text-center">{employee.attendance?.totalLeaveDays || 0}</TableCell>
 
 						<TableCell className="text-center">
 							{employee.attendance?.totalLateLeaveEquivalent || 0}
 						</TableCell>
 
-						<TableCell className="text-center">
-							{employee.attendance?.lastUpdatedYear || 0}
-						</TableCell>
+						<TableCell className="text-center">{employee.attendance?.lastUpdatedYear || 0}</TableCell>
 
-						<TableCell>
-							<div className="flex justify-center gap-2">
-								<button
-									onClick={() => onView(employee)}
-									className="rounded-md border border-slate-200 p-2 hover:bg-slate-100"
-								>
-									<Eye size={16} />
-								</button>
-
-								{/* <button className="rounded-md bg-blue-600 p-2 text-white">
-										<FileText size={16} />
-									</button> */}
-							</div>
-						</TableCell>
+						{employee.attendance?.attendancePercentage > 0 && (
+							<TableCell>
+								<div className="flex justify-center gap-2">
+									<button
+										onClick={() => onView(employee)}
+										className="rounded-md border border-slate-200 p-2 hover:bg-slate-100"
+									>
+										<Eye size={16} />
+									</button>
+								</div>
+							</TableCell>
+						)}
 					</TableRow>
 				))}
 			</TableBody>

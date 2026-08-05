@@ -4,8 +4,15 @@ import PropTypes from "prop-types";
 const PageLoader = ({ text = "Loading..." }) => {
 	return (
 		<div className="p-10">
-			<div className="flex min-h-75 flex-col items-center justify-center gap-4 text-center">
-				<Loader2 className="h-10 w-10 animate-spin text-indigo-600" />
+			<div
+				role="status"
+				aria-live="polite"
+				className="flex min-h-75 flex-col items-center justify-center gap-4 text-center"
+			>
+				<Loader2
+					aria-hidden="true"
+					className="h-10 w-10 animate-spin text-indigo-600"
+				/>
 
 				<div>
 					<h2 className="text-lg font-semibold text-slate-900">

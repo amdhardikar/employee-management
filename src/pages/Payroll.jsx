@@ -45,14 +45,13 @@ const Payroll = () => {
 		[debouncedSearch, query.department, query.order, query.sort],
 	);
 
-	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } =
-		useEmployeeListing({
-			fetchEmployees,
-			isDesktop,
-			tablePage: query.tablePage,
-			cardPage: query.cardPage,
-			pageSize: query.pageSize,
-		});
+	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } = useEmployeeListing({
+		fetchEmployees,
+		isDesktop,
+		tablePage: query.tablePage,
+		cardPage: query.cardPage,
+		pageSize: query.pageSize,
+	});
 
 	useEffect(() => {
 		if (!loading && restoreFocus.current) {
@@ -60,15 +59,11 @@ const Payroll = () => {
 		}
 	}, [loading]);
 
-	const {
-		onSearchChangeHandler,
-		onDepartmentChangeHandler,
-		onPageChangeHandler,
-		onPageSizeChangeHandler,
-	} = useFilters({
-		module: "payroll",
-		tableRef,
-	});
+	const { onSearchChangeHandler, onDepartmentChangeHandler, onPageChangeHandler, onPageSizeChangeHandler } =
+		useFilters({
+			module: "payroll",
+			tableRef,
+		});
 
 	const onViewHandler = (employee) => {
 		navigate(`/payroll/${employee.employeeId}`);
@@ -101,10 +96,7 @@ const Payroll = () => {
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
 				{hasTableData && (
 					<div className="hidden lg:block">
-						<PayrollTable
-							payrolls={tableEmployees}
-							onView={onViewHandler}
-						/>
+						<PayrollTable payrolls={tableEmployees} onView={onViewHandler} />
 						<Pagination
 							currentPage={query.tablePage}
 							totalPages={pagination.totalPages}
@@ -118,10 +110,7 @@ const Payroll = () => {
 				{hasCardData && (
 					<div className="grid gap-4 lg:hidden">
 						{cardEmployees.map((employee) => (
-							<PayrollCard
-								key={employee.id}
-								employee={employee}
-							/>
+							<PayrollCard key={employee.id} employee={employee} onView={onViewHandler} />
 						))}
 						{query.cardPage < pagination.totalPages && (
 							<div className="flex justify-center">
@@ -130,8 +119,8 @@ const Payroll = () => {
 									disabled={loadingMore}
 									onClick={() =>
 										dispatch(
-                                 setFilters({
-                                    module: "payroll",
+											setFilters({
+												module: "payroll",
 												cardPage: query.cardPage + 1,
 											}),
 										)
