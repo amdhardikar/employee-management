@@ -55,6 +55,7 @@ const Filters = ({
 								{dept}
 							</option>
 						))}
+						<option value="unassigned">Unassigned</option>
 					</select>
 				)}
 

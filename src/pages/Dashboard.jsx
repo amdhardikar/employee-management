@@ -2,14 +2,13 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Users, UserPlus, Briefcase, Calendar } from "lucide-react";
 import PageLoader from "../components/common/PageLoader";
+import ErrorState from "../components/common/ErrorState";
 import { fetchDashboard } from "../store/dashboardSlice";
 
 const Dashboard = () => {
 	const dispatch = useDispatch();
 
-	const { data: dashboard, loading } = useSelector(
-		(state) => state.dashboard,
-	);
+	const { data: dashboard, loading, error } = useSelector((state) => state.dashboard);
 
 	useEffect(() => {
 		dispatch(fetchDashboard());
@@ -17,6 +16,15 @@ const Dashboard = () => {
 
 	if (loading) {
 		return <PageLoader text="Loading dashboard..." />;
+	}
+
+	if (error) {
+		return (
+			<ErrorState
+				title="Unable to load dashboard"
+				message={`Reason : ${error.message || "Unable to load dashboard data."}`}
+			/>
+		);
 	}
 
 	const stats = [
@@ -48,12 +56,8 @@ const Dashboard = () => {
 				<div className="overflow-y-auto border-t border-slate-200 p-5">
 					{/* Header */}
 					<div className="mb-8">
-						<h2 className="text-3xl font-bold text-gray-800">
-							Dashboard
-						</h2>
-						<p className="text-gray-500">
-							Employee Management System Overview
-						</p>
+						<h2 className="text-3xl font-bold text-gray-800">Dashboard</h2>
+						<p className="text-gray-500">Employee Management System Overview</p>
 					</div>
 
 					{/* Stats Cards */}
@@ -64,17 +68,11 @@ const Dashboard = () => {
 								className="flex items-center justify-between rounded-xl bg-white p-6 shadow-sm transition hover:shadow-md"
 							>
 								<div>
-									<p className="text-sm text-gray-500">
-										{card.title}
-									</p>
-									<h3 className="mt-2 text-3xl font-bold">
-										{card.value}
-									</h3>
+									<p className="text-sm text-gray-500">{card.title}</p>
+									<h3 className="mt-2 text-3xl font-bold">{card.value}</h3>
 								</div>
 
-								<div className="rounded-lg bg-blue-100 p-3 text-blue-600">
-									{card.icon}
-								</div>
+								<div className="rounded-lg bg-blue-100 p-3 text-blue-600">{card.icon}</div>
 							</div>
 						))}
 					</div>
@@ -83,32 +81,21 @@ const Dashboard = () => {
 					<div className="grid gap-6 lg:grid-cols-2">
 						{/* Recent Employees */}
 						<div className="rounded-xl bg-white p-6 shadow-sm">
-							<h3 className="mb-4 text-lg font-semibold">
-								Recent Employees
-							</h3>
+							<h3 className="mb-4 text-lg font-semibold">Recent Employees</h3>
 
 							<div className="space-y-4">
 								{dashboard.recentEmployees.map((emp) => (
-									<div
-										key={emp.id}
-										className="flex items-center justify-between border-b pb-3"
-									>
+									<div key={emp.id} className="flex items-center justify-between border-b pb-3">
 										<div>
-											<p className="font-medium">
-												{emp.personalInfo.fullName}
-											</p>
-											<p className="text-sm text-gray-500">
-												{emp.employment.designation}
-											</p>
+											<p className="font-medium">{emp.personalInfo.fullName}</p>
+											<p className="text-sm text-gray-500">{emp.employment.designation}</p>
 										</div>
 
 										<span
 											className={`text-sm font-medium ${
-												emp.employment.status ===
-												"Active"
+												emp.employment.status === "Active"
 													? "text-green-600"
-													: emp.employment.status ===
-														  "On Leave"
+													: emp.employment.status === "On Leave"
 														? "text-yellow-600"
 														: "text-red-600"
 											}`}
@@ -122,9 +109,7 @@ const Dashboard = () => {
 
 						{/* Department Overview */}
 						<div className="rounded-xl bg-white p-6 shadow-sm">
-							<h3 className="mb-4 text-lg font-semibold">
-								Department Overview
-							</h3>
+							<h3 className="mb-4 text-lg font-semibold">Department Overview</h3>
 
 							<div className="space-y-4">
 								{dashboard.departmentStats.map((item) => (
@@ -149,26 +134,18 @@ const Dashboard = () => {
 
 						{/* Attendance Summary */}
 						<div className="rounded-xl bg-white p-6 shadow-sm">
-							<h3 className="mb-4 text-lg font-semibold">
-								Attendance Summary
-							</h3>
+							<h3 className="mb-4 text-lg font-semibold">Attendance Summary</h3>
 
 							<div className="py-8 text-center">
-								<h2 className="text-5xl font-bold text-green-600">
-									{dashboard.stats.avgAttendance}%
-								</h2>
+								<h2 className="text-5xl font-bold text-green-600">{dashboard.stats.avgAttendance}%</h2>
 
-								<p className="mt-2 text-gray-500">
-									Overall Attendance Rate
-								</p>
+								<p className="mt-2 text-gray-500">Overall Attendance Rate</p>
 							</div>
 						</div>
 
 						{/* Employee Status */}
 						<div className="rounded-xl bg-white p-6 shadow-sm">
-							<h3 className="mb-4 text-lg font-semibold">
-								Employee Status
-							</h3>
+							<h3 className="mb-4 text-lg font-semibold">Employee Status</h3>
 
 							<div className="space-y-4">
 								<div className="flex justify-between">
@@ -196,38 +173,25 @@ const Dashboard = () => {
 
 						{/* Payroll */}
 						<div className="rounded-xl bg-white p-6 shadow-sm">
-							<h3 className="mb-4 text-lg font-semibold">
-								Monthly Payroll
-							</h3>
+							<h3 className="mb-4 text-lg font-semibold">Monthly Payroll</h3>
 
 							<div className="py-6 text-center">
 								<h2 className="text-4xl font-bold text-indigo-600">
-									₹
-									{dashboard.stats.monthlyPayroll?.toLocaleString(
-										"en-IN",
-									)}
+									₹{dashboard.stats.monthlyPayroll?.toLocaleString("en-IN")}
 								</h2>
 
-								<p className="mt-2 text-gray-500">
-									Total Net Salary Payout
-								</p>
+								<p className="mt-2 text-gray-500">Total Net Salary Payout</p>
 							</div>
 						</div>
 
 						{/* Performance */}
 						<div className="rounded-xl bg-white p-6 shadow-sm">
-							<h3 className="mb-4 text-lg font-semibold">
-								Average Performance Rating
-							</h3>
+							<h3 className="mb-4 text-lg font-semibold">Average Performance Rating</h3>
 
 							<div className="py-6 text-center">
-								<h2 className="text-5xl font-bold text-orange-500">
-									{dashboard.stats.avgRating}
-								</h2>
+								<h2 className="text-5xl font-bold text-orange-500">{dashboard.stats.avgRating}</h2>
 
-								<p className="mt-2 text-gray-500">
-									Average Employee Rating
-								</p>
+								<p className="mt-2 text-gray-500">Average Employee Rating</p>
 							</div>
 						</div>
 					</div>

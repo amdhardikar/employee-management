@@ -8,6 +8,7 @@ import Filters from "../components/common/Filters";
 import PageLoader from "../components/common/PageLoader";
 import EmptyState from "../components/common/EmptyState";
 import Pagination from "../components/common/Pagination";
+import ErrorState from "../components/common/ErrorState";
 import EmployeeTable from "../components/employee/EmployeeTable";
 import EmployeeCard from "../components/employee/EmployeeCard";
 
@@ -27,7 +28,7 @@ const Employees = () => {
 	const restoreFocus = useRef(false);
 	const dispatch = useDispatch();
 
-	const departments = useDepartments();
+	const { departments, loading: departmentsLoading, error: departmentsError } = useDepartments();
 	const query = useSelector((state) => state.filters.employee);
 	const navigate = useNavigate();
 	const debouncedSearch = useDebounce(query.search, 500);
@@ -46,7 +47,7 @@ const Employees = () => {
 		[debouncedSearch, query.department, query.status],
 	);
 
-	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } = useEmployeeListing({
+	const { tableEmployees, cardEmployees, loading, loadingMore, pagination, error } = useEmployeeListing({
 		fetchEmployees,
 		isDesktop,
 		tablePage: query.tablePage,
@@ -87,31 +88,16 @@ const Employees = () => {
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
 
-	if (loading) {
-		return (
-			<>
-				<div className="sticky top-0 z-10 bg-white shadow-sm">
-					<Filters
-						searchRef={searchRef}
-						search={query.search}
-						department={query.department}
-						status={query.status}
-						statusList={statusList}
-						departments={departments}
-						showSearch
-						showDepartment
-						showStatus
-						onSearchChange={onSearchChangeHandler}
-						onDepartmentChange={onDepartmentChangeHandler}
-						onStatusChange={onStatusChangeHandler}
-						onSearchFocus={() => (restoreFocus.current = true)}
-						onSearchBlur={() => (restoreFocus.current = false)}
-						newButton={true}
-					/>
-				</div>
+	if (loading || departmentsLoading) {
+		return <PageLoader text="Loading employees..." />;
+	}
 
-				<PageLoader text="Loading employees..." />
-			</>
+	if (error || departmentsError) {
+		return (
+			<ErrorState
+				title="Unable to load employees"
+				message={`Reason : ${error?.message || departmentsError?.message || "Something went wrong while loading employees"}`}
+			/>
 		);
 	}
 
@@ -136,55 +122,56 @@ const Employees = () => {
 					newButton={true}
 				/>
 			</div>
+			{(hasTableData || hasCardData) && (
+				<div className="overflow-y-auto border-t border-slate-200 p-5">
+					{hasTableData && (
+						<div className="hidden lg:block" ref={tableRef}>
+							<EmployeeTable
+								employees={tableEmployees}
+								onView={onViewHandler}
+								onEdit={onEditHandler}
+								onDelete={onDeleteHandler}
+							/>
 
-			<div className="overflow-y-auto border-t border-slate-200 p-5">
-				{hasTableData && (
-					<div className="hidden lg:block" ref={tableRef}>
-						<EmployeeTable
-							employees={tableEmployees}
-							onView={onViewHandler}
-							onEdit={onEditHandler}
-							onDelete={onDeleteHandler}
-						/>
+							<Pagination
+								currentPage={query.tablePage}
+								totalPages={pagination.totalPages}
+								totalItems={pagination.totalItems}
+								pageSize={query.pageSize}
+								onPageChange={onPageChangeHandler}
+								onPageSizeChange={onPageSizeChangeHandler}
+							/>
+						</div>
+					)}
 
-						<Pagination
-							currentPage={query.tablePage}
-							totalPages={pagination.totalPages}
-							totalItems={pagination.totalItems}
-							pageSize={query.pageSize}
-							onPageChange={onPageChangeHandler}
-							onPageSizeChange={onPageSizeChangeHandler}
-						/>
-					</div>
-				)}
+					{hasCardData && (
+						<div className="grid gap-4 lg:hidden">
+							{cardEmployees.map((employee) => (
+								<EmployeeCard key={employee.id} employee={employee} onView={onViewHandler} />
+							))}
 
-				{hasCardData && (
-					<div className="grid gap-4 lg:hidden">
-						{cardEmployees.map((employee) => (
-							<EmployeeCard key={employee.id} employee={employee} onView={onViewHandler} />
-						))}
-
-						{query.cardPage < pagination.totalPages && (
-							<div className="flex justify-center">
-								<button
-									className="w-full px-4 py-2 text-sm font-medium hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
-									disabled={loadingMore}
-									onClick={() =>
-										dispatch(
-											setFilters({
-												module: "employee",
-												cardPage: query.cardPage + 1,
-											}),
-										)
-									}
-								>
-									{loadingMore ? "Loading..." : "Load More"}
-								</button>
-							</div>
-						)}
-					</div>
-				)}
-			</div>
+							{query.cardPage < pagination.totalPages && (
+								<div className="flex justify-center">
+									<button
+										className="w-full px-4 py-2 text-sm font-medium hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+										disabled={loadingMore}
+										onClick={() =>
+											dispatch(
+												setFilters({
+													module: "employee",
+													cardPage: query.cardPage + 1,
+												}),
+											)
+										}
+									>
+										{loadingMore ? "Loading..." : "Load More"}
+									</button>
+								</div>
+							)}
+						</div>
+					)}
+				</div>
+			)}
 			{!hasTableData && !hasCardData && <EmptyState />}
 		</>
 	);

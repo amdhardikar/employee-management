@@ -29,35 +29,6 @@ const DepartmentEditTable = ({
 			</TableHead>
 
 			<TableBody>
-				{employees.map((employee) => (
-					<TableRow key={employee.id}>
-						<TableCell>
-							<NavLink to={`/employees/${employee.employeeId}`}>{employee.employeeId}</NavLink>
-						</TableCell>
-						<TableCell>{employee.fullName}</TableCell>
-						<TableCell>{employee.employment.designation}</TableCell>
-						<TableCell>{employee.employment.employeeType}</TableCell>
-						<TableCell>{employee.employment.workLocation}</TableCell>
-						<TableCell>{employee.employment.manager?.name}</TableCell>
-						<TableCell>
-							<span
-								className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
-									STATUS_COLORS[employee.employment?.status] || "bg-slate-100 text-slate-700"
-								}`}
-							>
-								{employee.employment?.status}
-							</span>
-						</TableCell>
-						<TableCell className="text-center">
-							<button
-								onClick={() => onRemoveEmployee(employee)}
-								className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-red-100 hover:text-red-700"
-							>
-								<Trash className="h-4 w-4" />
-							</button>
-						</TableCell>
-					</TableRow>
-				))}
 				{newRows.map((row) => (
 					<TableRow
 						key={row.id}
@@ -66,7 +37,7 @@ const DepartmentEditTable = ({
 						<TableCell colSpan={2}>
 							<input
 								value={row.employeeId}
-								className={`outline-none h-10 w-full rounded-sm border px-3 text-sm ${
+								className={`h-10 w-full rounded-sm border px-3 text-sm outline-none ${
 									row.error
 										? "border-red-500 focus:ring-4 focus:ring-red-100"
 										: "border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
@@ -152,13 +123,48 @@ const DepartmentEditTable = ({
 						</TableCell>
 					</TableRow>
 				))}
+				{employees.map((employee) => (
+					<TableRow key={employee.id}>
+						<TableCell>
+							<NavLink to={`/employees/${employee.employeeId}`}>{employee.employeeId}</NavLink>
+						</TableCell>
+						<TableCell>{employee.fullName}</TableCell>
+						<TableCell>{employee.employment.designation}</TableCell>
+						<TableCell>{employee.employment.employeeType}</TableCell>
+						<TableCell>{employee.employment.workLocation}</TableCell>
+						<TableCell>{employee.employment.manager?.name}</TableCell>
+						<TableCell>
+							<span
+								className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
+									STATUS_COLORS[employee.employment?.status] || "bg-slate-100 text-slate-700"
+								}`}
+							>
+								{employee.employment?.status}
+							</span>
+						</TableCell>
+						<TableCell className="text-center">
+							<button
+								onClick={() => onRemoveEmployee(employee)}
+								className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-red-100 hover:text-red-700"
+							>
+								<Trash className="h-4 w-4" />
+							</button>
+						</TableCell>
+					</TableRow>
+				))}
 			</TableBody>
 		</Table>
 	);
 };
 
 DepartmentEditTable.propTypes = {
+	designations: PropTypes.array.isRequired,
 	employees: PropTypes.array.isRequired,
+	newRows: PropTypes.array.isRequired,
+	setNewRows: PropTypes.func.isRequired,
+	onSaveEmployee: PropTypes.func.isRequired,
+	onRemoveEmployee: PropTypes.func.isRequired,
+	onCancelRow: PropTypes.func.isRequired,
 };
 
 export default DepartmentEditTable;

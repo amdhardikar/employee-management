@@ -19,7 +19,10 @@ export const payrollApi = {
 
 			return data;
 		} catch (error) {
-			logger.error(`Error fetching payroll records for employee: ${employeeId}`, error);
+         logger.error(`Error fetching payroll records for employee: ${employeeId}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},

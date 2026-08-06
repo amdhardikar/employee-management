@@ -302,7 +302,7 @@ describe("Employees Page", () => {
 		expect(screen.getByText("Loading...")).toBeInTheDocument();
 	});
 
-	it("shows loader and handles search focus/blur while loading", () => {
+	it("shows loader while loading", () => {
 		employeeListingState = {
 			tableEmployees: [],
 			cardEmployees: [],
@@ -315,10 +315,7 @@ describe("Employees Page", () => {
 
 		expect(screen.getByText("Loading employees...")).toBeInTheDocument();
 
-		const input = screen.getByTestId("filters");
-
-		fireEvent.focus(input);
-		fireEvent.blur(input);
+		expect(screen.queryByTestId("filters")).not.toBeInTheDocument();
 	});
 
 	it("shows empty state when no employees", () => {

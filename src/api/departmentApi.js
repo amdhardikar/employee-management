@@ -23,6 +23,9 @@ export const departmentApi = {
 			return data;
 		} catch (error) {
 			logger.error("Error fetching departments", error);
+			if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -45,9 +48,12 @@ export const departmentApi = {
 			const data = await res.json();
 			logger.info(`Department loaded successfully. ID: ${id}`);
 
-			return data;
+			return data[0];
 		} catch (error) {
 			logger.error(`Error fetching department with ID: ${id}`, error);
+			if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -75,6 +81,40 @@ export const departmentApi = {
 			return data;
 		} catch (error) {
 			logger.error(`Error updating department: ${departmentId}`, error);
+			if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
+			throw error;
+		}
+	},
+	createDepartment: async (body) => {
+		try {
+			logger.debug("Creating department", body);
+
+			const res = await fetch(API_URL, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(body),
+			});
+
+			if (!res.ok) {
+				const errorData = await res.json();
+
+				logger.error("Failed to create department", errorData);
+				throw new Error(errorData.error || "Failed to create department");
+			}
+
+			const data = await res.json();
+			logger.info("Department created successfully");
+
+			return data;
+		} catch (error) {
+			logger.error("Error creating department", error);
+			if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},

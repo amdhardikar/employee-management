@@ -62,7 +62,7 @@ describe("departmentApi", () => {
 			},
 		});
 
-		expect(result).toEqual(mockDepartment);
+		expect(result).toEqual(mockDepartment[0]);
 	});
 
 	it("throws error when getById fails", async () => {

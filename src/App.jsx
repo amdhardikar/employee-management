@@ -20,6 +20,7 @@ import PayslipLayout from "./layout/payslipLayout";
 import EmployeeCreate from "./components/employee/EmployeeCreate";
 import EmployeeEdit from "./components/employee/EmployeeEdit";
 import DepartmentEdit from "./components/department/DepartmentEdit";
+import DepartmentCreate from "./components/department/DepartmentCreate";
 
 function App() {
 	return (
@@ -45,6 +46,7 @@ function App() {
 
 					<Route element={<DepartmentLayout />}>
 						<Route path="/departments" element={<Departments />} />
+						<Route path="/departments/new" element={<DepartmentCreate />} />
 						<Route path="/departments/:id" element={<DepartmentDetails />} />
 						<Route path="/departments/edit/:id" element={<DepartmentEdit />} />
 					</Route>

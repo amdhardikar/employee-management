@@ -18,7 +18,7 @@ export const employeeApi = {
 
 			if (!res.ok) {
 				logger.error(`Failed to fetch employees. Status: ${res.status}`);
-				throw new Error("Failed to load all employees");
+				throw new Error("Failed to load employees");
 			}
 
 			const data = await res.json();
@@ -26,7 +26,10 @@ export const employeeApi = {
 
 			return data;
 		} catch (error) {
-			logger.error("Error fetching all employees", error);
+         logger.error("Error fetching all employees", error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -89,7 +92,10 @@ export const employeeApi = {
 				items: totalItems,
 			};
 		} catch (error) {
-			logger.error("Error fetching employees", error);
+         logger.error("Error fetching employees", error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -117,6 +123,9 @@ export const employeeApi = {
 			}));
 		} catch (error) {
 			logger.error("Error fetching managers", error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -140,6 +149,9 @@ export const employeeApi = {
 			return data[0];
 		} catch (error) {
 			logger.error(`Error fetching employee: ${id}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -164,7 +176,10 @@ export const employeeApi = {
 
 			return data;
 		} catch (error) {
-			logger.error(`Error fetching employees for department: ${id}`, error);
+         logger.error(`Error fetching employees for department: ${id}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -187,7 +202,10 @@ export const employeeApi = {
 
 			return res;
 		} catch (error) {
-			logger.error(`Error authenticating employee code: ${code}`, error);
+         logger.error(`Error authenticating employee code: ${code}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -213,7 +231,10 @@ export const employeeApi = {
 
 			return data;
 		} catch (error) {
-			logger.error("Error creating employee", error);
+         logger.error("Error creating employee", error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -239,7 +260,10 @@ export const employeeApi = {
 
 			return data;
 		} catch (error) {
-			logger.error(`Error updating employee: ${id}`, error);
+         logger.error(`Error updating employee: ${id}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},
@@ -262,7 +286,10 @@ export const employeeApi = {
 
 			return true;
 		} catch (error) {
-			logger.error(`Error deleting employee: ${id}`, error);
+         logger.error(`Error deleting employee: ${id}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},

@@ -13,6 +13,7 @@ import PageLoader from "../common/PageLoader";
 import EmptyState from "../common/EmptyState";
 import StatCard from "../common/StatCard";
 import NotFound from "../common/NotFound";
+import ErrorState from "../common/ErrorState";
 
 import DepartmentEditTable from "./DepartmentEditTable";
 
@@ -23,22 +24,28 @@ const DepartmentEdit = () => {
 	const [department, setDepartment] = useState(null);
 	const [employees, setEmployees] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 	const [newRows, setNewRows] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
+				setLoading(true);
+				setError(null);
+
 				const [departmentData, employeeData, designationData] = await Promise.all([
 					departmentApi.getById(id),
 					employeeApi.getByDepartment(id),
 					designationApi.getByDepartment(id),
 				]);
 
-				setDepartment(departmentData[0]);
+				setDepartment(departmentData);
 				setEmployees(employeeData);
 				setDesignations(designationData);
 			} catch (error) {
-				console.error(error);
+				setError({
+					message: error.message || "Unable to load department details",
+				});
 			} finally {
 				setLoading(false);
 			}
@@ -137,6 +144,15 @@ const DepartmentEdit = () => {
 
 	if (loading) {
 		return <PageLoader text="Loading department details..." />;
+	}
+
+	if (error) {
+		return (
+			<ErrorState
+				title="Unable to load department"
+				message={`Reason : ${error?.message || "Something went wrong"}`}
+			/>
+		);
 	}
 
 	if (!department) {

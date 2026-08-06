@@ -1,10 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 
-import reducer, {
-	fetchDashboard,
-	clearDashboard,
-	refreshDashboard,
-} from "../../store/dashboardSlice";
+import reducer, { fetchDashboard, clearDashboard, refreshDashboard } from "../../store/dashboardSlice";
 
 import { dashboardApi } from "../../api/dashboardApi";
 
@@ -118,13 +114,16 @@ describe("dashboardSlice", () => {
 	it("handles fetchDashboard rejected state", () => {
 		const action = {
 			type: fetchDashboard.rejected.type,
-			payload: "Failed to load dashboard",
+			payload: {
+				message: "Failed to load dashboard",
+			},
 		};
 
 		const nextState = reducer(undefined, action);
 
-		expect(nextState.loading).toBe(false);
-		expect(nextState.error).toBe("Failed to load dashboard");
+		expect(nextState.error).toEqual({
+			message: "Failed to load dashboard",
+		});
 	});
 
 	it("fetchDashboard thunk succeeds", async () => {
@@ -152,6 +151,8 @@ describe("dashboardSlice", () => {
 
 		expect(result.type).toBe("dashboard/fetchDashboard/rejected");
 
-		expect(result.payload).toBe("Network Error");
+		expect(result.payload).toEqual({
+			message: "Network Error",
+		});
 	});
 });

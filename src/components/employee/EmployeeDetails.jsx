@@ -5,11 +5,13 @@ import { employeeApi } from "../../api/employeeApi";
 import { Mail, Phone } from "lucide-react";
 import PageLoader from "../common/PageLoader";
 import NotFound from "../common/NotFound";
+import ErrorState from "../common/ErrorState";
 
 const EmployeeDetails = () => {
 	const { id } = useParams();
 	const [employee, setEmployee] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 	const [activeTab, setActiveTab] = useState("overview");
 
 	const tabs = [
@@ -27,6 +29,7 @@ const EmployeeDetails = () => {
 		const loadEmployee = async () => {
 			try {
 				setLoading(true);
+				setError(null);
 
 				const data = await employeeApi.getById(id);
 
@@ -35,6 +38,11 @@ const EmployeeDetails = () => {
 				} else {
 					setEmployee(null);
 				}
+         } catch (err) {
+            console.log(err)
+				setError({
+					message: err.message || "Unable to load employee details",
+				});
 			} finally {
 				setLoading(false);
 			}
@@ -44,6 +52,15 @@ const EmployeeDetails = () => {
 
 	if (loading) {
 		return <PageLoader text="Loading employee details..." />;
+	}
+
+	if (error) {
+		return (
+			<ErrorState
+				title="Unable to load employee details"
+				message={`Reason : ${error?.message || "Something went wrong"}`}
+			/>
+		);
 	}
 
 	if (!employee) {

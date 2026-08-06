@@ -46,6 +46,14 @@ vi.mock("../../../components/common/NotFound", () => ({
 		</div>
 	),
 }));
+vi.mock("../../../components/common/ErrorState", () => ({
+	default: ({ title, message }) => (
+		<div>
+			<h1>{title}</h1>
+			<p>{message}</p>
+		</div>
+	),
+}));
 
 vi.mock("../../../components/common/EmptyState", () => ({
 	default: () => <div>Empty State</div>,
@@ -126,7 +134,7 @@ describe("DepartmentEdit", () => {
 	});
 
 	it("shows department not found when api returns empty", async () => {
-		departmentApi.getById.mockResolvedValue([]);
+		departmentApi.getById.mockResolvedValue(null);
 
 		employeeApi.getByDepartment.mockResolvedValue([]);
 
@@ -138,7 +146,7 @@ describe("DepartmentEdit", () => {
 	});
 
 	it("renders department details", async () => {
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 
@@ -152,7 +160,7 @@ describe("DepartmentEdit", () => {
 	});
 
 	it("renders employee table when employees exist", async () => {
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 
@@ -180,7 +188,7 @@ describe("DepartmentEdit", () => {
 	it("adds new employee row when Add Employee clicked", async () => {
 		const user = userEvent.setup();
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 
@@ -202,7 +210,7 @@ describe("DepartmentEdit", () => {
 	it("adds employee successfully", async () => {
 		const user = userEvent.setup();
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 		designationApi.getByDepartment.mockResolvedValue(designations);
 
@@ -250,7 +258,7 @@ describe("DepartmentEdit", () => {
 
 		const consoleSpy = vi.spyOn(console, "log").mockImplementation(() => {});
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 		designationApi.getByDepartment.mockResolvedValue(designations);
 
@@ -283,7 +291,7 @@ describe("DepartmentEdit", () => {
 	it("does not add another row when row already exists", async () => {
 		const user = userEvent.setup();
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 		designationApi.getByDepartment.mockResolvedValue(designations);
 
@@ -304,7 +312,7 @@ describe("DepartmentEdit", () => {
 	it("removes employee successfully", async () => {
 		const user = userEvent.setup();
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 
@@ -331,7 +339,7 @@ describe("DepartmentEdit", () => {
 	});
 
 	it("calls all api methods with department id", async () => {
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 
@@ -349,19 +357,16 @@ describe("DepartmentEdit", () => {
 	});
 
 	it("handles fetchData api error gracefully", async () => {
-		const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-
 		departmentApi.getById.mockRejectedValue(new Error("Failed"));
+
 		employeeApi.getByDepartment.mockResolvedValue([]);
 		designationApi.getByDepartment.mockResolvedValue([]);
 
 		render(<DepartmentEdit />);
 
-		await waitFor(() => {
-			expect(consoleSpy).toHaveBeenCalled();
-		});
+		expect(await screen.findByText(/Unable to load department/i)).toBeInTheDocument();
 
-		consoleSpy.mockRestore();
+		expect(screen.getByText(/Reason : Failed/i)).toBeInTheDocument();
 	});
 
 	it("handles remove employee api failure", async () => {
@@ -369,7 +374,7 @@ describe("DepartmentEdit", () => {
 
 		const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 		designationApi.getByDepartment.mockResolvedValue(designations);
 
@@ -395,7 +400,7 @@ describe("DepartmentEdit", () => {
 	it("shows designation required error while adding employee", async () => {
 		const user = userEvent.setup();
 
-		departmentApi.getById.mockResolvedValue([department]);
+		departmentApi.getById.mockResolvedValue(department);
 		employeeApi.getByDepartment.mockResolvedValue(employees);
 		designationApi.getByDepartment.mockResolvedValue(designations);
 

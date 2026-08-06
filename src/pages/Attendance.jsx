@@ -17,6 +17,7 @@ import useMediaQuery from "../hooks/useMediaQuery";
 import useEmployeeListing from "../hooks/useEmployeeListing";
 import useDepartments from "../hooks/useDepartments";
 import useFilters from "../hooks/useFilters";
+import ErrorState from "../components/common/ErrorState";
 
 const Attendance = () => {
 	const tableRef = useRef(null);
@@ -24,7 +25,7 @@ const Attendance = () => {
 	const restoreFocus = useRef(false);
 	const dispatch = useDispatch();
 
-	const departments = useDepartments();
+	const { departments, loading: departmentsLoading, error: departmentsError } = useDepartments();
 	const query = useSelector((state) => state.filters.attendance);
 	const navigate = useNavigate();
 	const debouncedSearch = useDebounce(query.search, 500);
@@ -42,14 +43,13 @@ const Attendance = () => {
 		[debouncedSearch, query.department],
 	);
 
-	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } =
-		useEmployeeListing({
-			fetchEmployees,
-			isDesktop,
-			tablePage: query.tablePage,
-			cardPage: query.cardPage,
-			pageSize: query.pageSize,
-		});
+	const { tableEmployees, cardEmployees, loading, loadingMore, pagination, error } = useEmployeeListing({
+		fetchEmployees,
+		isDesktop,
+		tablePage: query.tablePage,
+		cardPage: query.cardPage,
+		pageSize: query.pageSize,
+	});
 
 	useEffect(() => {
 		if (!loading && restoreFocus.current) {
@@ -57,15 +57,11 @@ const Attendance = () => {
 		}
 	}, [loading]);
 
-	const {
-		onSearchChangeHandler,
-		onDepartmentChangeHandler,
-		onPageChangeHandler,
-		onPageSizeChangeHandler,
-	} = useFilters({
-		module: "attendance",
-		tableRef,
-	});
+	const { onSearchChangeHandler, onDepartmentChangeHandler, onPageChangeHandler, onPageSizeChangeHandler } =
+		useFilters({
+			module: "attendance",
+			tableRef,
+		});
 
 	const onViewHandler = (employee) => {
 		navigate(`/attendance/${employee.employeeId}`);
@@ -74,8 +70,17 @@ const Attendance = () => {
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
 
-	if (loading) {
+	if (loading || departmentsLoading) {
 		return <PageLoader text="Loading attendance..." />;
+	}
+
+	if (error || departmentsError) {
+		return (
+			<ErrorState
+				title="Unable to load attendance"
+				message={`Reason : ${error?.message || departmentsError?.message || "Something went wrong while loading attendance"}`}
+			/>
+		);
 	}
 
 	return (
@@ -98,10 +103,7 @@ const Attendance = () => {
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
 				{hasTableData && (
 					<div className="hidden lg:block">
-						<AttendanceTable
-							employees={tableEmployees}
-							onView={onViewHandler}
-						/>
+						<AttendanceTable employees={tableEmployees} onView={onViewHandler} />
 						<Pagination
 							currentPage={query.tablePage}
 							totalPages={pagination.totalPages}
@@ -115,11 +117,7 @@ const Attendance = () => {
 				{hasCardData && (
 					<div className="grid gap-4 lg:hidden">
 						{cardEmployees.map((employee) => (
-							<AttendanceCard
-								key={employee.employeeId}
-								employee={employee}
-								onView={onViewHandler}
-							/>
+							<AttendanceCard key={employee.employeeId} employee={employee} onView={onViewHandler} />
 						))}
 						{query.cardPage < pagination.totalPages && (
 							<div className="flex justify-center">
@@ -128,8 +126,8 @@ const Attendance = () => {
 									disabled={loadingMore}
 									onClick={() =>
 										dispatch(
-                                 setFilters({
-                                    module: "attendance",
+											setFilters({
+												module: "attendance",
 												cardPage: query.cardPage + 1,
 											}),
 										)

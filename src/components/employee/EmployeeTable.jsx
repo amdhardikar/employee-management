@@ -39,8 +39,13 @@ const EmployeeTable = ({ employees, onView, onEdit, onDelete }) => {
 						</TableCell>
 
 						<TableCell>
-							<p className="font-medium text-slate-900">{employee.employment?.designation}</p>
-							<p className="text-xs text-slate-500">{employee.employment?.departmentName}</p>
+							<p className="font-medium text-slate-900">
+								{employee.employment?.designation || "No Designation"}
+							</p>
+
+							<p className="text-xs text-slate-500">
+								{employee.employment?.departmentName || "No Department"}
+							</p>
 						</TableCell>
 
 						<TableCell className="max-w-55] truncate">{employee.email}</TableCell>
@@ -61,19 +66,19 @@ const EmployeeTable = ({ employees, onView, onEdit, onDelete }) => {
 							<div className="flex justify-center gap-2">
 								<button
 									onClick={() => onView(employee)}
-									className="rounded-md border border-slate-200 p-2 hover:bg-blue-100 hover:text-blue-700 hover:cursor-pointer"
+									className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-blue-100 hover:text-blue-700"
 								>
 									<Eye className="h-4 w-4" />
 								</button>
 								<button
 									onClick={() => onEdit(employee)}
-									className="rounded-md border border-slate-200 p-2 hover:bg-green-100 hover:text-green-700 hover:cursor-pointer"
+									className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-green-100 hover:text-green-700"
 								>
 									<Pencil className="h-4 w-4" />
 								</button>
 								<button
 									onClick={() => onDelete(employee)}
-									className="rounded-md border border-slate-200 p-2 hover:bg-red-100 hover:text-red-700 hover:cursor-pointer"
+									className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-red-100 hover:text-red-700"
 								>
 									<Trash className="h-4 w-4" />
 								</button>

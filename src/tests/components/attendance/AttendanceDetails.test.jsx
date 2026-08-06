@@ -72,19 +72,17 @@ describe("AttendanceDetails", () => {
 		},
 	];
 
-	const employee = [
-		{
-			fullName: "John Doe",
-			email: "john@example.com",
-			personalInfo: {
-				profileImage: "/profile.png",
-			},
-			employment: {
-				departmentName: "Engineering",
-				designation: "Developer",
-			},
+	const employee = {
+		fullName: "John Doe",
+		email: "john@example.com",
+		personalInfo: {
+			profileImage: "/profile.png",
 		},
-	];
+		employment: {
+			departmentName: "Engineering",
+			designation: "Developer",
+		},
+	};
 
 	it("shows loader initially", () => {
 		attendanceApi.getByEmployeeId.mockReturnValue(new Promise(() => {}));

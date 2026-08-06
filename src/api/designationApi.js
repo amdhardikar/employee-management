@@ -18,7 +18,10 @@ export const designationApi = {
 
 			return data;
 		} catch (error) {
-			logger.error(`Error fetching designations for department: ${departmentId}`, error);
+         logger.error(`Error fetching designations for department: ${departmentId}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},

@@ -11,18 +11,18 @@ export const dashboardApi = {
 
 			if (!res.ok) {
 				logger.error(`Failed to fetch dashboard data. Status: ${res.status}`);
-
 				throw new Error("Failed to load dashboard");
 			}
 
 			const data = await res.json();
-
 			logger.info("Dashboard data loaded successfully");
 
 			return data;
 		} catch (error) {
 			logger.error("Error fetching dashboard data", error);
-
+			if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},

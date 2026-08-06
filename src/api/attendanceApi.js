@@ -18,7 +18,10 @@ export const attendanceApi = {
 
 			return data;
 		} catch (error) {
-			logger.error(`Error fetching monthly attendance for employee: ${employeeId}`, error);
+         logger.error(`Error fetching monthly attendance for employee: ${employeeId}`, error);
+         if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
 			throw error;
 		}
 	},

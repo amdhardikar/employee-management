@@ -53,7 +53,7 @@ const DepartmentDetailsTable = ({ employees }) => {
 							{employee.employment.manager?.name}
 						</TableCell>
 
-						<TableCell>
+						<TableCell className="text-center">
 							<span
 								className={`inline-flex rounded-full px-2 py-1 text-xs font-medium ${
 									STATUS_COLORS[

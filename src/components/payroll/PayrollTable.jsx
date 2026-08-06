@@ -41,8 +41,12 @@ const PayrollTable = ({ payrolls, onView }) => {
 						</TableCell>
 
 						<TableCell>
-							{employee.employment.departmentName}
-							<p className="text-xs text-slate-500">{employee.employment.designation}</p>
+							<p className="font-medium text-slate-900">
+								{employee.employment?.departmentName || "No Department"}
+							</p>
+							<p className="text-xs text-slate-500">
+								{employee.employment?.designation || "No Designation"}
+							</p>
 						</TableCell>
 
 						<TableCell>₹{employee.salary.employeeCTC.toLocaleString()}</TableCell>

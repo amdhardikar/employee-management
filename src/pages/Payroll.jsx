@@ -18,6 +18,7 @@ import useDepartments from "../hooks/useDepartments";
 import useMediaQuery from "../hooks/useMediaQuery";
 import useEmployeeListing from "../hooks/useEmployeeListing";
 import useFilters from "../hooks/useFilters";
+import ErrorState from "../components/common/ErrorState";
 
 const Payroll = () => {
 	const tableRef = useRef(null);
@@ -25,7 +26,7 @@ const Payroll = () => {
 	const restoreFocus = useRef(false);
 	const dispatch = useDispatch();
 
-	const departments = useDepartments();
+	const { departments, loading: departmentsLoading, error: departmentsError } = useDepartments();
 	const query = useSelector((state) => state.filters.payroll);
 	const navigate = useNavigate();
 	const debouncedSearch = useDebounce(query.search, 500);
@@ -45,7 +46,7 @@ const Payroll = () => {
 		[debouncedSearch, query.department, query.order, query.sort],
 	);
 
-	const { tableEmployees, cardEmployees, loading, loadingMore, pagination } = useEmployeeListing({
+	const { tableEmployees, cardEmployees, loading, loadingMore, pagination, error } = useEmployeeListing({
 		fetchEmployees,
 		isDesktop,
 		tablePage: query.tablePage,
@@ -72,8 +73,17 @@ const Payroll = () => {
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
 
-	if (loading) {
+	if (loading || departmentsLoading) {
 		return <PageLoader text="Loading payroll..." />;
+	}
+
+	if (error || departmentsError) {
+		return (
+			<ErrorState
+				title="Unable to load payrolls"
+				message={`Reason : ${error?.message || departmentsError?.message || "Something went wrong while loading payrolls"}`}
+			/>
+		);
 	}
 
 	return (

@@ -27,6 +27,11 @@ export const appRoutes = [
 		breadcrumb: "Departments",
 	},
 	{
+		path: "/departments/new",
+      breadcrumb: "New",
+      parent: "/departments"
+	},
+	{
 		path: "/departments/:id",
 		breadcrumb: "Details",
 		parent: "/departments",

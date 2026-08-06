@@ -39,7 +39,7 @@ const AttendanceTable = ({ employees, onView }) => {
 							</div>
 						</TableCell>
 
-						<TableCell>{employee.employment?.departmentName}</TableCell>
+						<TableCell>{employee.employment?.departmentName || "No Department"}</TableCell>
 
 						<TableCell>
 							<div className="flex items-center gap-2">

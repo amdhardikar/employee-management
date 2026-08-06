@@ -32,7 +32,7 @@ describe("employeeApi", () => {
 			ok: false,
 		});
 
-		await expect(employeeApi.getAll()).rejects.toThrow("Failed to load all employees");
+		await expect(employeeApi.getAll()).rejects.toThrow("Failed to load employees");
 	});
 
 	it("gets employees with default filters", async () => {

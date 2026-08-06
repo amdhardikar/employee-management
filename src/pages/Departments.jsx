@@ -2,33 +2,31 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import { employeeApi } from "../api/employeeApi";
-import { departmentApi } from "../api/departmentApi";
 
 import DepartmentTable from "../components/department/DepartmentTable";
 import DepartmentCard from "../components/department/DepartmentCard";
 import PageLoader from "../components/common/PageLoader";
 import EmptyState from "../components/common/EmptyState";
+import ErrorState from "../components/common/ErrorState";
+import useDepartments from "../hooks/useDepartments";
 
 const Departments = () => {
-	const [departments, setDepartments] = useState([]);
 	const [employees, setEmployees] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 	const navigate = useNavigate();
+	const { departments, loading: departmentsLoading, error: departmentsError } = useDepartments(false);
 
 	useEffect(() => {
 		const loadData = async () => {
 			try {
 				setLoading(true);
 
-				const [employeesData, departmentsData] = await Promise.all([
-					employeeApi.getAll(),
-					departmentApi.getAll(),
-				]);
+				const employeesData = await employeeApi.getAll();
 
 				setEmployees(employeesData);
-				setDepartments(departmentsData);
-			} catch (error) {
-				console.error(error);
+			} catch (err) {
+				setError(err);
 			} finally {
 				setLoading(false);
 			}
@@ -44,38 +42,63 @@ const Departments = () => {
 		navigate(`/departments/edit/${department.departmentId}`);
 	};
 
-	if (loading) {
+	const handleNewDepartment = () => {
+		navigate(`/departments/new`);
+	};
+
+	if (loading || departmentsLoading) {
 		return <PageLoader text="Loading departments..." />;
 	}
 
-	return (
-		<div className="overflow-y-auto border-t border-slate-200 p-5">
-			{departments?.length > 0 ? (
-				<>
-					<div className="hidden lg:block">
-						<DepartmentTable
-							departments={departments}
-							employees={employees}
-							onView={handleViewDepartment}
-							onEdit={handleEditDepartment}
-						/>
-					</div>
+	if (error || departmentsError) {
+		return (
+			<ErrorState
+				title="Unable to load depatments"
+				message={`Reason : ${error?.message || departmentsError?.message || "Something went wrong while loading departments"}`}
+			/>
+		);
+	}
 
-					<div className="grid gap-4 lg:hidden">
-						{departments.map((department) => (
-							<DepartmentCard
-								key={department.departmentId}
-								department={department}
+	return (
+		<>
+			<div className="bg-white px-5 py-3">
+				<div className="flex items-center justify-start gap-3">
+					<button
+						onClick={handleNewDepartment}
+						className={`rounded-sm bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50`}
+					>
+						Add Department
+					</button>
+				</div>
+			</div>
+			<div className="overflow-y-auto border-t border-slate-200 p-5">
+				{departments?.length > 0 ? (
+					<>
+						<div className="hidden lg:block">
+							<DepartmentTable
+								departments={departments}
 								employees={employees}
 								onView={handleViewDepartment}
+								onEdit={handleEditDepartment}
 							/>
-						))}
-					</div>
-				</>
-			) : (
-				<EmptyState />
-			)}
-		</div>
+						</div>
+
+						<div className="grid gap-4 lg:hidden">
+							{departments.map((department) => (
+								<DepartmentCard
+									key={department.departmentId}
+									department={department}
+									employees={employees}
+									onView={handleViewDepartment}
+								/>
+							))}
+						</div>
+					</>
+				) : (
+					<EmptyState />
+				)}
+			</div>
+		</>
 	);
 };
 

@@ -45,6 +45,15 @@ vi.mock("../../../components/common/NotFound", () => ({
 	),
 }));
 
+vi.mock("../../../components/common/ErrorState", () => ({
+	default: ({ title, message }) => (
+		<div>
+			<h2>{title}</h2>
+			<p>{message}</p>
+		</div>
+	),
+}));
+
 const renderComponent = () => {
 	return render(
 		<MemoryRouter initialEntries={["/departments/D001"]}>
@@ -71,12 +80,10 @@ describe("DepartmentDetails", () => {
 	});
 
 	it("fetches department and employees using id", async () => {
-		departmentApi.getById.mockResolvedValue([
-			{
-				name: "Engineering",
-				departmentId: "D001",
-			},
-		]);
+		departmentApi.getById.mockResolvedValue({
+			name: "Engineering",
+			departmentId: "D001",
+		});
 
 		employeeApi.getByDepartment.mockResolvedValue([]);
 
@@ -90,12 +97,10 @@ describe("DepartmentDetails", () => {
 	});
 
 	it("renders department information", async () => {
-		departmentApi.getById.mockResolvedValue([
-			{
-				name: "Engineering",
-				departmentId: "D001",
-			},
-		]);
+		departmentApi.getById.mockResolvedValue({
+			name: "Engineering",
+			departmentId: "D001",
+		});
 
 		employeeApi.getByDepartment.mockResolvedValue([]);
 
@@ -109,12 +114,10 @@ describe("DepartmentDetails", () => {
 	});
 
 	it("renders employee table when employees exist", async () => {
-		departmentApi.getById.mockResolvedValue([
-			{
-				name: "Engineering",
-				departmentId: "D001",
-			},
-		]);
+		departmentApi.getById.mockResolvedValue({
+			name: "Engineering",
+			departmentId: "D001",
+		});
 
 		employeeApi.getByDepartment.mockResolvedValue([
 			{
@@ -142,12 +145,10 @@ describe("DepartmentDetails", () => {
 	});
 
 	it("renders empty state when no employees exist", async () => {
-		departmentApi.getById.mockResolvedValue([
-			{
-				name: "Engineering",
-				departmentId: "D001",
-			},
-		]);
+		departmentApi.getById.mockResolvedValue({
+			name: "Engineering",
+			departmentId: "D001",
+		});
 
 		employeeApi.getByDepartment.mockResolvedValue([]);
 
@@ -159,7 +160,7 @@ describe("DepartmentDetails", () => {
 	});
 
 	it("shows not found when department does not exist", async () => {
-		departmentApi.getById.mockResolvedValue([]);
+		departmentApi.getById.mockResolvedValue(null);
 
 		employeeApi.getByDepartment.mockResolvedValue([]);
 
@@ -180,7 +181,9 @@ describe("DepartmentDetails", () => {
 		renderComponent();
 
 		await waitFor(() => {
-			expect(screen.getByText("Department Not Found")).toBeInTheDocument();
+			expect(screen.getByText("Unable to load department")).toBeInTheDocument();
 		});
+
+		expect(screen.getByText("Reason : API Error")).toBeInTheDocument();
 	});
 });

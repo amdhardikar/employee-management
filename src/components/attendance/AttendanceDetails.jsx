@@ -27,7 +27,7 @@ const AttendanceDetailsPage = () => {
 				const employeeData = await employeeApi.getById(id);
 
 				setAttendance(attendanceData);
-				setEmployee(employeeData[0]);
+				setEmployee(employeeData);
 			} catch (error) {
 				console.error(error);
 			} finally {

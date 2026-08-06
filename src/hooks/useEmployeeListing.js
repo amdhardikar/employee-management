@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 
-export default function useEmployeeListing({
-	fetchEmployees,
-	isDesktop,
-	tablePage,
-	cardPage,
-	pageSize,
-}) {
+export default function useEmployeeListing({ fetchEmployees, isDesktop, tablePage, cardPage, pageSize }) {
 	const [tableEmployees, setTableEmployees] = useState([]);
 	const [cardEmployees, setCardEmployees] = useState([]);
 
 	const [loading, setLoading] = useState(false);
 	const [loadingMore, setLoadingMore] = useState(false);
+	const [error, setError] = useState(null);
 
 	const [pagination, setPagination] = useState({
 		totalPages: 1,
@@ -20,6 +15,7 @@ export default function useEmployeeListing({
 
 	useEffect(() => {
 		async function loadData() {
+			setError(null);
 			try {
 				if (isDesktop) {
 					setLoading(true);
@@ -29,9 +25,7 @@ export default function useEmployeeListing({
 				}
 
 				const page = isDesktop ? tablePage : 1;
-
 				const limit = isDesktop ? pageSize : cardPage * pageSize;
-
 				const result = await fetchEmployees(page, limit);
 
 				if (isDesktop) {
@@ -44,6 +38,8 @@ export default function useEmployeeListing({
 					totalPages: result.pages,
 					totalItems: result.items,
 				});
+			} catch (err) {
+				setError(err);
 			} finally {
 				setLoading(false);
 				setLoadingMore(false);
@@ -59,5 +55,6 @@ export default function useEmployeeListing({
 		loading,
 		loadingMore,
 		pagination,
+		error,
 	};
 }

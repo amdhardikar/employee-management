@@ -38,7 +38,7 @@ describe("filterSlice", () => {
 				pageSize: 10,
 				search: "",
 				sort: "employeeId",
-				order: "asc",
+				order: "desc",
 				department: "all",
 			},
 

@@ -3,6 +3,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 
 import useDepartments from "../../hooks/useDepartments";
 import { departmentApi } from "../../api/departmentApi";
+import { setDepartments } from "../../store/departmentSlice";
 
 vi.mock("../../api/departmentApi", () => ({
 	departmentApi: {
@@ -10,9 +11,36 @@ vi.mock("../../api/departmentApi", () => ({
 	},
 }));
 
+const mockDispatch = vi.fn();
+
+const { mockUseSelector } = vi.hoisted(() => ({
+	mockUseSelector: vi.fn(),
+}));
+
+vi.mock("react-redux", () => ({
+	useDispatch: () => mockDispatch,
+	useSelector: mockUseSelector,
+}));
+
+vi.mock("../../store/departmentSlice", () => ({
+	setDepartments: vi.fn((payload) => ({
+		type: "department/setDepartments",
+		payload,
+	})),
+}));
+
 describe("useDepartments hook", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
+
+		mockUseSelector.mockImplementation((selector) =>
+			selector({
+				department: {
+					departments: [],
+					loaded: false,
+				},
+			}),
+		);
 	});
 
 	it("should return empty array initially", () => {
@@ -20,11 +48,12 @@ describe("useDepartments hook", () => {
 
 		const { result } = renderHook(() => useDepartments());
 
-		expect(result.current).toEqual([]);
+		expect(result.current.departments).toEqual([]);
+		expect(result.current.error).toBeNull();
 	});
 
-	it("should fetch departments and return department names", async () => {
-		departmentApi.getAll.mockResolvedValue([
+	it("should fetch departments and dispatch them", async () => {
+		const departments = [
 			{
 				departmentId: 1,
 				name: "Engineering",
@@ -33,26 +62,38 @@ describe("useDepartments hook", () => {
 				departmentId: 2,
 				name: "HR",
 			},
-		]);
+		];
 
-		const { result } = renderHook(() => useDepartments());
+		departmentApi.getAll.mockResolvedValue(departments);
+
+		renderHook(() => useDepartments());
 
 		await waitFor(() => {
-			expect(result.current).toEqual(["Engineering", "HR"]);
+			expect(departmentApi.getAll).toHaveBeenCalledTimes(1);
 		});
 
-		expect(departmentApi.getAll).toHaveBeenCalledTimes(1);
+		expect(setDepartments).toHaveBeenCalledWith(departments);
+
+		expect(mockDispatch).toHaveBeenCalledWith({
+			type: "department/setDepartments",
+			payload: departments,
+		});
 	});
 
 	it("should handle empty API response", async () => {
 		departmentApi.getAll.mockResolvedValue([]);
 
-		const { result } = renderHook(() => useDepartments());
+		renderHook(() => useDepartments());
 
 		await waitFor(() => {
-			expect(result.current).toEqual([]);
+			expect(departmentApi.getAll).toHaveBeenCalledTimes(1);
 		});
 
-		expect(departmentApi.getAll).toHaveBeenCalled();
+		expect(setDepartments).toHaveBeenCalledWith([]);
+
+		expect(mockDispatch).toHaveBeenCalledWith({
+			type: "department/setDepartments",
+			payload: [],
+		});
 	});
 });

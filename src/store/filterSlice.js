@@ -19,9 +19,7 @@ const initialState = {
 
 	attendance: createDefaultFilters(),
 
-	payroll: createDefaultFilters({
-		order: "asc",
-	}),
+	payroll: createDefaultFilters(),
 
 	department: createDefaultFilters({
 		sort: "departmentName",

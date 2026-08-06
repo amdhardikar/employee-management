@@ -29,8 +29,9 @@ export const fetchDashboard = createAsyncThunk("dashboard/fetchDashboard", async
 		return data;
 	} catch (error) {
 		logger.error("Failed to fetch dashboard data", error);
-
-		return rejectWithValue(error.message || "Failed to load dashboard");
+		return rejectWithValue({
+			message: error.message || "Unable to load dashboard",
+		});
 	}
 });
 
@@ -70,7 +71,9 @@ const dashboardSlice = createSlice({
 
 			.addCase(fetchDashboard.rejected, (state, action) => {
 				state.loading = false;
-				state.error = action.payload;
+				state.error = action.payload || {
+					message: action.error.message || "Unable to load dashboard",
+				};
 			});
 	},
 });
