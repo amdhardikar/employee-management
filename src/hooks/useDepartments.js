@@ -14,7 +14,8 @@ export default function useDepartments(namesOnly = true) {
 
 	useEffect(() => {
 		if (loaded) return;
-		async function load() {
+      async function load() {
+         console.log(loaded)
 			try {
 				setLoading(true);
 				setError(null);

@@ -118,4 +118,32 @@ export const departmentApi = {
 			throw error;
 		}
 	},
+
+	removeDepartment: async (id) => {
+		try {
+			logger.debug(`Deleting department: ${id}`);
+
+			const res = await fetch(`${API_URL}/${id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			});
+
+			if (!res.ok) {
+				logger.error(`Failed to delete department: ${id}. Status: ${res.status}`);
+				throw new Error("Failed to delete department");
+			}
+
+			logger.info(`Department deleted successfully. ID: ${id}`);
+
+			return true;
+		} catch (error) {
+			logger.error(`Error deleting department: ${id}`, error);
+			if (error instanceof TypeError && error.message === "Failed to fetch") {
+				throw new Error("Unable to connect to server. Please try again later.");
+			}
+			throw error;
+		}
+	},
 };

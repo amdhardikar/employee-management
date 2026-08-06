@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { invalidateDepartments } from "../../store/departmentSlice";
+import { addDepartment } from "../../store/departmentSlice";
 import { departmentApi } from "../../api/departmentApi";
 
 const DepartmentCreate = () => {
@@ -133,8 +133,12 @@ const DepartmentCreate = () => {
 			setSaving(true);
 			setErrors({});
 
-			await departmentApi.createDepartment(form);
-			dispatch(invalidateDepartments());
+			const response = await departmentApi.createDepartment(form);
+
+			dispatch(addDepartment(response.department));
+
+			navigate("/departments");
+
 			navigate("/departments");
 		} catch (error) {
 			setErrors({

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Eye, Pencil, Star, Trash } from "lucide-react";
 import { Table, TableHead, TableHeader, TableBody, TableRow, TableCell } from "../common/DataTable";
 
-const DepartmentTable = ({ departments = [], employees = [], onView , onEdit}) => {
+const DepartmentTable = ({ departments = [], employees = [], onView, onEdit, onDelete }) => {
 	const getDepartmentStats = (departmentId) => {
 		const departmentEmployees = employees.filter((emp) => emp.employment?.departmentId === departmentId);
 
@@ -112,15 +112,21 @@ const DepartmentTable = ({ departments = [], employees = [], onView , onEdit}) =
 								<div className="flex justify-center gap-2">
 									<button
 										onClick={() => onView?.(department)}
-										className="rounded-md border border-slate-200 p-2 hover:bg-blue-100 hover:text-blue-700 hover:cursor-pointer"
+										className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-blue-100 hover:text-blue-700"
 									>
 										<Eye className="h-4 w-4" />
 									</button>
 									<button
 										onClick={() => onEdit?.(department)}
-										className="rounded-md border border-slate-200 p-2 hover:bg-green-100 hover:text-green-700 hover:cursor-pointer"
+										className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-green-100 hover:text-green-700"
 									>
 										<Pencil className="h-4 w-4" />
+									</button>
+									<button
+										onClick={() => onDelete?.(department)}
+										className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-red-100 hover:text-red-700"
+									>
+										<Trash className="h-4 w-4" />
 									</button>
 								</div>
 							</TableCell>
@@ -136,7 +142,7 @@ DepartmentTable.propTypes = {
 	departments: PropTypes.array.isRequired,
 	employees: PropTypes.array.isRequired,
 	onView: PropTypes.func.isRequired,
-	onEdit: PropTypes.func.isRequired
+	onEdit: PropTypes.func.isRequired,
 };
 
 export default DepartmentTable;

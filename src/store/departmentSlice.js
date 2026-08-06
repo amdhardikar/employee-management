@@ -24,9 +24,12 @@ const departmentSlice = createSlice({
 		invalidateDepartments(state) {
 			state.loaded = false;
 		},
+		addDepartment(state, action) {
+			state.departments.push(action.payload);
+		},
 	},
 });
 
-export const { setDepartments, clearDepartments, invalidateDepartments } = departmentSlice.actions;
+export const { setDepartments, clearDepartments, invalidateDepartments, addDepartment } = departmentSlice.actions;
 
 export default departmentSlice.reducer;

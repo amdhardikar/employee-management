@@ -9,6 +9,7 @@ import PageLoader from "../components/common/PageLoader";
 import EmptyState from "../components/common/EmptyState";
 import ErrorState from "../components/common/ErrorState";
 import useDepartments from "../hooks/useDepartments";
+import { departmentApi } from "../api/departmentApi";
 
 const Departments = () => {
 	const [employees, setEmployees] = useState([]);
@@ -40,6 +41,11 @@ const Departments = () => {
 
 	const handleEditDepartment = (department) => {
 		navigate(`/departments/edit/${department.departmentId}`);
+	};
+
+	const handleDeleteDepartment = async (department) => {
+		await departmentApi.removeDepartment(department.departmentId);
+		window.location.reload();
 	};
 
 	const handleNewDepartment = () => {
@@ -80,6 +86,7 @@ const Departments = () => {
 								employees={employees}
 								onView={handleViewDepartment}
 								onEdit={handleEditDepartment}
+								onDelete={handleDeleteDepartment}
 							/>
 						</div>
 
