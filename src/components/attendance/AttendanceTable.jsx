@@ -8,7 +8,7 @@ const AttendanceTable = ({ employees, onView }) => {
 			<TableHead>
 				<TableRow>
 					<TableHeader className="text-left">Employee</TableHeader>
-					<TableHeader className="text-left">Department</TableHeader>
+					<TableHeader className="text-left">Designation</TableHeader>
 					<TableHeader className="text-left">Attendance %</TableHeader>
 					<TableHeader className="text-center">Present</TableHeader>
 					<TableHeader className="text-center">Absent</TableHeader>
@@ -39,7 +39,15 @@ const AttendanceTable = ({ employees, onView }) => {
 							</div>
 						</TableCell>
 
-						<TableCell>{employee.employment?.departmentName || "No Department"}</TableCell>
+						<TableCell>
+							<p className="font-medium text-slate-900">
+								{employee.employment?.designation || "Not Assigned"}
+							</p>
+
+							<p className="text-xs text-slate-500">
+								{employee.employment?.departmentName || "Not Assigned"}
+							</p>
+						</TableCell>
 
 						<TableCell>
 							<div className="flex items-center gap-2">

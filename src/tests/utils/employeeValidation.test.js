@@ -195,39 +195,6 @@ describe("validateEmployee", () => {
 		expect(errors.managerEmployeeId).toBe("Invalid manager employee ID");
 	});
 
-	it("validates salary fields", () => {
-		const employee = {
-			...validEmployee,
-			salary: {
-				employeeCTC: -100,
-				monthlyGross: 40000,
-				basic: 50000,
-				netSalary: 90000,
-			},
-		};
-
-		const errors = validateEmployee(employee);
-
-		expect(errors.employeeCTC).toBe("Cannot be negative");
-
-		expect(errors.basic).toBe("Basic salary cannot exceed monthly gross");
-
-		expect(errors.netSalary).toBe("Net salary cannot exceed gross salary");
-   });
-   
-   it("validates salary numeric fields", () => {
-		const employee = {
-			...validEmployee,
-			salary: {
-				monthlyGross: "abc",
-			},
-		};
-
-		const errors = validateEmployee(employee);
-
-		expect(errors.monthlyGross).toBe("Must be a number");
-   });
-
 	it("validates bank details", () => {
 		const employee = {
 			...validEmployee,
@@ -268,4 +235,160 @@ describe("validateEmployee", () => {
 
 		expect(errors.emergencyPhone).toBe("Invalid phone number");
 	});
+	it("rejects invalid email format", () => {
+		const employee = {
+			...validEmployee,
+			email: "invalid-email",
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.email).toBe("Invalid email");
+	});
+
+	it("validates alternate phone number", () => {
+		const employee = {
+			...validEmployee,
+			personalInfo: {
+				...validEmployee.personalInfo,
+				alternatePhone: "12345",
+			},
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.alternatePhone).toBe("Invalid alternate phone");
+	});
+
+	it("validates invalid HR employee id", () => {
+		const employee = {
+			...validEmployee,
+			employment: {
+				...validEmployee.employment,
+				hr: {
+					employeeId: "123",
+				},
+			},
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.hrEmployeeId).toBe("Invalid HR employee ID");
+	});
+
+	it("validates invalid lead employee id", () => {
+		const employee = {
+			...validEmployee,
+			employment: {
+				...validEmployee.employment,
+				lead: {
+					employeeId: "ABC",
+				},
+			},
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.leadEmployeeId).toBe("Invalid lead employee ID");
+	});
+
+	it("returns error for invalid email format", () => {
+		const employee = {
+			...validEmployee,
+			email: "john@test", // no top-level domain
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.email).toBe("Invalid email");
+	});
+
+   it("validates missing date of birth", () => {
+      const employee = {
+         ...validEmployee,
+         personalInfo: {
+            ...validEmployee.personalInfo,
+            dateOfBirth: "",
+         },
+      };
+
+      const errors = validateEmployee(employee);
+
+      expect(errors.dateOfBirth).toBe("Date of birth is required");
+   });
+
+   it("accepts valid marital status, nationality and phone", () => {
+		const employee = {
+			...validEmployee,
+			personalInfo: {
+				...validEmployee.personalInfo,
+				maritalStatus: "Married",
+				nationality: "Indian",
+				phone: "9876543210",
+			},
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.maritalStatus).toBeUndefined();
+		expect(errors.nationality).toBeUndefined();
+		expect(errors.phone).toBeUndefined();
+   });
+
+   it("handles missing address object", () => {
+		const employee = {
+			...validEmployee,
+			address: {},
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors["currentAddress.street"]).toBe("Street is required");
+		expect(errors["permanentAddress.street"]).toBe("Street is required");
+   });
+
+   it("accepts valid bank details", () => {
+		const errors = validateEmployee(validEmployee);
+
+		expect(errors.accountNumber).toBeUndefined();
+		expect(errors.ifscCode).toBeUndefined();
+   });
+
+   it("accepts valid emergency phone", () => {
+      const errors = validateEmployee(validEmployee);
+
+      expect(errors.emergencyPhone).toBeUndefined();
+   });
+
+   it("handles completely missing nested objects", () => {
+		const errors = validateEmployee({
+			email: "john@test.com",
+		});
+
+		expect(errors.firstName).toBe("First name is required");
+		expect(errors.lastName).toBe("Last name is required");
+		expect(errors.gender).toBe("Gender is required");
+		expect(errors.bloodGroup).toBe("Gender is required");
+		expect(errors.dateOfBirth).toBe("Date of birth is required");
+		expect(errors.maritalStatus).toBe("Marital status is required");
+		expect(errors.nationality).toBe("Nationality is required");
+
+		expect(errors.departmentId).toBe("Department is required");
+		expect(errors.bankName).toBe("Bank name is required");
+		expect(errors.emergencyName).toBe("Contact name is required");
+   });
+
+   it("rejects invalid last name", () => {
+		const employee = {
+			...validEmployee,
+			personalInfo: {
+				...validEmployee.personalInfo,
+				lastName: "Doe123",
+			},
+		};
+
+		const errors = validateEmployee(employee);
+
+		expect(errors.lastName).toBe("Invalid last name");
+   });
 });

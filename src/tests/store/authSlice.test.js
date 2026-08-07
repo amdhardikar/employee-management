@@ -128,9 +128,7 @@ describe("authSlice", () => {
 
 		expect(nextState.loading).toBe(false);
 
-		expect(nextState.error).toBe(
-			"Invalid Email or Employee Code combination.",
-		);
+		expect(nextState.error).toBe("Invalid Email or Employee Code combination.");
 	});
 
 	it("login thunk succeeds", async () => {
@@ -180,15 +178,11 @@ describe("authSlice", () => {
 
 		expect(result.type).toBe("auth/login/rejected");
 
-		expect(result.payload).toBe(
-			"Invalid Email or Employee Code combination.",
-		);
+		expect(result.payload).toBe("Invalid Email or Employee Code combination.");
 	});
 
 	it("login thunk rejects on server error", async () => {
-		employeeApi.getByEmailAndEmployeeCode.mockRejectedValue(
-			new Error("Network error"),
-		);
+		employeeApi.getByEmailAndEmployeeCode.mockRejectedValue(new Error("Network error"));
 
 		const result = await login({
 			email: "john@test.com",
@@ -198,5 +192,36 @@ describe("authSlice", () => {
 		expect(result.type).toBe("auth/login/rejected");
 
 		expect(result.payload).toBe("Server connection error.");
-	});
+   });
+   
+   it("logs employee information when user logs out", () => {
+		const previousState = {
+			user: {
+				employeeId: "EMP001",
+				fullName: "John Doe",
+			},
+			loading: false,
+			error: null,
+		};
+
+		const nextState = reducer(previousState, logout());
+
+		expect(nextState.user).toBeNull();
+
+		expect(localStorage.getItem("ems_session")).toBeNull();
+   });
+
+   it("clears user on logout", () => {
+		const previousState = {
+			user: {
+				name: "John",
+			},
+			loading: false,
+			error: "Old error",
+		};
+
+		const nextState = reducer(previousState, logout());
+
+		expect(nextState.user).toBeNull();
+   });
 });

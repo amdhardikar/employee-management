@@ -40,11 +40,9 @@ const EmployeeEdit = () => {
 			const updatePayload = buildEmployeeUpdatePayload(employee);
 			await employeeApi.updateEmployee(employee.id, updatePayload);
 			console.log(updatePayload);
-			// alert("Employee updated successfully");
 			navigate(`/employees/${employee.employeeId}`);
 		} catch (error) {
 			console.error("Update employee error:", error);
-			// alert(error.message || "Unable to update employee");
 		} finally {
 			setSaving(false);
 		}

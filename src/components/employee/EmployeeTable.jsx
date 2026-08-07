@@ -2,6 +2,7 @@ import { Eye, Pencil, Trash } from "lucide-react";
 import PropTypes from "prop-types";
 import { STATUS_COLORS } from "../../constants/EMSconstants";
 import { Table, TableHead, TableHeader, TableBody, TableRow, TableCell } from "../common/DataTable";
+import { display, phone } from "../../utils/display";
 
 const EmployeeTable = ({ employees, onView, onEdit, onDelete }) => {
 	return (
@@ -40,17 +41,17 @@ const EmployeeTable = ({ employees, onView, onEdit, onDelete }) => {
 
 						<TableCell>
 							<p className="font-medium text-slate-900">
-								{employee.employment?.designation || "No Designation"}
+								{employee.employment?.designation || "Not Assigned"}
 							</p>
 
 							<p className="text-xs text-slate-500">
-								{employee.employment?.departmentName || "No Department"}
+								{employee.employment?.departmentName || "Not Assigned"}
 							</p>
 						</TableCell>
 
-						<TableCell className="max-w-55] truncate">{employee.email}</TableCell>
+						<TableCell className="max-w-55] truncate">{display(employee.email)}</TableCell>
 
-						<TableCell className="whitespace-nowrap">{employee.personalInfo?.phone}</TableCell>
+						<TableCell className="whitespace-nowrap">{phone(employee.personalInfo?.phone)}</TableCell>
 
 						<TableCell>
 							<span

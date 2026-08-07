@@ -154,5 +154,48 @@ describe("dashboardSlice", () => {
 		expect(result.payload).toEqual({
 			message: "Network Error",
 		});
-	});
+   });
+
+   it("fetchDashboard thunk uses default error message when error.message is missing", async () => {
+		dashboardApi.getDashboard.mockRejectedValue({});
+
+		const result = await fetchDashboard()(vi.fn(), vi.fn(), {});
+
+		expect(result.type).toBe("dashboard/fetchDashboard/rejected");
+		expect(result.payload).toEqual({
+			message: "Unable to load dashboard",
+		});
+   });
+
+   it("handles rejected action without payload", () => {
+		const action = {
+			type: fetchDashboard.rejected.type,
+			payload: undefined,
+			error: {
+				message: "Server Error",
+			},
+		};
+
+		const nextState = reducer(undefined, action);
+
+		expect(nextState.error).toEqual({
+			message: "Server Error",
+		});
+   });
+
+   it("handles rejected action with default message", () => {
+		const action = {
+			type: fetchDashboard.rejected.type,
+			payload: undefined,
+			error: {},
+		};
+
+		const nextState = reducer(undefined, action);
+
+		expect(nextState.error).toEqual({
+			message: "Unable to load dashboard",
+		});
+   });
+
+   
 });

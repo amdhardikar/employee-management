@@ -13,9 +13,9 @@ import { MemoryRouter } from "react-router-dom";
 vi.mock("../../../hooks/useEmployeeCreate");
 
 vi.mock("../../../api/employeeApi", () => ({
-	employeeApi: {
-		createEmployee: vi.fn(),
-	},
+   employeeApi: {
+      createEmployee: vi.fn(),
+   },
 }));
 
 vi.mock("../../../utils/employeePayload", () => ({

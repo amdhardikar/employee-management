@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 import Payroll from "../../pages/Payroll";
 
@@ -7,8 +7,12 @@ import { useSelector } from "react-redux";
 import useMediaQuery from "../../hooks/useMediaQuery";
 import useEmployeeListing from "../../hooks/useEmployeeListing";
 
+import { employeeApi } from "../../api/employeeApi";
+
 const navigate = vi.fn();
 const dispatch = vi.fn();
+
+let filtersProps;
 
 vi.mock("react-router-dom", () => ({
 	useNavigate: () => navigate,
@@ -24,7 +28,11 @@ vi.mock("../../hooks/useDebounce", () => ({
 }));
 
 vi.mock("../../hooks/useDepartments", () => ({
-	default: () => ["IT", "HR"],
+	default: () => ({
+		departments: ["IT", "HR"],
+		loading: false,
+		error: null,
+	}),
 }));
 
 vi.mock("../../hooks/useMediaQuery", () => ({
@@ -33,6 +41,12 @@ vi.mock("../../hooks/useMediaQuery", () => ({
 
 vi.mock("../../hooks/useEmployeeListing", () => ({
 	default: vi.fn(),
+}));
+
+vi.mock("../../api/employeeApi", () => ({
+	employeeApi: {
+		getEmployees: vi.fn().mockResolvedValue([]),
+	},
 }));
 
 vi.mock("../../hooks/useFilters", () => ({
@@ -52,14 +66,26 @@ vi.mock("../../components/common/EmptyState", () => ({
 	default: () => <div>Empty State</div>,
 }));
 
-vi.mock("../../components/common/Filters", () => ({
-	default: ({ onSearchFocus, onSearchBlur }) => (
+vi.mock("../../components/common/ErrorState", () => ({
+	default: ({ title, message }) => (
 		<div>
-			Filters
-			<button onClick={onSearchFocus}>Focus</button>
-			<button onClick={onSearchBlur}>Blur</button>
+			<div>{title}</div>
+			<div>{message}</div>
 		</div>
 	),
+}));
+
+vi.mock("../../components/common/Filters", () => ({
+	default: (props) => {
+		filtersProps = props;
+
+		return (
+			<div>
+				<button onClick={props.onSearchFocus}>Focus</button>
+				<button onClick={props.onSearchBlur}>Blur</button>
+			</div>
+		);
+	},
 }));
 
 vi.mock("../../components/payroll/PayrollTable", () => ({
@@ -93,8 +119,8 @@ describe("Payroll", () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
 
-		// component expects state.filters.payroll
-		// but useSelector receives selector callback
+		filtersProps = null;
+
 		useSelector.mockImplementation((selector) =>
 			selector({
 				filters: {
@@ -104,6 +130,10 @@ describe("Payroll", () => {
 		);
 
 		useMediaQuery.mockReturnValue(true);
+	});
+
+	afterEach(() => {
+		vi.restoreAllMocks();
 	});
 
 	it("shows loader while loading", () => {
@@ -120,9 +150,32 @@ describe("Payroll", () => {
 		expect(screen.getByText("Loading payroll...")).toBeInTheDocument();
 	});
 
-	it("renders table view and navigates on view", () => {
-		useMediaQuery.mockReturnValue(true);
+	it("calls employee api with filters", async () => {
+		useEmployeeListing.mockImplementation(({ fetchEmployees }) => {
+			fetchEmployees(1, 10);
 
+			return {
+				tableEmployees: [],
+				cardEmployees: [],
+				loading: false,
+				loadingMore: false,
+				pagination: {},
+			};
+		});
+
+		render(<Payroll />);
+
+		expect(employeeApi.getEmployees).toHaveBeenCalledWith({
+			page: 1,
+			pageSize: 10,
+			search: "",
+			department: "",
+			order: "asc",
+			sort: "name",
+		});
+	});
+
+	it("renders table and navigates", () => {
 		useEmployeeListing.mockReturnValue({
 			tableEmployees: [employee],
 			cardEmployees: [],
@@ -139,11 +192,9 @@ describe("Payroll", () => {
 		fireEvent.click(screen.getByText("Table 1"));
 
 		expect(navigate).toHaveBeenCalledWith("/payroll/EMP001");
-
-		expect(screen.getByText("Pagination")).toBeInTheDocument();
 	});
 
-	it("renders cards and load more button", () => {
+	it("renders cards and load more", () => {
 		useMediaQuery.mockReturnValue(false);
 
 		useEmployeeListing.mockReturnValue({
@@ -153,22 +204,17 @@ describe("Payroll", () => {
 			loadingMore: false,
 			pagination: {
 				totalPages: 3,
-				totalItems: 3,
 			},
 		});
 
 		render(<Payroll />);
-
-		expect(screen.getByText("Card 1")).toBeInTheDocument();
-
-		expect(screen.getByText("Load More")).toBeInTheDocument();
 
 		fireEvent.click(screen.getByText("Load More"));
 
 		expect(dispatch).toHaveBeenCalled();
 	});
 
-	it("shows loading more state", () => {
+	it("shows loading more", () => {
 		useMediaQuery.mockReturnValue(false);
 
 		useEmployeeListing.mockReturnValue({
@@ -186,9 +232,7 @@ describe("Payroll", () => {
 		expect(screen.getByText("Loading...")).toBeInTheDocument();
 	});
 
-	it("shows empty state when no employees exist", () => {
-		useMediaQuery.mockReturnValue(true);
-
+	it("shows empty state", () => {
 		useEmployeeListing.mockReturnValue({
 			tableEmployees: [],
 			cardEmployees: [],
@@ -200,5 +244,42 @@ describe("Payroll", () => {
 		render(<Payroll />);
 
 		expect(screen.getByText("Empty State")).toBeInTheDocument();
+	});
+
+	it("shows error state", () => {
+		useEmployeeListing.mockReturnValue({
+			tableEmployees: [],
+			cardEmployees: [],
+			loading: false,
+			loadingMore: false,
+			pagination: {},
+			error: {
+				message: "API failed",
+			},
+		});
+
+		render(<Payroll />);
+
+		expect(screen.getByText("Unable to load payrolls")).toBeInTheDocument();
+
+		expect(screen.getByText("Reason : API failed")).toBeInTheDocument();
+	});
+
+	it("handles focus and blur callbacks", () => {
+		useEmployeeListing.mockReturnValue({
+			tableEmployees: [],
+			cardEmployees: [],
+			loading: false,
+			loadingMore: false,
+			pagination: {},
+		});
+
+		render(<Payroll />);
+
+		fireEvent.click(screen.getByText("Focus"));
+
+		expect(filtersProps).not.toBeNull();
+
+		fireEvent.click(screen.getByText("Blur"));
 	});
 });

@@ -39,6 +39,8 @@ const useEmployeeEdit = (id) => {
 	useEffect(() => {
 		if (employee) {
 			const validationErrors = validateEmployee(employee) || {};
+			console.log(validationErrors);
+
 			setErrors(validationErrors);
 		}
 	}, [employee]);

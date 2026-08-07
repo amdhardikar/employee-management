@@ -10,7 +10,7 @@ const PayrollTable = ({ payrolls, onView }) => {
 			<TableHead>
 				<TableRow>
 					<TableHeader className="text-left">Employee</TableHeader>
-					<TableHeader className="text-left">Department</TableHeader>
+					<TableHeader className="text-left">Designation</TableHeader>
 					<TableHeader className="text-left">CTC</TableHeader>
 					<TableHeader className="text-left">Monthly Gross</TableHeader>
 					<TableHeader className="text-left">Net Salary</TableHeader>
@@ -42,10 +42,11 @@ const PayrollTable = ({ payrolls, onView }) => {
 
 						<TableCell>
 							<p className="font-medium text-slate-900">
-								{employee.employment?.departmentName || "No Department"}
+								{employee.employment?.designation || "Not Assigned"}
 							</p>
+
 							<p className="text-xs text-slate-500">
-								{employee.employment?.designation || "No Designation"}
+								{employee.employment?.departmentName || "Not Assigned"}
 							</p>
 						</TableCell>
 

@@ -39,7 +39,7 @@ const DepartmentDetailsTable = ({ employees }) => {
 
 						<TableCell>{employee.fullName}</TableCell>
 
-						<TableCell>{employee.employment.designation}</TableCell>
+						<TableCell>{employee.employment.designation || "Not Assigned"}</TableCell>
 
 						<TableCell>
 							{employee.employment.employeeType}

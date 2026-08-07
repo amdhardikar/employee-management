@@ -6,6 +6,7 @@ import { Mail, Phone } from "lucide-react";
 import PageLoader from "../common/PageLoader";
 import NotFound from "../common/NotFound";
 import ErrorState from "../common/ErrorState";
+import { display, date, currency, address, phone, mask } from "../../utils/display";
 
 const EmployeeDetails = () => {
 	const { id } = useParams();
@@ -38,8 +39,8 @@ const EmployeeDetails = () => {
 				} else {
 					setEmployee(null);
 				}
-         } catch (err) {
-            console.log(err)
+			} catch (err) {
+				console.log(err);
 				setError({
 					message: err.message || "Unable to load employee details",
 				});
@@ -74,10 +75,7 @@ const EmployeeDetails = () => {
 					<div className="grid gap-4 md:gap-6 lg:grid-cols-2">
 						<SectionCard title="Personal Information">
 							<InfoRow label="Gender" value={employee.personalInfo.gender} />
-							<InfoRow
-								label="Date of Birth"
-								value={new Date(employee.personalInfo.dateOfBirth).toLocaleDateString()}
-							/>
+							<InfoRow label="Date of Birth" value={date(employee.personalInfo.dateOfBirth)} />
 							<InfoRow label="Marital Status" value={employee.personalInfo.maritalStatus} />
 							<InfoRow label="Blood Group" value={employee.personalInfo.bloodGroup} />
 							<InfoRow label="Nationality" value={employee.personalInfo.nationality} />
@@ -87,25 +85,12 @@ const EmployeeDetails = () => {
 							<div className="space-y-4">
 								<div>
 									<p className="text-sm text-slate-500">Current Address</p>
-
-									<p className="mt-1 text-sm">
-										{employee.address.currentAddress.street}, {employee.address.currentAddress.city}
-										, {employee.address.currentAddress.state},{" "}
-										{employee.address.currentAddress.country} -{" "}
-										{employee.address.currentAddress.pincode}
-									</p>
+									<p className="mt-1 text-sm">{address(employee.address.currentAddress)}</p>
 								</div>
 
 								<div>
 									<p className="text-sm text-slate-500">Permanent Address</p>
-
-									<p className="mt-1 text-sm">
-										{employee.address.permanentAddress.street},{" "}
-										{employee.address.permanentAddress.city},{" "}
-										{employee.address.permanentAddress.state},{" "}
-										{employee.address.permanentAddress.country} -{" "}
-										{employee.address.permanentAddress.pincode}
-									</p>
+									<p className="mt-1 text-sm">{address(employee.address.permanentAddress)}</p>
 								</div>
 							</div>
 						</SectionCard>
@@ -116,55 +101,46 @@ const EmployeeDetails = () => {
 				return (
 					<div>
 						<SectionCard title="Employment">
-							<InfoRow label="Department" value={employee.employment.departmentName} />
-							<InfoRow label="Designation" value={employee.employment.designation} />
+							<InfoRow label="Department" value={employee.employment.departmentName ?? "Not Assigned"} />
+							<InfoRow label="Department ID" value={employee.employment.departmentId ?? "Not Assigned"} />
+							<InfoRow label="Designation" value={employee.employment.designation ?? "Not Assigned"} />
+							<InfoRow
+								label="Designation ID"
+								value={employee.employment.designationId ?? "Not Assigned"}
+							/>
+							<InfoRow label="Joining Date" value={date(employee.employment.joiningDate)} />
 							<InfoRow label="Employee Type" value={employee.employment.employeeType} />
-							<InfoRow label="Joining Date" value={employee.employment.joiningDate} />
-							<InfoRow label="Manager" value={employee.employment.manager?.name ?? "Not Assigned"} />
-							<InfoRow label="Department ID" value={employee.employment.departmentId} />
-							<InfoRow label="Designation ID" value={employee.employment.designationId} />
 							<InfoRow label="Work Mode" value={employee.employment.workMode} />
 							<InfoRow label="Work Location" value={employee.employment.workLocation} />
 							<InfoRow label="Status" value={employee.employment.status} />
-							<InfoRow label="Probation End Date" value={employee.employment.probationEndDate} />
+							<InfoRow label="Probation End Date" value={date(employee.employment.probationEndDate)} />
 							<InfoRow label="Probation Status" value={employee.employment.probationStatus} />
-							<InfoRow label="HR" value={employee.employment.hr?.name ?? "Not Assigned"} />
 							<InfoRow label="Team Lead" value={employee.employment.lead?.name ?? "Not Assigned"} />
+							<InfoRow label="Manager" value={employee.employment.manager?.name ?? "Not Assigned"} />
+							<InfoRow label="HR" value={employee.employment.hr?.name ?? "Not Assigned"} />
 						</SectionCard>
 					</div>
 				);
 
 			case "payroll":
 				return (
-					<div className="grid gap-4 md:gap-6 lg:grid-cols-2">
+					<div className="grid gap-4 md:gap-6 lg:grid-cols-3">
 						<SectionCard title="Salary Details">
-							<InfoRow label="CTC" value={`₹${employee.salary.employeeCTC.toLocaleString()}`} />
-							<InfoRow label="Net Salary" value={`₹${employee.salary.netSalary.toLocaleString()}`} />
-							<InfoRow
-								label="Monthly Gross"
-								value={`₹${employee.salary.monthlyGross.toLocaleString()}`}
-							/>
-							<InfoRow label="Basic Salary" value={`₹${employee.salary.basic.toLocaleString()}`} />
-							<InfoRow label="HRA" value={`₹${employee.salary.hra.toLocaleString()}`} />
-							<InfoRow
-								label="Special Allowance"
-								value={`₹${employee.salary.specialAllowance.toLocaleString()}`}
-							/>
-							<InfoRow label="PF" value={`₹${employee.salary.pf.toLocaleString()}`} />
-							<InfoRow
-								label="Professional Tax"
-								value={`₹${employee.salary.professionalTax.toLocaleString()}`}
-							/>
-							<InfoRow
-								label="Other Deductions"
-								value={`₹${employee.salary.otherDeductions.toLocaleString()}`}
-							/>
+							<InfoRow label="CTC" value={currency(employee.salary.employeeCTC)} />
+							<InfoRow label="Net Salary" value={currency(employee.salary.netSalary)} />
+							<InfoRow label="Monthly Gross" value={currency(employee.salary.monthlyGross)} />
+							<InfoRow label="Basic Salary" value={currency(employee.salary.basic)} />
+							<InfoRow label="HRA" value={currency(employee.salary.hra)} />
+							<InfoRow label="Special Allowance" value={currency(employee.salary.specialAllowance)} />
+							<InfoRow label="PF" value={currency(employee.salary.pf)} />
+							<InfoRow label="Professional Tax" value={currency(employee.salary.professionalTax)} />
+							<InfoRow label="Other Deductions" value={currency(employee.salary.otherDeductions)} />
 							<InfoRow label="Currency" value={employee.salary.currency} />
 						</SectionCard>
 
 						<SectionCard title="Bank Details">
 							<InfoRow label="Bank" value={employee.bankDetails.bankName} />
-							<InfoRow label="Account" value={employee.bankDetails.accountNumber} />
+							<InfoRow label="Account" value={mask(employee.bankDetails.accountNumber)} />
 							<InfoRow label="IFSC Code" value={employee.bankDetails.ifscCode} />
 							<InfoRow label="Branch" value={employee.bankDetails.branch} />
 						</SectionCard>
@@ -173,9 +149,9 @@ const EmployeeDetails = () => {
 								label="Month"
 								value={`${employee.recentPayslip.month} ${employee.recentPayslip.year}`}
 							/>
-							<InfoRow label="Gross Salary" value={`₹${employee.recentPayslip.grossSalary}`} />
-							<InfoRow label="Deductions" value={`₹${employee.recentPayslip.deductions}`} />
-							<InfoRow label="Net Salary" value={`₹${employee.recentPayslip.netSalary}`} />
+							<InfoRow label="Gross Salary" value={currency(employee.recentPayslip.grossSalary)} />
+							<InfoRow label="Deductions" value={currency(employee.recentPayslip.deductions)} />
+							<InfoRow label="Net Salary" value={currency(employee.recentPayslip.netSalary)} />
 							<InfoRow label="Status" value={employee.recentPayslip.status} />
 						</SectionCard>
 					</div>
@@ -216,13 +192,17 @@ const EmployeeDetails = () => {
 						</SectionCard>
 
 						<SectionCard title="Skills">
-							<div className="flex flex-wrap gap-2">
-								{employee.performance.skills.map((skill) => (
-									<span key={skill} className="rounded-full bg-slate-100 px-3 py-1 text-sm">
-										{skill}
-									</span>
-								))}
-							</div>
+							{employee.performance.skills?.length ? (
+								<div className="flex flex-wrap gap-2">
+									{employee.performance.skills.map((skill) => (
+										<span key={skill} className="rounded-full bg-slate-100 px-3 py-1 text-sm">
+											{skill}
+										</span>
+									))}
+								</div>
+							) : (
+								<span className="text-sm text-slate-500">—</span>
+							)}
 						</SectionCard>
 					</div>
 				);
@@ -235,9 +215,8 @@ const EmployeeDetails = () => {
 								key={doc.id}
 								className="flex items-center justify-between border-b border-slate-300 py-3"
 							>
-								<p className="flex flex-col">
+								<p className="flex flex-col text-sm">
 									<span>{doc.type}</span>
-									<span className="text-xs text-slate-500">{doc.id}</span>
 								</p>
 
 								<span className="rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
@@ -253,14 +232,14 @@ const EmployeeDetails = () => {
 					<div className="grid gap-4 md:gap-6 lg:grid-cols-2">
 						<SectionCard title="Contact">
 							<InfoRow label="Email" value={employee.email} />
-							<InfoRow label="Phone" value={employee.personalInfo.phone} />
-							<InfoRow label="Alternate Phone" value={employee.personalInfo.alternatePhone} />
+							<InfoRow label="Phone" value={phone(employee.personalInfo.phone)} />
+							<InfoRow label="Alternate Phone" value={phone(employee.personalInfo.alternatePhone)} />
 						</SectionCard>
 
 						<SectionCard title="Emergency Contact">
 							<InfoRow label="Name" value={employee.emergencyContact.name} />
 							<InfoRow label="Relationship" value={employee.emergencyContact.relationship} />
-							<InfoRow label="Phone" value={employee.emergencyContact.phone} />
+							<InfoRow label="Phone" value={phone(employee.emergencyContact.phone)} />
 						</SectionCard>
 					</div>
 				);
@@ -303,31 +282,41 @@ const EmployeeDetails = () => {
 						<div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
 							<div className="flex items-center gap-2">
 								<Mail className="h-4 w-4 shrink-0 text-slate-600" />
-
 								<span className="text-sm break-all text-slate-600">{employee.email}</span>
 							</div>
 
 							<div className="flex items-center gap-2">
 								<Phone className="h-4 w-4 shrink-0 text-slate-600" />
-
-								<span className="text-sm text-slate-600">{employee.personalInfo.phone}</span>
+								<span className="text-sm text-slate-600">{phone(employee.personalInfo.phone)}</span>
 							</div>
 						</div>
 
 						<div className="mt-2 flex gap-2 md:hidden">
-							<span className="text-sm text-slate-600">{employee.employment.designation}</span>
+							{employee.employment.designation && (
+								<span className="text-sm text-slate-600">{employee.employment.designation}</span>
+							)}
 
-							<span className="inline text-slate-600">|</span>
+							{employee.employment.designation && employee.employeeCode && (
+								<span className="inline text-slate-600">|</span>
+							)}
 
-							<span className="text-sm text-slate-600">{employee.employeeCode}</span>
+							{employee.employeeCode && (
+								<span className="text-sm text-slate-600">{employee.employeeCode}</span>
+							)}
 						</div>
 
 						<div className="mt-2 hidden md:flex md:flex-wrap md:items-center md:gap-2">
-							<span className="text-sm text-slate-600">{employee.employment.designation}</span>
+							{employee.employment.designation && (
+								<span className="text-sm text-slate-600">{employee.employment.designation}</span>
+							)}
 
-							<span className="inline text-slate-600">|</span>
+							{employee.employment.designation && employee.employeeCode && (
+								<span className="inline text-slate-600">|</span>
+							)}
 
-							<span className="text-sm text-slate-600">{employee.employeeCode}</span>
+							{employee.employeeCode && (
+								<span className="text-sm text-slate-600">{employee.employeeCode}</span>
+							)}
 						</div>
 					</div>
 				</div>
@@ -357,8 +346,7 @@ function InfoRow({ label, value }) {
 	return (
 		<div className="flex flex-col gap-1 py-2 sm:flex-row sm:items-center sm:justify-between">
 			<span className="text-sm text-slate-500">{label}</span>
-
-			<span className="wrap-break-words text-sm font-medium text-slate-900 sm:text-right">{value}</span>
+			<span className="wrap-break-words text-sm font-medium text-slate-900 sm:text-right">{display(value)}</span>
 		</div>
 	);
 }

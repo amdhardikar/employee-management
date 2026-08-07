@@ -18,12 +18,9 @@ export const validateEmployee = (employee) => {
 	const employment = employee.employment || {};
 	const bankDetails = employee.bankDetails || {};
 	const emergencyContact = employee.emergencyContact || {};
-	const salary = employee.salary || {};
+	// const salary = employee.salary || {};
 
-	/* -------------------------------------------------------------------------- */
-	/*                               Personal Info                                */
-	/* -------------------------------------------------------------------------- */
-
+	// PERSONAL INFO VALIDATION
 	if (isEmpty(personalInfo.firstName)) errors.firstName = "First name is required";
 	else if (!regex.name.test(personalInfo.firstName)) errors.firstName = "Invalid first name";
 
@@ -33,9 +30,9 @@ export const validateEmployee = (employee) => {
 	if (isEmpty(employee.email)) errors.email = "Email is required";
 	else if (!regex.email.test(employee.email)) errors.email = "Invalid email";
 
-   if (!personalInfo.gender) errors.gender = "Gender is required";
-   
-   if (!personalInfo.bloodGroup) errors.bloodGroup = "Gender is required";
+	if (!personalInfo.gender) errors.gender = "Gender is required";
+
+	if (!personalInfo.bloodGroup) errors.bloodGroup = "Gender is required";
 
 	if (!personalInfo.dateOfBirth) {
 		errors.dateOfBirth = "Date of birth is required";
@@ -51,10 +48,7 @@ export const validateEmployee = (employee) => {
 	if (personalInfo.alternatePhone && !regex.phone.test(personalInfo.alternatePhone))
 		errors.alternatePhone = "Invalid alternate phone";
 
-	/* -------------------------------------------------------------------------- */
-	/*                                  Address                                   */
-	/* -------------------------------------------------------------------------- */
-
+	// ADDRESS VALIDATION
 	["currentAddress", "permanentAddress"].forEach((section) => {
 		const addr = address[section] || {};
 
@@ -65,10 +59,7 @@ export const validateEmployee = (employee) => {
 		if (!regex.pincode.test(addr.pincode || "")) errors[`${section}.pincode`] = "Invalid pincode";
 	});
 
-	/* -------------------------------------------------------------------------- */
-	/*                                Employment                                  */
-	/* -------------------------------------------------------------------------- */
-
+	// EMPLOYMENT VALIDATION
 	if (!employment.departmentId) errors.departmentId = "Department is required";
 	if (!employment.designationId) errors.designationId = "Designation is required";
 	if (!employment.employeeType) errors.employeeType = "Employee type is required";
@@ -76,10 +67,7 @@ export const validateEmployee = (employee) => {
 	if (!employment.workLocation) errors.workLocation = "Work location is required";
 	if (!employment.status) errors.status = "Status is required";
 
-	/* -------------------------------------------------------------------------- */
-	/*                          Reporting Hierarchy                               */
-	/* -------------------------------------------------------------------------- */
-
+	// REPORTING HIERARCHY VALIDATION
 	if (employment.manager?.employeeId && !regex.employeeId.test(employment.manager.employeeId))
 		errors.managerEmployeeId = "Invalid manager employee ID";
 
@@ -89,11 +77,8 @@ export const validateEmployee = (employee) => {
 	if (employment.lead?.employeeId && !regex.employeeId.test(employment.lead.employeeId))
 		errors.leadEmployeeId = "Invalid lead employee ID";
 
-	/* -------------------------------------------------------------------------- */
-	/*                                   Salary                                   */
-	/* -------------------------------------------------------------------------- */
-
-	if (Object.keys(salary).length) {
+	// SALARY VALIDATION
+	/* if (Object.keys(salary).length) {
 		const salaryFields = [
 			"employeeCTC",
 			"monthlyGross",
@@ -122,21 +107,15 @@ export const validateEmployee = (employee) => {
 
 		if (salary.netSalary != null && salary.monthlyGross != null && salary.netSalary > salary.monthlyGross)
 			errors.netSalary = "Net salary cannot exceed gross salary";
-	}
+	} */
 
-	/* -------------------------------------------------------------------------- */
-	/*                               Bank Details                                 */
-	/* -------------------------------------------------------------------------- */
-
+	// BANK DETAILS VALIDATION
 	if (isEmpty(bankDetails.bankName)) errors.bankName = "Bank name is required";
 	if (!regex.accountNumber.test(bankDetails.accountNumber || "")) errors.accountNumber = "Invalid account number";
 	if (!regex.ifsc.test(bankDetails.ifscCode || "")) errors.ifscCode = "Invalid IFSC";
 	if (isEmpty(bankDetails.branch)) errors.branch = "Branch is required";
 
-	/* -------------------------------------------------------------------------- */
-	/*                            Emergency Contact                               */
-	/* -------------------------------------------------------------------------- */
-
+	// EMERGENCY CONTACT VALIDATION
 	if (isEmpty(emergencyContact.name)) errors.emergencyName = "Contact name is required";
 	if (!emergencyContact.relationship) errors.relationship = "Relationship is required";
 	if (!regex.phone.test(emergencyContact.phone || "")) errors.emergencyPhone = "Invalid phone number";
