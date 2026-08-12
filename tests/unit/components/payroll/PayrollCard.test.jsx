@@ -5,21 +5,24 @@ import PayrollCard from "../../../../src/components/payroll/PayrollCard";
 
 const employee = {
 	id: "1",
+	employeeId: "EMP001",
+	employeeCode: "E001",
+	fullName: "John Doe",
 
 	personalInfo: {
 		profileImage: "profile.jpg",
-		fullName: "John Doe",
 	},
 
 	employment: {
 		departmentName: "Engineering",
+		designation: "Software Engineer",
 	},
 
-	recentPayslip: {
+	salary: {
+		employeeCTC: 1200000,
+		monthlyGross: 100000,
 		netSalary: 85000,
-		grossSalary: 100000,
-		deductions: 15000,
-		month: "January",
+		professionalTax: 15000,
 	},
 };
 
@@ -27,8 +30,10 @@ describe("PayrollCard", () => {
 	it("renders employee payroll information", () => {
 		render(<PayrollCard employee={employee} onView={vi.fn()} />);
 
-		expect(screen.getByText("Engineering")).toBeInTheDocument();
-		expect(screen.getByText("January")).toBeInTheDocument();
+		expect(screen.getByText("John Doe")).toBeInTheDocument();
+		expect(screen.getByText("E001 | EMP001")).toBeInTheDocument();
+		expect(screen.getByText("Software Engineer | Engineering")).toBeInTheDocument();
+		expect(screen.getByText("₹12,00,000")).toBeInTheDocument();
 		expect(screen.getByText("₹85,000")).toBeInTheDocument();
 		expect(screen.getByText("₹1,00,000")).toBeInTheDocument();
 		expect(screen.getByText("₹15,000")).toBeInTheDocument();
@@ -56,26 +61,27 @@ describe("PayrollCard", () => {
 
 	it("handles missing optional employee details", () => {
 		const incompleteEmployee = {
-			recentPayslip: {
+			salary: {
 				netSalary: 50000,
-				grossSalary: 60000,
-				deductions: 10000,
-				month: "February",
+				monthlyGross: 60000,
+				professionalTax: 10000,
 			},
 		};
 
 		render(<PayrollCard employee={incompleteEmployee} onView={vi.fn()} />);
 
 		expect(screen.getByText("₹50,000")).toBeInTheDocument();
-		expect(screen.getByText("February")).toBeInTheDocument();
+		expect(screen.getByText("₹60,000")).toBeInTheDocument();
+		expect(screen.getByText("₹10,000")).toBeInTheDocument();
+		expect(screen.getByText("Not Assigned | Not Assigned")).toBeInTheDocument();
 
 		const image = screen.getByRole("img");
 		expect(image.getAttribute("src")).toMatch(/^data:image\/svg\+xml/);
 		expect(image).toHaveAttribute("alt", "—");
 	});
 
-	it("handles a missing recent payslip", () => {
-		render(<PayrollCard employee={{ ...employee, recentPayslip: null }} onView={vi.fn()} />);
+	it("handles missing salary details", () => {
+		render(<PayrollCard employee={{ ...employee, salary: null }} onView={vi.fn()} />);
 		expect(screen.getAllByText("—").length).toBeGreaterThan(0);
 	});
 });
