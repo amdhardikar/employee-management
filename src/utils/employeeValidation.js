@@ -1,15 +1,48 @@
+/**
+ * @fileoverview Validates the complete employee form model before create or update. It checks personal data, age, addresses, employment selections, reporting IDs, bank details, and emergency contacts, returning an error object keyed exactly as the form fields expect.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/utils/employeeValidation
+ */
 const regex = {
 	name: /^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/,
 	email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-	phone: /^(?:\+91)?[6-9]\d{9}$/,
+	phone: /^(?:\+91)?\d{10}$/,
 	pincode: /^\d{6}$/,
 	accountNumber: /^(?:\d{9,18}|[X|x*]{2,14}\d{4})$/,
 	ifsc: /^[A-Z]{4}0[A-Z0-9]{6}$/,
 	employeeId: /^EMP\d{3,6}$/,
 };
 
+/**
+ * Is empty.
+ * @param {*} value - Value to render, format, debounce, or edit.
+ * @returns {*} Computed result.
+ */
 const isEmpty = (value) => !String(value ?? "").trim();
 
+/**
+ * Normalizes supported Indian phone input before validation.
+ * Whitespace is removed while the optional +91 prefix is preserved, allowing
+ * users to enter either `+91 9876543210`, `+919876543210`, or `9876543210`.
+ *
+ * @param {*} value - Raw phone value entered by the user.
+ * @returns {string} Phone value normalized for the shared phone-number regex.
+ */
+export const normalizePhone = (value) =>
+	String(value ?? "")
+		.trim()
+		.replace(/\s+/g, "");
+
+/**
+ * Validate employee.
+ * @param {Object} employee - Employee domain record used by the component or operation.
+ * @returns {*} Computed result.
+ */
 export const validateEmployee = (employee) => {
 	const errors = {};
 
@@ -44,8 +77,8 @@ export const validateEmployee = (employee) => {
 
 	if (!personalInfo.maritalStatus) errors.maritalStatus = "Marital status is required";
 	if (isEmpty(personalInfo.nationality)) errors.nationality = "Nationality is required";
-	if (!regex.phone.test(personalInfo.phone || "")) errors.phone = "Invalid phone number";
-	if (personalInfo.alternatePhone && !regex.phone.test(personalInfo.alternatePhone))
+	if (!regex.phone.test(normalizePhone(personalInfo.phone))) errors.phone = "Invalid phone number";
+	if (personalInfo.alternatePhone && !regex.phone.test(normalizePhone(personalInfo.alternatePhone)))
 		errors.alternatePhone = "Invalid alternate phone";
 
 	// ADDRESS VALIDATION
@@ -77,38 +110,6 @@ export const validateEmployee = (employee) => {
 	if (employment.lead?.employeeId && !regex.employeeId.test(employment.lead.employeeId))
 		errors.leadEmployeeId = "Invalid lead employee ID";
 
-	// SALARY VALIDATION
-	/* if (Object.keys(salary).length) {
-		const salaryFields = [
-			"employeeCTC",
-			"monthlyGross",
-			"basic",
-			"hra",
-			"specialAllowance",
-			"pf",
-			"professionalTax",
-			"otherDeductions",
-			"netSalary",
-		];
-
-		salaryFields.forEach((field) => {
-			const value = salary[field];
-
-			if (value === "" || value == null) errors[field] = "Required";
-			else if (Number.isNaN(Number(value))) errors[field] = "Must be a number";
-			else if (Number(value) < 0) errors[field] = "Cannot be negative";
-		});
-
-		if (salary.employeeCTC != null && salary.monthlyGross != null && salary.monthlyGross > salary.employeeCTC / 12)
-			errors.monthlyGross = "Monthly gross exceeds annual CTC";
-
-		if (salary.basic != null && salary.monthlyGross != null && salary.basic > salary.monthlyGross)
-			errors.basic = "Basic salary cannot exceed monthly gross";
-
-		if (salary.netSalary != null && salary.monthlyGross != null && salary.netSalary > salary.monthlyGross)
-			errors.netSalary = "Net salary cannot exceed gross salary";
-	} */
-
 	// BANK DETAILS VALIDATION
 	if (isEmpty(bankDetails.bankName)) errors.bankName = "Bank name is required";
 	if (!regex.accountNumber.test(bankDetails.accountNumber || "")) errors.accountNumber = "Invalid account number";
@@ -118,7 +119,7 @@ export const validateEmployee = (employee) => {
 	// EMERGENCY CONTACT VALIDATION
 	if (isEmpty(emergencyContact.name)) errors.emergencyName = "Contact name is required";
 	if (!emergencyContact.relationship) errors.relationship = "Relationship is required";
-	if (!regex.phone.test(emergencyContact.phone || "")) errors.emergencyPhone = "Invalid phone number";
+	if (!regex.phone.test(normalizePhone(emergencyContact.phone))) errors.emergencyPhone = "Invalid phone number";
 
 	return errors;
 };

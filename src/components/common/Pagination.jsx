@@ -1,5 +1,26 @@
+/**
+ * @fileoverview Renders desktop pagination and page-size controls. It derives a compact page-number window, disables invalid previous/next actions, reports the visible record range, and emits page or page-size changes to the owning list.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/common/Pagination
+ */
 import PropTypes from "prop-types";
 
+/**
+ * Renders the pagination interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {*} props.currentPage - The current page value required by this operation.
+ * @param {*} props.totalPages - The total pages value required by this operation.
+ * @param {*} props.totalItems - The total items value required by this operation.
+ * @param {number} props.pageSize - Number of records requested per page.
+ * @param {Function} props.onPageChange - The on page change value required by this operation.
+ * @param {Function} props.onPageSizeChange - The on page size change value required by this operation.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Pagination = ({
 	currentPage,
 	totalPages,

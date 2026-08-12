@@ -1,7 +1,21 @@
+/**
+ * @fileoverview Builds an accessible breadcrumb trail from the current URL and route metadata. It resolves dynamic route segments, links intermediate locations, and marks the final location as the current page.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/common/Breadcrumb
+ */
 import { NavLink, useLocation, matchPath } from "react-router-dom";
 import { Home, ChevronRight } from "lucide-react";
 import { appRoutes } from "../../router";
 
+/**
+ * Renders the breadcrumb interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Breadcrumb = () => {
 	const location = useLocation();
 

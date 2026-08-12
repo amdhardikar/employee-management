@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Exports the route metadata used by navigation and breadcrumbs. Each entry maps a URL pattern to a human-readable label; dynamic employee, department, attendance, and payroll identifiers are represented as parameterized routes.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/router
+ */
 export const appRoutes = [
 	{
 		path: "/dashboard",

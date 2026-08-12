@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Runs the payroll listing experience. It retrieves payroll records using shared search/filter/pagination state, renders desktop and mobile presentations, links to payroll details, and handles loading, error, and empty states.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/pages/Payroll
+ */
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +30,10 @@ import useEmployeeListing from "../hooks/useEmployeeListing";
 import useFilters from "../hooks/useFilters";
 import ErrorState from "../components/common/ErrorState";
 
+/**
+ * Renders the payroll interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Payroll = () => {
 	const tableRef = useRef(null);
 	const searchRef = useRef(null);
@@ -66,12 +80,13 @@ const Payroll = () => {
 			tableRef,
 		});
 
-	const onViewHandler = (employee) => {
+	const onViewHandler = useCallback((employee) => {
 		navigate(`/payroll/${employee.employeeId}`);
-	};
+	}, [navigate]);
 
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
+	const hasActiveData = isDesktop ? hasTableData : hasCardData;
 
 	if (loading || departmentsLoading) {
 		return <PageLoader text="Loading payroll..." />;
@@ -90,6 +105,7 @@ const Payroll = () => {
 		<>
 			<div className="sticky top-0 z-10 bg-slate-50 shadow-sm">
 				<Filters
+					searchRef={searchRef}
 					search={query.search}
 					department={query.department}
 					departments={departments}
@@ -104,8 +120,8 @@ const Payroll = () => {
 			</div>
 
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
-				{hasTableData && (
-					<div className="hidden lg:block">
+				{isDesktop && hasTableData && (
+					<div>
 						<PayrollTable payrolls={tableEmployees} onView={onViewHandler} />
 						<Pagination
 							currentPage={query.tablePage}
@@ -117,8 +133,8 @@ const Payroll = () => {
 						/>
 					</div>
 				)}
-				{hasCardData && (
-					<div className="grid gap-4 lg:hidden">
+				{!isDesktop && hasCardData && (
+					<div className="grid gap-4">
 						{cardEmployees.map((employee) => (
 							<PayrollCard key={employee.id} employee={employee} onView={onViewHandler} />
 						))}
@@ -143,7 +159,7 @@ const Payroll = () => {
 					</div>
 				)}
 			</div>
-			{!hasTableData && !hasCardData && <EmptyState />}
+			{!hasActiveData && <EmptyState />}
 		</>
 	);
 };

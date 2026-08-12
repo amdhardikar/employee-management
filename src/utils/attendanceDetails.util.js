@@ -1,3 +1,18 @@
+/**
+ * @fileoverview Summarizes an employee's monthly attendance record. It totals present, absent, leave, half-day, holiday, and weekend entries for the attendance details statistics.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/utils/attendanceDetails.util
+ */
+/**
+ * Get attendance summary.
+ * @param {Object} attendance - Monthly attendance record to summarize or display.
+ * @returns {*} Computed result.
+ */
 export const getAttendanceSummary = (attendance) => {
 	const totalWorkingDays = attendance.reduce(
 		(sum, item) => sum + item.workingDays,

@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Manages authentication state in Redux. It restores the saved session from localStorage, authenticates an employee by email and employee code, persists successful sessions, exposes request/error state, and clears storage on logout.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/store/authSlice
+ */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { employeeApi } from "../api/employeeApi";
 
@@ -34,8 +44,7 @@ export const login = createAsyncThunk("auth/login", async ({ email, employeeCode
 		localStorage.setItem("ems_session", JSON.stringify(sessionData));
 
 		return sessionData;
-   } catch (error) {
-      console.log(error)
+   } catch {
 		return rejectWithValue("Server connection error.");
 	}
 });

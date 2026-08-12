@@ -6,7 +6,7 @@ import reactRefresh from "eslint-plugin-react-refresh";
 
 export default [
 	{
-		ignores: ["dist", "node_modules"],
+		ignores: ["dist", "node_modules", "reports"],
 	},
 	{
 		files: ["**/*.{js,jsx}"],
@@ -43,6 +43,12 @@ export default [
 				"warn",
 				{ allowConstantExport: true },
 			],
+		},
+	},
+	{
+		files: ["tests/**/*.{js,jsx}"],
+		rules: {
+			"react/prop-types": "off",
 		},
 	},
 ];

@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Loads the employee identified by the route and presents their complete profile in grouped information cards. It formats personal, address, employment, reporting, bank, emergency, and salary data and handles loading, request failure, missing records, and edit navigation.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/employee/EmployeeDetails
+ */
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
@@ -6,8 +16,14 @@ import { Mail, Phone } from "lucide-react";
 import PageLoader from "../common/PageLoader";
 import NotFound from "../common/NotFound";
 import ErrorState from "../common/ErrorState";
-import { display, date, currency, address, phone, mask } from "../../utils/display";
+import { display, date, currency, address, phone, mask } from "../../utils/formatter";
+import ProfileImage from "../common/ProfileImage";
+import logger from "../../logging/logger";
 
+/**
+ * Renders the employee details interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const EmployeeDetails = () => {
 	const { id } = useParams();
 	const [employee, setEmployee] = useState(null);
@@ -40,7 +56,7 @@ const EmployeeDetails = () => {
 					setEmployee(null);
 				}
 			} catch (err) {
-				console.log(err);
+				logger.error("Unable to load employee details", err);
 				setError({
 					message: err.message || "Unable to load employee details",
 				});
@@ -67,6 +83,8 @@ const EmployeeDetails = () => {
 	if (!employee) {
 		return <NotFound title="Employee Not Found" message={`No employee exists with ID "${id}".`} />;
 	}
+
+	const emailSeparatorIndex = employee.email?.indexOf("@") ?? -1;
 
 	const renderTabContent = () => {
 		switch (activeTab) {
@@ -262,18 +280,17 @@ const EmployeeDetails = () => {
 					</SectionCard>
 				);
 
-			default:
-				return null;
 		}
 	};
 
 	return (
 		<div className="space-y-4 p-4 md:space-y-6 md:p-6">
-			<div className="flex flex-col rounded-sm border border-slate-200 bg-white px-4 pt-4 shadow-sm md:gap-3 md:px-6 md:pt-6">
-				<div className="flex items-start gap-4">
-					<img
+			<div className="rounded-sm border border-slate-200 bg-white p-4 shadow-sm md:p-6">
+				<div className="flex flex-col items-start gap-3 md:flex-row md:gap-4">
+					<ProfileImage
 						src={employee.personalInfo.profileImage}
-						alt={employee.fullName}
+						name={employee.fullName}
+						eager
 						className="h-16 w-16 shrink-0 rounded-full object-cover md:h-24 md:w-24"
 					/>
 
@@ -282,7 +299,17 @@ const EmployeeDetails = () => {
 						<div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:gap-4">
 							<div className="flex items-center gap-2">
 								<Mail className="h-4 w-4 shrink-0 text-slate-600" />
-								<span className="text-sm break-all text-slate-600">{employee.email}</span>
+								<span className="min-w-0 text-sm text-slate-600">
+									{emailSeparatorIndex >= 0 ? (
+										<>
+											{employee.email.slice(0, emailSeparatorIndex + 1)}
+											<wbr />
+											{employee.email.slice(emailSeparatorIndex + 1)}
+										</>
+									) : (
+										employee.email
+									)}
+								</span>
 							</div>
 
 							<div className="flex items-center gap-2">
@@ -291,18 +318,10 @@ const EmployeeDetails = () => {
 							</div>
 						</div>
 
-						<div className="mt-2 flex gap-2 md:hidden">
-							{employee.employment.designation && (
-								<span className="text-sm text-slate-600">{employee.employment.designation}</span>
-							)}
-
-							{employee.employment.designation && employee.employeeCode && (
-								<span className="inline text-slate-600">|</span>
-							)}
-
-							{employee.employeeCode && (
-								<span className="text-sm text-slate-600">{employee.employeeCode}</span>
-							)}
+						<div className="mt-2 flex flex-wrap gap-2 md:hidden">
+							<span className="text-sm text-slate-600">{display(employee.employment.departmentName)}</span>
+							<span className="text-slate-600">|</span>
+							<span className="text-sm text-slate-600">{display(employee.employment.designation)}</span>
 						</div>
 
 						<div className="mt-2 hidden md:flex md:flex-wrap md:items-center md:gap-2">
@@ -320,24 +339,42 @@ const EmployeeDetails = () => {
 						</div>
 					</div>
 				</div>
-				<div className="flex overflow-x-auto">
-					{tabs.map((tab) => (
-						<button
-							key={tab.id}
-							onClick={() => setActiveTab(tab.id)}
-							className={`border-b-2 px-5 py-4 text-sm font-medium whitespace-nowrap transition ${
-								activeTab === tab.id
-									? "border-blue-600 text-blue-600"
-									: "border-transparent text-slate-500 hover:text-slate-900"
-							}`}
-						>
-							{tab.label}
-						</button>
-					))}
-				</div>
 			</div>
 
-			{renderTabContent()}
+			<div className="md:hidden">
+				<label htmlFor="employee-detail-section" className="mb-2 block text-sm font-medium text-slate-700">
+					Profile section
+				</label>
+				<select
+					id="employee-detail-section"
+					aria-label="Employee detail sections"
+					value={activeTab}
+					onChange={(event) => setActiveTab(event.target.value)}
+					className="w-full rounded-sm border border-slate-300 bg-white px-3 py-3 text-sm text-slate-900 shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 focus:outline-none"
+				>
+					{tabs.map((tab) => <option key={tab.id} value={tab.id}>{tab.label}</option>)}
+				</select>
+			</div>
+
+			<div className="grid items-start gap-4 md:grid-cols-[13rem_minmax(0,1fr)] md:gap-6 lg:grid-cols-[15rem_minmax(0,1fr)]">
+				<nav aria-label="Employee detail sections" className="sticky top-0 hidden rounded-sm border border-slate-200 bg-white p-2 shadow-sm md:block">
+					<p className="px-3 py-2 text-xs font-semibold tracking-wide text-slate-400 uppercase">Profile sections</p>
+					<div className="space-y-1">
+						{tabs.map((tab) => (
+							<button
+								key={tab.id}
+								type="button"
+								onClick={() => setActiveTab(tab.id)}
+								aria-current={activeTab === tab.id ? "page" : undefined}
+								className={`w-full rounded-md px-3 py-2.5 text-left text-sm font-medium transition ${activeTab === tab.id ? "bg-blue-50 text-blue-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+							>
+								{tab.label}
+							</button>
+						))}
+					</div>
+				</nav>
+				<main className="min-w-0">{renderTabContent()}</main>
+			</div>
 		</div>
 	);
 };

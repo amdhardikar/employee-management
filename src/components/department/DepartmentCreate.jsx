@@ -1,9 +1,26 @@
-import { useState } from "react";
+/**
+ * @fileoverview Implements the department create workflow. It coordinates route or form state, department API operations, employee assignments, validation, navigation, and the appropriate loading, error, or not-found presentation.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/department/DepartmentCreate
+ */
+import { useId, useState } from "react";
+import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addDepartment } from "../../store/departmentSlice";
+import { invalidateDesignations } from "../../store/designationSlice";
 import { departmentApi } from "../../api/departmentApi";
+import Popup from "../common/Popup";
 
+/**
+ * Renders the department create interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const DepartmentCreate = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
@@ -17,10 +34,9 @@ const DepartmentCreate = () => {
 	const [designationInput, setDesignationInput] = useState("");
 
 	const [saving, setSaving] = useState(false);
+	const [saveError, setSaveError] = useState(null);
 	const [touched, setTouched] = useState({});
 	const [errors, setErrors] = useState({});
-
-	const isFormValid = form.name.trim() && form.skills.length > 0 && form.designations.length > 0;
 
 	const markTouched = (field) => {
 		setTouched((prev) => ({
@@ -126,38 +142,44 @@ const DepartmentCreate = () => {
 
 		if (Object.keys(validationErrors).length) {
 			setErrors(validationErrors);
+			setSaveError("Please correct the highlighted form errors before creating the department.");
 			return;
 		}
 
 		try {
+			setSaveError(null);
 			setSaving(true);
 			setErrors({});
 
 			const response = await departmentApi.createDepartment(form);
 
 			dispatch(addDepartment(response.department));
-
-			navigate("/departments");
+			dispatch(invalidateDesignations());
 
 			navigate("/departments");
 		} catch (error) {
-			setErrors({
-				server: error.message || "Unable to create department",
-			});
+			setSaveError(error);
 		} finally {
 			setSaving(false);
 		}
 	};
 
 	return (
-		<div className="border-t border-slate-200">
-			<form onSubmit={submitHandler} className="space-y-8">
+		<div className="min-w-0 border-t border-slate-200">
+			<Popup
+				saving={saving}
+				error={saveError}
+				savingMessage="Creating department..."
+				errorTitle="Unable to create department"
+				onClose={() => setSaveError(null)}
+			/>
+			<form onSubmit={submitHandler} className="space-y-5 sm:space-y-8">
 				<section className="rounded-sm border border-slate-200">
-					<h2 className="border-b border-slate-100 px-6 py-3 text-lg font-semibold text-slate-800">
+					<h2 className="border-b border-slate-100 px-4 py-3 text-base font-semibold text-slate-800 sm:px-6 sm:text-lg">
 						Create Department
 					</h2>
 
-					<div className="grid gap-6 p-6">
+					<div className="grid gap-5 p-4 sm:gap-6 sm:p-6">
 						<div>
 							<label className="mb-2 block text-sm font-medium text-slate-700">Department Name</label>
 
@@ -252,20 +274,20 @@ const DepartmentCreate = () => {
 					</div>
 				</section>
 
-				<div className="sticky bottom-0 flex justify-end gap-4 border-t border-slate-200 bg-white p-5">
+				<div className="sticky bottom-0 z-10 flex flex-col-reverse gap-3 border-t border-slate-200 bg-white p-4 shadow-[0_-4px_12px_rgba(15,23,42,0.06)] sm:flex-row sm:justify-end sm:gap-4 sm:p-5">
 					<button
 						type="button"
 						disabled={saving}
 						onClick={() => navigate(-1)}
-						className="rounded-sm border border-slate-300 px-4 py-2 text-sm hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50"
+						className="w-full rounded-sm border border-slate-300 px-4 py-2.5 text-sm hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:py-2"
 					>
 						Cancel
 					</button>
 
 					<button
 						type="submit"
-						disabled={!isFormValid || saving}
-						className="rounded-sm bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+						disabled={saving}
+						className="w-full rounded-sm bg-blue-600 px-5 py-2.5 text-sm font-semibold text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:py-2"
 					>
 						{saving ? "Creating..." : "Create"}
 					</button>
@@ -275,13 +297,33 @@ const DepartmentCreate = () => {
 	);
 };
 
+/**
+ * Renders the tag input interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {string} props.label - Human-readable field or metric label.
+ * @param {*} props.value - Value to render, format, debounce, or edit.
+ * @param {Function} props.setValue - The set value value required by this operation.
+ * @param {Function} props.setError - The set error value required by this operation.
+ * @param {*} props.items - The items value required by this operation.
+ * @param {Function} props.onAdd - The on add value required by this operation.
+ * @param {Function} props.onRemove - The on remove value required by this operation.
+ * @param {*} props.placeholder - The placeholder value required by this operation.
+ * @param {*} props.error - The error value required by this operation.
+ * @param {Function} props.onBlur - The on blur value required by this operation.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const TagInput = ({ label, value, setValue, setError, items, onAdd, onRemove, placeholder, error, onBlur }) => {
+	const fieldId = useId();
+	const errorId = `${fieldId}-error`;
 	return (
 		<div>
-			<label className="mb-2 block text-sm font-medium text-slate-700">{label}</label>
+			<label htmlFor={fieldId} className="mb-2 block text-sm font-medium text-slate-700">{label}</label>
 
-			<div className="flex gap-2">
+			<div className="flex flex-col gap-2 sm:flex-row">
 				<input
+					id={fieldId}
+					aria-invalid={Boolean(error)}
+					aria-describedby={error ? errorId : undefined}
 					value={value}
 					onChange={(e) => {
 						const value = e.target.value;
@@ -300,7 +342,7 @@ const TagInput = ({ label, value, setValue, setError, items, onAdd, onRemove, pl
 						}
 					}}
 					onBlur={onBlur}
-					className={`flex-1 rounded-sm border px-4 py-2 outline-none ${
+					className={`min-w-0 flex-1 rounded-sm border px-4 py-2.5 outline-none ${
 						error
 							? "border-red-500 focus:ring-4 focus:ring-red-100"
 							: "border-slate-300 focus:border-blue-500 focus:ring-4 focus:ring-blue-100"
@@ -308,7 +350,11 @@ const TagInput = ({ label, value, setValue, setError, items, onAdd, onRemove, pl
 					placeholder={placeholder}
 				/>
 
-				<button type="button" onClick={onAdd} className="rounded-sm bg-slate-800 px-4 text-white">
+				<button
+					type="button"
+					onClick={onAdd}
+					className="min-h-11 w-full rounded-sm bg-slate-800 px-4 text-white transition-colors hover:bg-slate-700 sm:w-auto"
+				>
 					Add
 				</button>
 			</div>
@@ -318,16 +364,29 @@ const TagInput = ({ label, value, setValue, setError, items, onAdd, onRemove, pl
 					<div key={item} className="flex items-center gap-2 rounded-full bg-slate-100 px-3 py-1 text-sm">
 						{item}
 
-						<button type="button" onClick={() => onRemove(item)} className="text-red-500">
+						<button type="button" onClick={() => onRemove(item)} className="rounded p-1 text-red-500 transition-colors hover:bg-red-50 hover:text-red-700">
 							×
 						</button>
 					</div>
 				))}
 			</div>
 
-			{error && <p className="mt-1 text-sm text-red-500">{error}</p>}
+			{error && <p id={errorId} className="mt-1 text-sm text-red-600">{error}</p>}
 		</div>
 	);
+};
+
+TagInput.propTypes = {
+	label: PropTypes.string.isRequired,
+	value: PropTypes.string.isRequired,
+	setValue: PropTypes.func.isRequired,
+	setError: PropTypes.func.isRequired,
+	items: PropTypes.arrayOf(PropTypes.string).isRequired,
+	onAdd: PropTypes.func.isRequired,
+	onRemove: PropTypes.func.isRequired,
+	placeholder: PropTypes.string,
+	error: PropTypes.string,
+	onBlur: PropTypes.func.isRequired,
 };
 
 export default DepartmentCreate;

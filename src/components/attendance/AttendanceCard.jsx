@@ -1,4 +1,15 @@
+/**
+ * @fileoverview Renders one attendance record in the responsive card presentation. It highlights the most important summary fields and status and delegates navigation or actions through its callback properties.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/attendance/AttendanceCard
+ */
 import PropTypes from "prop-types";
+import { memo } from "react";
 import {
 	Card,
 	CardHeader,
@@ -8,9 +19,19 @@ import {
 	CardGrid,
 	CardItem,
 	CardAction,
+	CardFooter,
 } from "../common/InfoCard";
 import { Eye } from "lucide-react";
+import { display } from "../../utils/formatter";
+import ProfileImage from "../common/ProfileImage";
 
+/**
+ * Renders the attendance card interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {Object} props.employee - Employee domain record used by the component or operation.
+ * @param {Function} props.onView - Called with the selected record when the user requests details.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const AttendanceCard = ({ employee, onView }) => {
 	const attendancePercentage = employee.attendance?.attendancePercentage || 0;
 
@@ -18,30 +39,27 @@ const AttendanceCard = ({ employee, onView }) => {
 		<Card className="rounded-sm">
 			<CardHeader className="items-center gap-3">
 				<div className="flex min-w-0 flex-1 items-center gap-3">
-					<img
+					<ProfileImage
 						src={employee.personalInfo?.profileImage}
-						alt={employee.fullName}
+						name={display(employee.fullName)}
 						className="h-12 w-12 rounded-full object-cover"
 					/>
 
 					<div className="min-w-0 flex-1">
 						<CardTitle className="truncate text-sm">
-							{employee.fullName}
+							{display(employee.fullName)}
 						</CardTitle>
 
 						<CardSubtitle className="mt-1">
-							{employee.employeeCode} | {employee.employeeId}
+							{display(employee.employeeCode)} | {display(employee.employeeId)}
 						</CardSubtitle>
 
 						<CardSubtitle className="mt-1">
-							{employee.employment?.departmentName}
+							{display(employee.employment?.departmentName)}
 						</CardSubtitle>
 					</div>
 				</div>
 
-				<CardAction onClick={() => onView(employee)}>
-					<Eye className="h-4 w-4" />
-				</CardAction>
 			</CardHeader>
 
 			<CardContent>
@@ -89,6 +107,11 @@ const AttendanceCard = ({ employee, onView }) => {
 					/>
 				</CardGrid>
 			</CardContent>
+			<CardFooter className="border-t border-slate-100 pt-3">
+				<CardAction ariaLabel="View attendance" onClick={() => onView(employee)} className="flex w-full items-center justify-center gap-2 border-blue-200 px-3 text-xs font-medium text-blue-700 hover:bg-blue-50">
+					<Eye className="h-4 w-4" /> View details
+				</CardAction>
+			</CardFooter>
 		</Card>
 	);
 };
@@ -98,4 +121,4 @@ AttendanceCard.propTypes = {
 	onView: PropTypes.func.isRequired,
 };
 
-export default AttendanceCard;
+export default memo(AttendanceCard);

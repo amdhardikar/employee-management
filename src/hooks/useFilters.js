@@ -1,6 +1,23 @@
+/**
+ * @fileoverview Converts search, department, status, page, and page-size UI events into Redux filter updates for a selected module. Filter changes reset both pagination modes, and table-page changes scroll the table back into view.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/hooks/useFilters
+ */
 import { useDispatch } from "react-redux";
 import { setFilters } from "../store/filterSlice";
 
+/**
+ * Manages filters state and exposes values and callbacks to React consumers.
+ * @param {Object} props - Component or hook input properties.
+ * @param {string} props.module - Redux filter namespace to update.
+ * @param {React.RefObject} props.tableRef - Reference scrolled into view after a desktop page change.
+ * @returns {Object|*} Hook state, derived values, and/or callback functions.
+ */
 export default function useFilters({ module, tableRef }) {
 	const dispatch = useDispatch();
 

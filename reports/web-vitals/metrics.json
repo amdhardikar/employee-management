@@ -1,0 +1,313 @@
+{
+  "generatedAt": "2026-08-12T04:57:34.674Z",
+  "routes": [
+    {
+      "path": "/login",
+      "url": "http://127.0.0.1:4175/dashboard",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 12.700000047683716,
+          "rating": "good",
+          "delta": 12.700000047683716,
+          "id": "v6-1786510618548-7888073412673",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 1040,
+          "rating": "good",
+          "delta": 1040,
+          "id": "v6-1786510618547-3023412566504",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/dashboard",
+      "url": "http://127.0.0.1:4175/dashboard",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 7.5,
+          "rating": "good",
+          "delta": 7.5,
+          "id": "v6-1786510621130-4809072098913",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 88,
+          "rating": "good",
+          "delta": 88,
+          "id": "v6-1786510621130-4028304924916",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/employees",
+      "url": "http://127.0.0.1:4175/employees",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 4.299999952316284,
+          "rating": "good",
+          "delta": 4.299999952316284,
+          "id": "v6-1786510623710-6284683925159",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 80,
+          "rating": "good",
+          "delta": 80,
+          "id": "v6-1786510623710-7805777326215",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/employees/new",
+      "url": "http://127.0.0.1:4175/employees/new",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 3.100000023841858,
+          "rating": "good",
+          "delta": 3.100000023841858,
+          "id": "v6-1786510626298-6222279418493",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 84,
+          "rating": "good",
+          "delta": 84,
+          "id": "v6-1786510626298-5277898835701",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/employees/EMP001",
+      "url": "http://127.0.0.1:4175/employees/EMP001",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 3,
+          "rating": "good",
+          "delta": 3,
+          "id": "v6-1786510628894-4084011635413",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 92,
+          "rating": "good",
+          "delta": 92,
+          "id": "v6-1786510628894-3923411079943",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/employees/edit/EMP001",
+      "url": "http://127.0.0.1:4175/employees/edit/EMP001",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 2.9000000953674316,
+          "rating": "good",
+          "delta": 2.9000000953674316,
+          "id": "v6-1786510631478-9303523975251",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 76,
+          "rating": "good",
+          "delta": 76,
+          "id": "v6-1786510631478-3796709160095",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/departments",
+      "url": "http://127.0.0.1:4175/departments",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 3.700000047683716,
+          "rating": "good",
+          "delta": 3.700000047683716,
+          "id": "v6-1786510634059-6106155791951",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 84,
+          "rating": "good",
+          "delta": 84,
+          "id": "v6-1786510634058-1440696622060",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/departments/new",
+      "url": "http://127.0.0.1:4175/departments/new",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 3.600000023841858,
+          "rating": "good",
+          "delta": 3.600000023841858,
+          "id": "v6-1786510636652-5308593326809",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 84,
+          "rating": "good",
+          "delta": 84,
+          "id": "v6-1786510636652-2636476095673",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/departments/DEPT001",
+      "url": "http://127.0.0.1:4175/departments/DEPT001",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 4.199999928474426,
+          "rating": "good",
+          "delta": 4.199999928474426,
+          "id": "v6-1786510639260-6370148923863",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 92,
+          "rating": "good",
+          "delta": 92,
+          "id": "v6-1786510639259-7431873596657",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/departments/edit/DEPT001",
+      "url": "http://127.0.0.1:4175/departments/edit/DEPT001",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 5.5,
+          "rating": "good",
+          "delta": 5.5,
+          "id": "v6-1786510641846-3731535102364",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 88,
+          "rating": "good",
+          "delta": 88,
+          "id": "v6-1786510641846-7187294079362",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/attendance",
+      "url": "http://127.0.0.1:4175/attendance",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 4.700000047683716,
+          "rating": "good",
+          "delta": 4.700000047683716,
+          "id": "v6-1786510644414-6665822827215",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 72,
+          "rating": "good",
+          "delta": 72,
+          "id": "v6-1786510644414-1486302903454",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/attendance/EMP001",
+      "url": "http://127.0.0.1:4175/attendance/EMP001",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 4,
+          "rating": "good",
+          "delta": 4,
+          "id": "v6-1786510647000-5299726329264",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 92,
+          "rating": "good",
+          "delta": 92,
+          "id": "v6-1786510647000-2009940852577",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/payroll",
+      "url": "http://127.0.0.1:4175/payroll",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 3,
+          "rating": "good",
+          "delta": 3,
+          "id": "v6-1786510649587-7012626498673",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 88,
+          "rating": "good",
+          "delta": 88,
+          "id": "v6-1786510649587-7159564632553",
+          "navigationType": "navigate"
+        }
+      ]
+    },
+    {
+      "path": "/payroll/EMP001",
+      "url": "http://127.0.0.1:4175/payroll/EMP001",
+      "metrics": [
+        {
+          "name": "TTFB",
+          "value": 4.100000023841858,
+          "rating": "good",
+          "delta": 4.100000023841858,
+          "id": "v6-1786510652172-2925936715415",
+          "navigationType": "navigate"
+        },
+        {
+          "name": "FCP",
+          "value": 80,
+          "rating": "good",
+          "delta": 80,
+          "id": "v6-1786510652172-7274079020351",
+          "navigationType": "navigate"
+        }
+      ]
+    }
+  ]
+}

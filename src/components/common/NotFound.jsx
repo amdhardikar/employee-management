@@ -1,7 +1,24 @@
+/**
+ * @fileoverview Displays a reusable record-not-found state and a navigation action back to the previous screen. Title and explanatory text can be specialized by details pages.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/common/NotFound
+ */
 import { TriangleAlert } from "lucide-react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Renders the not found interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {string} props.title - Heading displayed to the user.
+ * @param {string} props.message - Supporting message displayed to the user.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const NotFound = ({ title = "Record Not Found", message = "The requested record could not be found." }) => {
 	const navigate = useNavigate();
 

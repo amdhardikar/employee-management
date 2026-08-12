@@ -1,11 +1,40 @@
+/**
+ * @fileoverview Builds the employee object sent by create and update screens. It derives the employee code and full name, preserves nested domain groups, and omits client-only or server-managed values so API calls receive a consistent payload.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/utils/employeePayload
+ */
+import { properCase } from "./formatter";
+
+const formatAddress = (address = {}) => {
+	const formattedAddress = { ...address };
+
+	["street", "city", "state", "country"].forEach((field) => {
+		if (Object.hasOwn(address, field)) {
+			formattedAddress[field] = properCase(address[field]);
+		}
+	});
+
+	return formattedAddress;
+};
+
+/**
+ * Build employee update payload.
+ * @param {Object} employee - Employee domain record used by the component or operation.
+ * @returns {*} Computed result.
+ */
 export const buildEmployeeUpdatePayload = (employee) => {
 	return {
 		fullName: employee.fullName || "",
 		email: employee.email || "",
 
 		personalInfo: {
-			firstName: employee.personalInfo?.firstName || "",
-			lastName: employee.personalInfo?.lastName || "",
+			firstName: properCase(employee.personalInfo?.firstName),
+			lastName: properCase(employee.personalInfo?.lastName),
 			gender: employee.personalInfo?.gender || "",
 			dateOfBirth: employee.personalInfo?.dateOfBirth || "",
 			maritalStatus: employee.personalInfo?.maritalStatus || "",
@@ -17,12 +46,8 @@ export const buildEmployeeUpdatePayload = (employee) => {
 		},
 
 		address: {
-			currentAddress: {
-				...(employee.address?.currentAddress || {}),
-			},
-			permanentAddress: {
-				...(employee.address?.permanentAddress || {}),
-			},
+			currentAddress: formatAddress(employee.address?.currentAddress),
+			permanentAddress: formatAddress(employee.address?.permanentAddress),
 		},
 
 		employment: {
@@ -72,7 +97,7 @@ export const buildEmployeeUpdatePayload = (employee) => {
 		},
 
 		emergencyContact: {
-			name: employee.emergencyContact?.name || "",
+			name: properCase(employee.emergencyContact?.name),
 			relationship: employee.emergencyContact?.relationship || "",
 			phone: employee.emergencyContact?.phone || "",
 		},

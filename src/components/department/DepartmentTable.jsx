@@ -1,7 +1,28 @@
+/**
+ * @fileoverview Renders department table data in the desktop table presentation. It defines the domain-specific columns, formats status and values consistently, and invokes supplied view/edit/delete callbacks without owning navigation or server state.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/department/DepartmentTable
+ */
 import PropTypes from "prop-types";
 import { Eye, Pencil, Star, Trash } from "lucide-react";
 import { Table, TableHead, TableHeader, TableBody, TableRow, TableCell } from "../common/DataTable";
+import { currency } from "../../utils/formatter";
 
+/**
+ * Renders the department table interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {Array} props.departments - Available department values shown by the control.
+ * @param {Object[]} props.employees - Employee records to display or summarize.
+ * @param {Function} props.onView - Called with the selected record when the user requests details.
+ * @param {Function} props.onEdit - Called with the selected record when the user requests editing.
+ * @param {Function} props.onDelete - Called with the selected record when the user requests deletion.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const DepartmentTable = ({ departments = [], employees = [], onView, onEdit, onDelete }) => {
 	const getDepartmentStats = (departmentId) => {
 		const departmentEmployees = employees.filter((emp) => emp.employment?.departmentId === departmentId);
@@ -34,14 +55,6 @@ const DepartmentTable = ({ departments = [], employees = [], onView, onEdit, onD
 			avgCTC,
 			locations,
 		};
-	};
-
-	const formatCurrency = (amount) => {
-		return new Intl.NumberFormat("en-IN", {
-			style: "currency",
-			currency: "INR",
-			maximumFractionDigits: 0,
-		}).format(amount);
 	};
 
 	return (
@@ -106,25 +119,25 @@ const DepartmentTable = ({ departments = [], employees = [], onView, onEdit, onD
 								</div>
 							</TableCell>
 
-							<TableCell className="text-right">{formatCurrency(stats.avgCTC)}</TableCell>
+							<TableCell className="text-right">{currency(stats.avgCTC)}</TableCell>
 
 							<TableCell>
 								<div className="flex justify-center gap-2">
 									<button
 										onClick={() => onView?.(department)}
-										className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-blue-100 hover:text-blue-700"
+										className="rounded-md border border-blue-200 p-2 text-blue-700 transition-colors hover:bg-blue-50"
 									>
 										<Eye className="h-4 w-4" />
 									</button>
 									<button
 										onClick={() => onEdit?.(department)}
-										className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-green-100 hover:text-green-700"
+										className="rounded-md border border-green-200 p-2 text-green-700 transition-colors hover:bg-green-50"
 									>
 										<Pencil className="h-4 w-4" />
 									</button>
 									<button
 										onClick={() => onDelete?.(department)}
-										className="rounded-md border border-slate-200 p-2 hover:cursor-pointer hover:bg-red-100 hover:text-red-700"
+										className="rounded-md border border-red-200 p-2 text-red-700 transition-colors hover:bg-red-50"
 									>
 										<Trash className="h-4 w-4" />
 									</button>
@@ -143,6 +156,7 @@ DepartmentTable.propTypes = {
 	employees: PropTypes.array.isRequired,
 	onView: PropTypes.func.isRequired,
 	onEdit: PropTypes.func.isRequired,
+	onDelete: PropTypes.func,
 };
 
 export default DepartmentTable;

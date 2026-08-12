@@ -1,7 +1,25 @@
+/**
+ * @fileoverview Renders attendance table data in the desktop table presentation. It defines the domain-specific columns, formats status and values consistently, and invokes supplied view/edit/delete callbacks without owning navigation or server state.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/attendance/AttendanceTable
+ */
 import PropTypes from "prop-types";
+import ProfileImage from "../common/ProfileImage";
 import { Eye } from "lucide-react";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../common/DataTable";
 
+/**
+ * Renders the attendance table interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {Object[]} props.employees - Employee records to display or summarize.
+ * @param {Function} props.onView - Called with the selected record when the user requests details.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const AttendanceTable = ({ employees, onView }) => {
 	return (
 		<Table>
@@ -24,9 +42,9 @@ const AttendanceTable = ({ employees, onView }) => {
 					<TableRow key={employee.employeeId}>
 						<TableCell>
 							<div className="flex items-center gap-3">
-								<img
+								<ProfileImage
 									src={employee.personalInfo?.profileImage}
-									alt={employee.fullName}
+									name={employee.fullName}
 									className="h-10 w-10 rounded-full object-cover"
 								/>
 
@@ -83,7 +101,7 @@ const AttendanceTable = ({ employees, onView }) => {
 								<div className="flex justify-center gap-2">
 									<button
 										onClick={() => onView(employee)}
-										className="rounded-md border border-slate-200 p-2 hover:bg-slate-100"
+										className="rounded-md border border-blue-200 p-2 text-blue-700 transition-colors hover:bg-blue-50"
 									>
 										<Eye size={16} />
 									</button>

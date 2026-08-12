@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Runs the attendance listing experience. It loads monthly attendance through the active filters, supports desktop table and mobile cards, navigates to employee attendance details, and handles pagination, loading, error, and empty states.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/pages/Attendance
+ */
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +29,10 @@ import useDepartments from "../hooks/useDepartments";
 import useFilters from "../hooks/useFilters";
 import ErrorState from "../components/common/ErrorState";
 
+/**
+ * Renders the attendance interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Attendance = () => {
 	const tableRef = useRef(null);
 	const searchRef = useRef(null);
@@ -63,12 +77,13 @@ const Attendance = () => {
 			tableRef,
 		});
 
-	const onViewHandler = (employee) => {
+	const onViewHandler = useCallback((employee) => {
 		navigate(`/attendance/${employee.employeeId}`);
-	};
+	}, [navigate]);
 
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
+	const hasActiveData = isDesktop ? hasTableData : hasCardData;
 
 	if (loading || departmentsLoading) {
 		return <PageLoader text="Loading attendance..." />;
@@ -101,8 +116,8 @@ const Attendance = () => {
 				/>
 			</div>
 			<div className="overflow-y-auto border-t border-slate-200 p-5">
-				{hasTableData && (
-					<div className="hidden lg:block">
+				{isDesktop && hasTableData && (
+					<div>
 						<AttendanceTable employees={tableEmployees} onView={onViewHandler} />
 						<Pagination
 							currentPage={query.tablePage}
@@ -114,8 +129,8 @@ const Attendance = () => {
 						/>
 					</div>
 				)}
-				{hasCardData && (
-					<div className="grid gap-4 lg:hidden">
+				{!isDesktop && hasCardData && (
+					<div className="grid gap-4">
 						{cardEmployees.map((employee) => (
 							<AttendanceCard key={employee.employeeId} employee={employee} onView={onViewHandler} />
 						))}
@@ -140,7 +155,7 @@ const Attendance = () => {
 					</div>
 				)}
 
-				{!hasTableData && !hasCardData && <EmptyState />}
+				{!hasActiveData && <EmptyState />}
 			</div>
 		</>
 	);

@@ -1,12 +1,18 @@
+/**
+ * @fileoverview Stores global presentation state shared across the application. It controls whether the responsive sidebar is open and exposes explicit open and close actions.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/store/uiSlice
+ */
 import { createSlice } from "@reduxjs/toolkit";
 import logger from "../logging/logger";
 
-// const getStoredTheme = () => localStorage.getItem("theme") || "light";
-
 const initialState = {
 	sidebarOpen: false,
-	loading: false,
-	// theme: getStoredTheme(),
 };
 
 const uiSlice = createSlice({
@@ -25,17 +31,6 @@ const uiSlice = createSlice({
 			state.sidebarOpen = false;
 		},
 
-		// setTheme(state, action) {
-		// 	logger.info(`Theme changed to ${action.payload}`);
-
-		// 	state.theme = action.payload;
-		// 	localStorage.setItem("theme", action.payload);
-		// },
-
-		// resetUI() {
-		// 	logger.info("UI state reset");
-		// 	return initialState;
-		// },
 	},
 });
 

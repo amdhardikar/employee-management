@@ -1,0 +1,159 @@
+{
+  "generatedAt": "2026-08-12T05:01:32.906Z",
+  "routes": [
+    {
+      "path": "/login",
+      "url": "http://127.0.0.1:4176/login",
+      "report": "login/index.html",
+      "scores": {
+        "performance": 74,
+        "accessibility": 95,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/dashboard",
+      "url": "http://127.0.0.1:4176/dashboard",
+      "report": "dashboard/index.html",
+      "scores": {
+        "performance": 74,
+        "accessibility": 95,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/employees",
+      "url": "http://127.0.0.1:4176/employees",
+      "report": "employees/index.html",
+      "scores": {
+        "performance": 73,
+        "accessibility": 98,
+        "best-practices": 96,
+        "seo": 83
+      }
+    },
+    {
+      "path": "/employees/new",
+      "url": "http://127.0.0.1:4176/employees/new",
+      "report": "employees-new/index.html",
+      "scores": {
+        "performance": 74,
+        "accessibility": 91,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/employees/EMP001",
+      "url": "http://127.0.0.1:4176/employees/EMP001",
+      "report": "employees-EMP001/index.html",
+      "scores": {
+        "performance": 69,
+        "accessibility": 98,
+        "best-practices": 96,
+        "seo": 83
+      }
+    },
+    {
+      "path": "/employees/edit/EMP001",
+      "url": "http://127.0.0.1:4176/employees/edit/EMP001",
+      "report": "employees-edit-EMP001/index.html",
+      "scores": {
+        "performance": 74,
+        "accessibility": 92,
+        "best-practices": 96,
+        "seo": 83
+      }
+    },
+    {
+      "path": "/departments",
+      "url": "http://127.0.0.1:4176/departments",
+      "report": "departments/index.html",
+      "scores": {
+        "performance": 79,
+        "accessibility": 93,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/departments/new",
+      "url": "http://127.0.0.1:4176/departments/new",
+      "report": "departments-new/index.html",
+      "scores": {
+        "performance": 80,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/departments/DEPT001",
+      "url": "http://127.0.0.1:4176/departments/DEPT001",
+      "report": "departments-DEPT001/index.html",
+      "scores": {
+        "performance": 78,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/departments/edit/DEPT001",
+      "url": "http://127.0.0.1:4176/departments/edit/DEPT001",
+      "report": "departments-edit-DEPT001/index.html",
+      "scores": {
+        "performance": 76,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 82
+      }
+    },
+    {
+      "path": "/attendance",
+      "url": "http://127.0.0.1:4176/attendance",
+      "report": "attendance/index.html",
+      "scores": {
+        "performance": 80,
+        "accessibility": 98,
+        "best-practices": 96,
+        "seo": 83
+      }
+    },
+    {
+      "path": "/attendance/EMP001",
+      "url": "http://127.0.0.1:4176/attendance/EMP001",
+      "report": "attendance-EMP001/index.html",
+      "scores": {
+        "performance": 78,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 83
+      }
+    },
+    {
+      "path": "/payroll",
+      "url": "http://127.0.0.1:4176/payroll",
+      "report": "payroll/index.html",
+      "scores": {
+        "performance": 78,
+        "accessibility": 88,
+        "best-practices": 96,
+        "seo": 75
+      }
+    },
+    {
+      "path": "/payroll/EMP001",
+      "url": "http://127.0.0.1:4176/payroll/EMP001",
+      "report": "payroll-EMP001/index.html",
+      "scores": {
+        "performance": 70,
+        "accessibility": 95,
+        "best-practices": 96,
+        "seo": 83
+      }
+    }
+  ]
+}

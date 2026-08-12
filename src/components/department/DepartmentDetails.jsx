@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Implements the department details workflow. It coordinates route or form state, department API operations, employee assignments, validation, navigation, and the appropriate loading, error, or not-found presentation.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/department/DepartmentDetails
+ */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Users, BadgeCheck, CalendarMinus, UserCheck, FileText, UserX } from "lucide-react";
@@ -16,6 +26,10 @@ import ErrorState from "../common/ErrorState";
 
 import { getDepartmentSummary } from "../../utils/department.util";
 
+/**
+ * Renders the department details interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const DepartmentDetails = () => {
 	const { id } = useParams();
 

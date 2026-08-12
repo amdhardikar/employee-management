@@ -1,5 +1,16 @@
+/**
+ * @fileoverview Renders payroll details table data in the desktop table presentation. It defines the domain-specific columns, formats status and values consistently, and invokes supplied view/edit/delete callbacks without owning navigation or server state.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/payroll/PayrollDetailsTable
+ */
 import PropTypes from "prop-types";
 import { PAYROLL_STATUS_COLORS } from "../../constants/EMSconstants";
+import { currency, date } from "../../utils/formatter";
 import {
 	Table,
 	TableHead,
@@ -9,13 +20,12 @@ import {
 	TableCell,
 } from "../common/DataTable";
 
-const formatCurrency = (amount) =>
-	new Intl.NumberFormat("en-IN", {
-		style: "currency",
-		currency: "INR",
-		maximumFractionDigits: 0,
-	}).format(amount);
-
+/**
+ * Renders the payroll details table interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {Object} props.payroll - Payroll record to display.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const PayrollDetailsTable = ({ payroll }) => {
 	return (
 		<Table>
@@ -52,23 +62,21 @@ const PayrollDetailsTable = ({ payroll }) => {
 						</TableCell>
 
 						<TableCell className="text-right">
-							{formatCurrency(item.grossSalary)}
+							{currency(item.grossSalary)}
 						</TableCell>
 
 						<TableCell className="text-right">
-							{formatCurrency(
+							{currency(
 								item.deductions?.totalDeductions || 0,
 							)}
 						</TableCell>
 
 						<TableCell className="text-right font-semibold text-green-600">
-							{formatCurrency(item.netSalary)}
+							{currency(item.netSalary)}
 						</TableCell>
 
 						<TableCell className="text-center">
-							{item.paymentDate ? new Date(item.paymentDate).toLocaleDateString(
-								"en-IN",
-							) : "-"}
+							{date(item.paymentDate, "-")}
 						</TableCell>
 
 						<TableCell className="text-center">

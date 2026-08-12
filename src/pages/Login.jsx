@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Renders and submits the employee login form. It validates required credentials, invokes the authentication context, reports authentication failures, and redirects authenticated users to their original protected destination or the dashboard.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/pages/Login
+ */
 import { useCallback, useState } from "react";
 import { Lock, Mail, AlertCircle } from "lucide-react";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
@@ -6,6 +16,10 @@ import { login } from "../store/authSlice";
 
 const DEFAULT_REDIRECT = "/dashboard";
 
+/**
+ * Renders the login interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Login = () => {
 	const [form, setForm] = useState({
 		email: "",

@@ -1,6 +1,22 @@
+/**
+ * @fileoverview Displays a centered, accessible loading indicator with configurable status text. The live status region informs assistive technology while data-dependent pages are waiting.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/common/PageLoader
+ */
 import { Loader2 } from "lucide-react";
 import PropTypes from "prop-types";
 
+/**
+ * Renders the page loader interface and coordinates its presentation behavior.
+ * @param {Object} props - Component or hook input properties.
+ * @param {*} props.text - The text value required by this operation.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const PageLoader = ({ text = "Loading..." }) => {
 	return (
 		<div className="p-10">

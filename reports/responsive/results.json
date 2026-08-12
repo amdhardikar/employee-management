@@ -1,0 +1,630 @@
+{
+  "config": {
+    "argv": [
+      "C:\\Users\\amdha\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin\\node.exe",
+      "D:\\PIP\\Employee Management\\node_modules\\@playwright\\test\\cli.js",
+      "test",
+      "--config",
+      "playwright.config.js"
+    ],
+    "configFile": "D:\\PIP\\Employee Management\\playwright.config.js",
+    "rootDir": "D:/PIP/Employee Management/tests/playwright",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/PIP/Employee Management/reports/responsive/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "mobile",
+        "name": "mobile",
+        "testDir": "D:/PIP/Employee Management/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "responsive.spec.js"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/PIP/Employee Management/reports/responsive/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "tablet",
+        "name": "tablet",
+        "testDir": "D:/PIP/Employee Management/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "responsive.spec.js"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/PIP/Employee Management/reports/responsive/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "small-desktop",
+        "name": "small-desktop",
+        "testDir": "D:/PIP/Employee Management/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "responsive.spec.js"
+        ],
+        "timeout": 30000
+      },
+      {
+        "outputDir": "D:/PIP/Employee Management/reports/responsive/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "desktop",
+        "name": "desktop",
+        "testDir": "D:/PIP/Employee Management/tests/playwright",
+        "testIgnore": [],
+        "testMatch": [
+          "responsive.spec.js"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "outputFolder": "./reports/responsive/html",
+          "open": "never"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "./reports/responsive/results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.62.1",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "responsive.spec.js",
+      "file": "responsive.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "login remains usable without horizontal overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8101,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-12T06:01:45.654Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-6ffb47532b29b5da8e3a",
+          "file": "responsive.spec.js",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "every authenticated screen loads and remains responsive",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "mobile",
+              "projectName": "mobile",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 37647,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "/dashboard",
+                      "duration": 5355
+                    },
+                    {
+                      "title": "/employees",
+                      "duration": 1479
+                    },
+                    {
+                      "title": "/employees/new",
+                      "duration": 706
+                    },
+                    {
+                      "title": "/employees/EMP001",
+                      "duration": 685
+                    },
+                    {
+                      "title": "/employees/edit/EMP001",
+                      "duration": 2104
+                    },
+                    {
+                      "title": "/departments",
+                      "duration": 714
+                    },
+                    {
+                      "title": "/departments/new",
+                      "duration": 660
+                    },
+                    {
+                      "title": "/departments/DEPT001",
+                      "duration": 2263
+                    },
+                    {
+                      "title": "/departments/edit/DEPT001",
+                      "duration": 5851
+                    },
+                    {
+                      "title": "/attendance",
+                      "duration": 4625
+                    },
+                    {
+                      "title": "/attendance/EMP001",
+                      "duration": 1382
+                    },
+                    {
+                      "title": "/payroll",
+                      "duration": 951
+                    },
+                    {
+                      "title": "/payroll/EMP001",
+                      "duration": 1047
+                    }
+                  ],
+                  "startTime": "2026-08-12T06:01:55.605Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-5eb49216c4148059fe6a",
+          "file": "responsive.spec.js",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "login remains usable without horizontal overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 8086,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-12T06:01:45.719Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-5000e9e6eff3fcacf770",
+          "file": "responsive.spec.js",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "every authenticated screen loads and remains responsive",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "tablet",
+              "projectName": "tablet",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 1,
+                  "status": "passed",
+                  "duration": 45023,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "/dashboard",
+                      "duration": 4576
+                    },
+                    {
+                      "title": "/employees",
+                      "duration": 4321
+                    },
+                    {
+                      "title": "/employees/new",
+                      "duration": 3676
+                    },
+                    {
+                      "title": "/employees/EMP001",
+                      "duration": 3218
+                    },
+                    {
+                      "title": "/employees/edit/EMP001",
+                      "duration": 5182
+                    },
+                    {
+                      "title": "/departments",
+                      "duration": 3537
+                    },
+                    {
+                      "title": "/departments/new",
+                      "duration": 5226
+                    },
+                    {
+                      "title": "/departments/DEPT001",
+                      "duration": 1756
+                    },
+                    {
+                      "title": "/departments/edit/DEPT001",
+                      "duration": 1432
+                    },
+                    {
+                      "title": "/attendance",
+                      "duration": 1016
+                    },
+                    {
+                      "title": "/attendance/EMP001",
+                      "duration": 3957
+                    },
+                    {
+                      "title": "/payroll",
+                      "duration": 4750
+                    },
+                    {
+                      "title": "/payroll/EMP001",
+                      "duration": 1385
+                    }
+                  ],
+                  "startTime": "2026-08-12T06:01:55.861Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-74af45ce7fa256a87e25",
+          "file": "responsive.spec.js",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "login remains usable without horizontal overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "small-desktop",
+              "projectName": "small-desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 10576,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-12T06:01:45.678Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-998a2e6c049ce710b497",
+          "file": "responsive.spec.js",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "every authenticated screen loads and remains responsive",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "small-desktop",
+              "projectName": "small-desktop",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 2,
+                  "status": "passed",
+                  "duration": 42191,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "/dashboard",
+                      "duration": 1679
+                    },
+                    {
+                      "title": "/employees",
+                      "duration": 1841
+                    },
+                    {
+                      "title": "/employees/new",
+                      "duration": 3853
+                    },
+                    {
+                      "title": "/employees/EMP001",
+                      "duration": 4110
+                    },
+                    {
+                      "title": "/employees/edit/EMP001",
+                      "duration": 5971
+                    },
+                    {
+                      "title": "/departments",
+                      "duration": 3353
+                    },
+                    {
+                      "title": "/departments/new",
+                      "duration": 3932
+                    },
+                    {
+                      "title": "/departments/DEPT001",
+                      "duration": 1418
+                    },
+                    {
+                      "title": "/departments/edit/DEPT001",
+                      "duration": 3747
+                    },
+                    {
+                      "title": "/attendance",
+                      "duration": 2428
+                    },
+                    {
+                      "title": "/attendance/EMP001",
+                      "duration": 3952
+                    },
+                    {
+                      "title": "/payroll",
+                      "duration": 902
+                    },
+                    {
+                      "title": "/payroll/EMP001",
+                      "duration": 1024
+                    }
+                  ],
+                  "startTime": "2026-08-12T06:01:58.063Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-a24ed2538fe1fa217966",
+          "file": "responsive.spec.js",
+          "line": 49,
+          "column": 1
+        },
+        {
+          "title": "login remains usable without horizontal overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 30000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 7934,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-08-12T06:01:45.648Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-56b08309f72099d62182",
+          "file": "responsive.spec.js",
+          "line": 38,
+          "column": 1
+        },
+        {
+          "title": "every authenticated screen loads and remains responsive",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 120000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "desktop",
+              "projectName": "desktop",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 3,
+                  "status": "passed",
+                  "duration": 44515,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "/dashboard",
+                      "duration": 4800
+                    },
+                    {
+                      "title": "/employees",
+                      "duration": 4898
+                    },
+                    {
+                      "title": "/employees/new",
+                      "duration": 1915
+                    },
+                    {
+                      "title": "/employees/EMP001",
+                      "duration": 1764
+                    },
+                    {
+                      "title": "/employees/edit/EMP001",
+                      "duration": 5816
+                    },
+                    {
+                      "title": "/departments",
+                      "duration": 3398
+                    },
+                    {
+                      "title": "/departments/new",
+                      "duration": 2397
+                    },
+                    {
+                      "title": "/departments/DEPT001",
+                      "duration": 5076
+                    },
+                    {
+                      "title": "/departments/edit/DEPT001",
+                      "duration": 1794
+                    },
+                    {
+                      "title": "/attendance",
+                      "duration": 900
+                    },
+                    {
+                      "title": "/attendance/EMP001",
+                      "duration": 4829
+                    },
+                    {
+                      "title": "/payroll",
+                      "duration": 674
+                    },
+                    {
+                      "title": "/payroll/EMP001",
+                      "duration": 4514
+                    }
+                  ],
+                  "startTime": "2026-08-12T06:01:55.532Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "68833bfb7a01a66a4f98-90a0c2930f572e7e9df3",
+          "file": "responsive.spec.js",
+          "line": 49,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-08-12T06:01:43.082Z",
+    "duration": 63834.784,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

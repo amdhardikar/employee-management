@@ -1,51 +1,34 @@
-import { useEffect, useMemo, useState } from "react";
-
-import { departmentApi } from "../api/departmentApi";
-import { designationApi } from "../api/designationApi";
+/**
+ * @fileoverview Owns the employee-create form model. It initializes the complete employee shape, loads department/designation choices, updates nested fields immutably, synchronizes dependent selections, tracks touched fields, and exposes validation state and callbacks to EmployeeCreate.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/hooks/useEmployeeCreate
+ */
+import { useMemo, useState } from "react";
 
 import { validateEmployee } from "../utils/employeeValidation";
 import { EMPLOYEE_DEFAULT_VALUES } from "../constants/EMSconstants";
+import useDepartments from "./useDepartments";
+import useDesignations from "./useDesignations";
 
+/**
+ * Manages employee create state and exposes values and callbacks to React consumers.
+ * @returns {Object|*} Hook state, derived values, and/or callback functions.
+ */
 const useEmployeeCreate = () => {
 	const [employee, setEmployee] = useState(EMPLOYEE_DEFAULT_VALUES);
-	const [departments, setDepartments] = useState([]);
-	const [designations, setDesignations] = useState([]);
-	const [loading, setLoading] = useState(true);
 	const [errors, setErrors] = useState({});
 	const [touched, setTouched] = useState({});
-
-	useEffect(() => {
-		const loadData = async () => {
-			try {
-				setLoading(true);
-
-				const departmentData = await departmentApi.getAll();
-
-				setDepartments(departmentData);
-			} catch (error) {
-				console.error("Employee edit loading failed:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		loadData();
-	}, []);
-
-	useEffect(() => {
-		if (!employee?.employment?.departmentId) {
-			setDesignations([]);
-			return;
-		}
-
-		const loadDesignations = async () => {
-			const data = await designationApi.getByDepartment(employee.employment.departmentId);
-
-			setDesignations(data);
-		};
-
-		loadDesignations();
-	}, [employee?.employment?.departmentId]);
+	const { departments, loading: departmentsLoading, error: departmentsError } = useDepartments(false);
+	const {
+		designations,
+		loading: designationsLoading,
+		error: designationsError,
+	} = useDesignations(employee?.employment?.departmentId);
 
 	const runValidation = (updatedEmployee) => {
 		const validationErrors = validateEmployee(updatedEmployee);
@@ -162,7 +145,8 @@ const useEmployeeCreate = () => {
 		isFormValid,
 		departments,
 		designations,
-		loading,
+		loading: departmentsLoading || designationsLoading,
+		error: departmentsError || designationsError,
 		updateRootField,
 		updateNestedField,
 		updateDeepField,

@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Renders primary EMS navigation for desktop and mobile layouts. It highlights the active section, responds to global sidebar state, closes after mobile navigation, and provides access to dashboard and business modules.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/components/common/Sidebar
+ */
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
 	LayoutDashboard,
@@ -13,6 +23,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/authSlice";
 import { closeSidebar } from "../../store/uiSlice";
 
+/**
+ * Renders the sidebar interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Sidebar = () => {
 	const navItems = [
 		{ path: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
@@ -89,7 +103,6 @@ const Sidebar = () => {
 					</ul>
 				</nav>
 
-				{/* Logout Button */}
 				<div className="border-t border-slate-700 p-4">
 					<button
 						onClick={handleLogout}

@@ -1,4 +1,14 @@
-import { useCallback, useEffect, useRef } from "react";
+/**
+ * @fileoverview Runs the employee directory experience. It combines debounced Redux filters with server pagination, switches between desktop table and mobile cards, restores search focus, supports view/edit/delete navigation, and renders loading, error, and empty states.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/pages/Employees
+ */
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -11,6 +21,7 @@ import Pagination from "../components/common/Pagination";
 import ErrorState from "../components/common/ErrorState";
 import EmployeeTable from "../components/employee/EmployeeTable";
 import EmployeeCard from "../components/employee/EmployeeCard";
+import Popup from "../components/common/Popup";
 
 import { setFilters } from "../store/filterSlice.js";
 
@@ -20,6 +31,10 @@ import useEmployeeListing from "../hooks/useEmployeeListing";
 import useDepartments from "../hooks/useDepartments";
 import useFilters from "../hooks/useFilters";
 
+/**
+ * Renders the employees interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Employees = () => {
 	const statusList = ["Active", "On Leave", "Resigned"];
 
@@ -27,6 +42,8 @@ const Employees = () => {
 	const searchRef = useRef(null);
 	const restoreFocus = useRef(false);
 	const dispatch = useDispatch();
+	const [deleting, setDeleting] = useState(false);
+	const [deleteError, setDeleteError] = useState(null);
 
 	const { departments, loading: departmentsLoading, error: departmentsError } = useDepartments();
 	const query = useSelector((state) => state.filters.employee);
@@ -72,21 +89,30 @@ const Employees = () => {
 		tableRef,
 	});
 
-	const onViewHandler = (employee) => {
+	const onViewHandler = useCallback((employee) => {
 		navigate(`/employees/${employee.employeeId}`);
-	};
+	}, [navigate]);
 
-	const onEditHandler = (employee) => {
+	const onEditHandler = useCallback((employee) => {
 		navigate(`/employees/edit/${employee.employeeId}`);
-	};
+	}, [navigate]);
 
-	const onDeleteHandler = async (employee) => {
-		await employeeApi.removeEmployee(employee.id);
-		window.location.reload();
-	};
+	const onDeleteHandler = useCallback(async (employee) => {
+		try {
+			setDeleteError(null);
+			setDeleting(true);
+			await employeeApi.removeEmployee(employee.id);
+			window.location.reload();
+		} catch (error) {
+			setDeleteError(error);
+		} finally {
+			setDeleting(false);
+		}
+	}, []);
 
 	const hasTableData = tableEmployees.length > 0;
 	const hasCardData = cardEmployees.length > 0;
+	const hasActiveData = isDesktop ? hasTableData : hasCardData;
 
 	if (loading || departmentsLoading) {
 		return <PageLoader text="Loading employees..." />;
@@ -103,29 +129,37 @@ const Employees = () => {
 
 	return (
 		<>
+			<Popup
+				saving={deleting}
+				error={deleteError}
+				progressTitle="Deleting"
+				savingMessage="Deleting employee..."
+				errorTitle="Unable to delete employee"
+				onClose={() => setDeleteError(null)}
+			/>
 			<div className="sticky top-0 z-10 bg-white shadow-sm">
 				<Filters
-					searchRef={searchRef}
-					search={query.search}
-					department={query.department}
-					status={query.status}
-					statusList={statusList}
-					departments={departments}
-					showSearch
-					showDepartment
-					showStatus
-					onSearchChange={onSearchChangeHandler}
-					onDepartmentChange={onDepartmentChangeHandler}
-					onStatusChange={onStatusChangeHandler}
-					onSearchFocus={() => (restoreFocus.current = true)}
-					onSearchBlur={() => (restoreFocus.current = false)}
-					newButton={true}
+               searchRef={searchRef}
+               search={query.search}
+               department={query.department}
+               status={query.status}
+               statusList={statusList}
+               departments={departments}
+               showSearch
+               showDepartment
+               showStatus
+               onSearchChange={onSearchChangeHandler}
+               onDepartmentChange={onDepartmentChangeHandler}
+               onStatusChange={onStatusChangeHandler}
+               onSearchFocus={() => (restoreFocus.current = true)}
+               onSearchBlur={() => (restoreFocus.current = false)}
+               newButton={true}
 				/>
 			</div>
-			{(hasTableData || hasCardData) && (
+			{hasActiveData && (
 				<div className="overflow-y-auto border-t border-slate-200 p-5">
-					{hasTableData && (
-						<div className="hidden lg:block" ref={tableRef}>
+					{isDesktop && hasTableData && (
+						<div ref={tableRef}>
 							<EmployeeTable
 								employees={tableEmployees}
 								onView={onViewHandler}
@@ -144,10 +178,16 @@ const Employees = () => {
 						</div>
 					)}
 
-					{hasCardData && (
-						<div className="grid gap-4 lg:hidden">
+					{!isDesktop && hasCardData && (
+						<div className="grid gap-4">
 							{cardEmployees.map((employee) => (
-								<EmployeeCard key={employee.id} employee={employee} onView={onViewHandler} />
+								<EmployeeCard
+									key={employee.id}
+									employee={employee}
+									onView={onViewHandler}
+									onEdit={onEditHandler}
+									onDelete={onDeleteHandler}
+								/>
 							))}
 
 							{query.cardPage < pagination.totalPages && (
@@ -172,7 +212,7 @@ const Employees = () => {
 					)}
 				</div>
 			)}
-			{!hasTableData && !hasCardData && <EmptyState />}
+			{!hasActiveData && <EmptyState />}
 		</>
 	);
 };

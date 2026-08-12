@@ -1,3 +1,13 @@
+/**
+ * @fileoverview Manages dashboard summary data. The asynchronous thunk loads dashboard metrics, while reducers track loading and errors and allow callers to clear or explicitly refresh cached dashboard information.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/store/dashboardSlice
+ */
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { dashboardApi } from "../api/dashboardApi";
 import logger from "../logging/logger";

@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="Employee Management" tests="661" failures="0" errors="0" time="96.4161772">
+    <testsuite name="tests/integration/App.test.jsx" timestamp="2026-08-12T06:07:17.899Z" hostname="Aaamod" tests="14" failures="0" errors="0" skipped="0" time="4.5094182">
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders the login route" time="0.419802">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders a protected module route" time="0.3411828">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; redirects unknown routes to the dashboard" time="0.0319343">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; supports nested employee routes" time="0.3274885">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /employees/EMP001" time="0.3455663">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /employees/edit/EMP001" time="0.3267286">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /departments" time="0.3390874">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /departments/new" time="0.3448967">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /departments/DEPT001" time="0.3162207">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /departments/edit/DEPT001" time="0.3437673">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /attendance" time="0.3588838">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /attendance/EMP001" time="0.3296129">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /payroll" time="0.3295596">
+        </testcase>
+        <testcase classname="tests/integration/App.test.jsx" name="App &gt; renders /payroll/EMP001" time="0.3419437">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/main.test.jsx" timestamp="2026-08-12T06:07:17.917Z" hostname="Aaamod" tests="1" failures="0" errors="0" skipped="0" time="5.8933358">
+        <testcase classname="tests/integration/main.test.jsx" name="main entry point &gt; mounts the application into the root element" time="5.8869658">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/router.test.js" timestamp="2026-08-12T06:07:17.926Z" hostname="Aaamod" tests="3" failures="0" errors="0" skipped="0" time="0.0183665">
+        <testcase classname="tests/unit/router.test.js" name="appRoutes &gt; contains all primary EMS routes" time="0.0103142">
+        </testcase>
+        <testcase classname="tests/unit/router.test.js" name="appRoutes &gt; defines parent relationships for nested routes" time="0.0016268">
+        </testcase>
+        <testcase classname="tests/unit/router.test.js" name="appRoutes &gt; provides breadcrumb metadata for every route" time="0.0004572">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/api/networkFailureApi.test.js" timestamp="2026-08-12T06:07:17.933Z" hostname="Aaamod" tests="13" failures="0" errors="0" skipped="0" time="12.2594971">
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed all employees request into the shared connection error" time="1.242501">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed filtered employees request into the shared connection error" time="1.22982">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed managers request into the shared connection error" time="1.2174956">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed employee by ID request into the shared connection error" time="1.2142632">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed employees by department request into the shared connection error" time="1.2224629">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed authentication lookup request into the shared connection error" time="1.2210356">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed employee creation request into the shared connection error" time="0.0014006">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed employee update request into the shared connection error" time="0.0009504">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed employee deletion request into the shared connection error" time="0.0012533">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed attendance request into the shared connection error" time="1.2296481">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed dashboard request into the shared connection error" time="1.2168764">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed designations request into the shared connection error" time="1.2261923">
+        </testcase>
+        <testcase classname="tests/integration/api/networkFailureApi.test.js" name="API network-failure normalization &gt; converts a failed payroll request into the shared connection error" time="1.2244531">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/constants/EMSconstants.test.js" timestamp="2026-08-12T06:07:17.951Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.0243116">
+        <testcase classname="tests/unit/constants/EMSconstants.test.js" name="EMS constants &gt; contains employee status colors" time="0.0093571">
+        </testcase>
+        <testcase classname="tests/unit/constants/EMSconstants.test.js" name="EMS constants &gt; contains attendance status and percentage colors" time="0.0012224">
+        </testcase>
+        <testcase classname="tests/unit/constants/EMSconstants.test.js" name="EMS constants &gt; contains payroll status colors" time="0.0006581">
+        </testcase>
+        <testcase classname="tests/unit/constants/EMSconstants.test.js" name="EMS constants &gt; provides a complete default employee form shape" time="0.0050031">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/api/attendanceApi.test.js" timestamp="2026-08-12T06:07:17.960Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="0.0534981">
+        <testcase classname="tests/unit/api/attendanceApi.test.js" name="attendanceApi &gt; getByEmployeeId &gt; should fetch attendance by employee id" time="0.0370587">
+        </testcase>
+        <testcase classname="tests/unit/api/attendanceApi.test.js" name="attendanceApi &gt; getByEmployeeId &gt; should throw when getByEmployeeId request fails" time="0.0074213">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/api/dashboardApi.test.js" timestamp="2026-08-12T06:07:17.966Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="0.0534569">
+        <testcase classname="tests/unit/api/dashboardApi.test.js" name="dashboardApi &gt; should fetch dashboard data" time="0.0377088">
+        </testcase>
+        <testcase classname="tests/unit/api/dashboardApi.test.js" name="dashboardApi &gt; should throw an error when the request fails" time="0.008404">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/api/departmentApi.test.js" timestamp="2026-08-12T06:07:17.969Z" hostname="Aaamod" tests="12" failures="0" errors="0" skipped="0" time="3.715394">
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; fetches all departments successfully" time="0.0125635">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; gets a paginated department search" time="0.0112286">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; reports paginated department HTTP and network failures" time="1.2290136">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; throws error when getAll fails" time="0.0010404">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; fetches department by id successfully" time="0.0034551">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; throws error when getById fails" time="0.0013465">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; updates department successfully" time="0.012072">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; throws default error when update fails without error message" time="0.0011654">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; throws api error message when update fails" time="0.0009876">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; creates and removes a department" time="0.0047136">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; reports create and remove failures" time="0.0014336">
+        </testcase>
+        <testcase classname="tests/unit/api/departmentApi.test.js" name="departmentApi &gt; translates network failures for every operation" time="2.4297105">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/api/designationApi.test.js" timestamp="2026-08-12T06:07:17.998Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="1.2614946">
+        <testcase classname="tests/unit/api/designationApi.test.js" name="designationApi &gt; fetches all designations" time="0.0202997">
+        </testcase>
+        <testcase classname="tests/unit/api/designationApi.test.js" name="designationApi &gt; reports all-designation HTTP and network failures" time="1.2297806">
+        </testcase>
+        <testcase classname="tests/unit/api/designationApi.test.js" name="designationApi &gt; fetches designations by department successfully" time="0.0022533">
+        </testcase>
+        <testcase classname="tests/unit/api/designationApi.test.js" name="designationApi &gt; throws error when fetching designations fails" time="0.0017032">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/api/employeeApi.test.js" timestamp="2026-08-12T06:07:18.013Z" hostname="Aaamod" tests="19" failures="0" errors="0" skipped="0" time="0.0924361">
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; gets all employees successfully" time="0.0308866">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when getAll fails" time="0.0091381">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; gets employees with default filters" time="0.0087697">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; gets employees with search department and status filters" time="0.0034275">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when getEmployees fails" time="0.0013777">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; gets employee managers successfully" time="0.0017603">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when getManagers fails" time="0.0035347">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; gets employee by id successfully" time="0.0025428">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when getById fails" time="0.0015863">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; gets employees by department" time="0.0028804">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when getByDepartment fails" time="0.0017974">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; authenticates employee by email and code" time="0.0029523">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when authentication fails" time="0.0020055">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; creates employee successfully" time="0.0035256">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when createEmployee fails" time="0.0013363">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; updates employee successfully" time="0.00165">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when update fails" time="0.0012443">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; removes employee successfully" time="0.0021522">
+        </testcase>
+        <testcase classname="tests/unit/api/employeeApi.test.js" name="employeeApi &gt; throws error when removeEmployee fails" time="0.0020295">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/api/payrollApi.test.js" timestamp="2026-08-12T06:07:18.041Z" hostname="Aaamod" tests="3" failures="0" errors="0" skipped="0" time="0.0711927">
+        <testcase classname="tests/unit/api/payrollApi.test.js" name="payrollApi &gt; getByEmployeeId &gt; should fetch payroll by employee id" time="0.0505202">
+        </testcase>
+        <testcase classname="tests/unit/api/payrollApi.test.js" name="payrollApi &gt; getByEmployeeId &gt; should throw an error when request fails" time="0.0080565">
+        </testcase>
+        <testcase classname="tests/unit/api/payrollApi.test.js" name="payrollApi &gt; getByEmployeeId &gt; should return an empty array when no payroll records exist" time="0.0028295">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/layout/Layout.test.jsx" timestamp="2026-08-12T06:07:18.046Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.2175519">
+        <testcase classname="tests/unit/layout/Layout.test.jsx" name="AttendanceLayout &gt; renders outlet" time="0.1140127">
+        </testcase>
+        <testcase classname="tests/unit/layout/Layout.test.jsx" name="DepartmentLayout &gt; renders outlet" time="0.0081832">
+        </testcase>
+        <testcase classname="tests/unit/layout/Layout.test.jsx" name="EmployeeLayout &gt; renders outlet" time="0.0083004">
+        </testcase>
+        <testcase classname="tests/unit/layout/Layout.test.jsx" name="PayslipLayout &gt; renders outlet" time="0.0079278">
+        </testcase>
+        <testcase classname="tests/unit/layout/Layout.test.jsx" name="MainLayout &gt; renders sidebar, header and outlet" time="0.0243054">
+        </testcase>
+        <testcase classname="tests/unit/layout/Layout.test.jsx" name="MainLayout &gt; resets the main scroll position when the route changes" time="0.0430693">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useDebounce.test.js" timestamp="2026-08-12T06:07:18.060Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.1350881">
+        <testcase classname="tests/unit/hooks/useDebounce.test.js" name="useDebounce &gt; returns initial value immediately" time="0.0819415">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDebounce.test.js" name="useDebounce &gt; updates value after delay" time="0.018791">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDebounce.test.js" name="useDebounce &gt; uses default delay when delay is not provided" time="0.0122183">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDebounce.test.js" name="useDebounce &gt; clears previous timer when value changes quickly" time="0.0105428">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useDepartments.test.js" timestamp="2026-08-12T06:07:18.067Z" hostname="Aaamod" tests="8" failures="0" errors="0" skipped="0" time="0.3013615">
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; should return an empty array after an empty response" time="0.0895736">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; should fetch departments and dispatch them" time="0.012408">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; should handle empty API response" time="0.0071986">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; exposes an API error and stops loading" time="0.0809587">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; returns full cached records and skips the API when already loaded" time="0.0059399">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; returns department names from cached records" time="0.0040871">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; uses a fallback message for errors without a message" time="0.0839024">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDepartments.test.js" name="useDepartments hook &gt; does not update state or dispatch after unmounting" time="0.0045507">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useDesignations.test.jsx" timestamp="2026-08-12T06:07:18.078Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.3133056">
+        <testcase classname="tests/unit/hooks/useDesignations.test.jsx" name="useDesignations &gt; loads once and filters cached designations by department" time="0.1965109">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDesignations.test.jsx" name="useDesignations &gt; reuses an already loaded cache" time="0.0101339">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDesignations.test.jsx" name="useDesignations &gt; exposes lookup failures and stops loading" time="0.0753256">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useDesignations.test.jsx" name="useDesignations &gt; does not dispatch or update state after unmounting" time="0.0135693">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useEmployeeCreate.test.jsx" timestamp="2026-08-12T06:07:18.084Z" hostname="Aaamod" tests="12" failures="0" errors="0" skipped="0" time="0.1918922">
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; initializes with default employee values" time="0.0959006">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; loads departments on mount" time="0.0111084">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; loads designations when department exists" time="0.0151391">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; updates root field" time="0.0064898">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; updates nested field" time="0.0056116">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; updates deep field" time="0.0059092">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; updates designation" time="0.0049595">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; marks field as touched" time="0.0045281">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; returns validation errors" time="0.0052128">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; sets form validity correctly" time="0.0042511">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; stops loading when department lookup fails" time="0.0089912">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeCreate.test.jsx" name="useEmployeeCreate &gt; creates missing nested and deeply nested sections while updating" time="0.009739">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useEmployeeEdit.test.js" timestamp="2026-08-12T06:07:18.100Z" hostname="Aaamod" tests="13" failures="0" errors="0" skipped="0" time="1.1013094">
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; loads employee and department data" time="0.1237382">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; loads designations when department exists" time="0.0740663">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; updates root field" time="0.0801835">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; updates nested field" time="0.0784037">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; updates deep field" time="0.076967">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; changes department and resets designation" time="0.0810568">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; changes designation" time="0.0788806">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; touches field" time="0.0745448">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; validates employee" time="0.0764837">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; stops loading when employee initialization fails" time="0.0794353">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; handles designation lookup failure" time="0.0767246">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; handles a missing employee response" time="0.0773388">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeEdit.test.js" name="useEmployeeEdit &gt; creates missing nested sections and tolerates undefined validation output" time="0.1135541">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useEmployeeListing.test.js" timestamp="2026-08-12T06:07:18.115Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="0.4237518">
+        <testcase classname="tests/unit/hooks/useEmployeeListing.test.js" name="useEmployeeListing hook &gt; should fetch table employees in desktop mode" time="0.1591334">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeListing.test.js" name="useEmployeeListing hook &gt; should fetch card employees in mobile mode" time="0.082534">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeListing.test.js" name="useEmployeeListing hook &gt; should load more cards when cardPage increases" time="0.0087732">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeListing.test.js" name="useEmployeeListing hook &gt; should stop loading after API success" time="0.0828942">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useEmployeeListing.test.js" name="useEmployeeListing hook &gt; exposes an API error and clears loading states" time="0.0790686">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useFilters.test.js" timestamp="2026-08-12T06:07:18.122Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.1401411">
+        <testcase classname="tests/unit/hooks/useFilters.test.js" name="useFilters hook &gt; should dispatch search filter and reset pagination" time="0.0853886">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useFilters.test.js" name="useFilters hook &gt; should update search value" time="0.0097629">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useFilters.test.js" name="useFilters hook &gt; should update department filter" time="0.0072841">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useFilters.test.js" name="useFilters hook &gt; should update status filter" time="0.0052438">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useFilters.test.js" name="useFilters hook &gt; should change page and scroll table" time="0.0140174">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useFilters.test.js" name="useFilters hook &gt; should update page size as number" time="0.005491">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/hooks/useMediaQuery.test.jsx" timestamp="2026-08-12T06:07:18.130Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.102025">
+        <testcase classname="tests/unit/hooks/useMediaQuery.test.jsx" name="useMediaQuery &gt; should return false when window is undefined" time="0.0090538">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useMediaQuery.test.jsx" name="useMediaQuery &gt; should return false initially" time="0.0554844">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useMediaQuery.test.jsx" name="useMediaQuery &gt; stays false when matchMedia is unavailable" time="0.0045482">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useMediaQuery.test.jsx" name="useMediaQuery &gt; should return true when media query matches" time="0.0056261">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useMediaQuery.test.jsx" name="useMediaQuery &gt; should update when media query changes" time="0.0107582">
+        </testcase>
+        <testcase classname="tests/unit/hooks/useMediaQuery.test.jsx" name="useMediaQuery &gt; should remove listener on unmount" time="0.0062451">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/logging/logger.test.js" timestamp="2026-08-12T06:07:18.136Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.0333753">
+        <testcase classname="tests/unit/logging/logger.test.js" name="logger &gt; suppresses debug, info, and warn logs in the test environment" time="0.0134958">
+        </testcase>
+        <testcase classname="tests/unit/logging/logger.test.js" name="logger &gt; suppresses error logs in the test environment" time="0.002244">
+        </testcase>
+        <testcase classname="tests/unit/logging/logger.test.js" name="logger &gt; writes every severity when configured for debug output" time="0.0084893">
+        </testcase>
+        <testcase classname="tests/unit/logging/logger.test.js" name="logger &gt; suppresses every severity when logging is disabled" time="0.0015492">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/pages/Attendance.test.jsx" timestamp="2026-08-12T06:07:18.141Z" hostname="Aaamod" tests="16" failures="0" errors="0" skipped="0" time="1.3194911">
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; shows loader while loading" time="0.1421879">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; shows the listing error state" time="0.0510253">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; uses fallback text for a listing error without a message" time="0.0217731">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; renders filters" time="0.0254952">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; fetches employees with correct filters" time="0.0165868">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; renders attendance table and pagination on desktop" time="0.0190731">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; renders attendance cards on mobile" time="0.5568414">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; dispatches Load More action" time="0.138966">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; shows loading text while loading more" time="0.0504317">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; does not show Load More on last page" time="0.0352089">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; renders empty state when there is no data" time="0.0083144">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; navigates when viewing employee from table" time="0.1034671">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; navigates when viewing employee from card" time="0.0826366">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; passes correct props to useFilters" time="0.0125987">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; restores focus on search input after loading completes" time="0.0288436">
+        </testcase>
+        <testcase classname="tests/unit/pages/Attendance.test.jsx" name="Attendance Page &gt; handles search focus and blur" time="0.013269">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/pages/Dashboard.test.jsx" timestamp="2026-08-12T06:07:18.155Z" hostname="Aaamod" tests="13" failures="0" errors="0" skipped="0" time="1.5748665">
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; shows loader while loading" time="0.5696822">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; shows the dashboard error state" time="0.0449855">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; uses fallback error text and renders an on-leave recent employee" time="0.0900926">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders attendance summary" time="0.0666498">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders employee status" time="0.1072299">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; dispatches fetchDashboard on mount" time="0.0548677">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders dashboard heading" time="0.0926393">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders employee statistics" time="0.1172419">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders recent employees" time="0.088147">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders department overview" time="0.0667248">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders attendance summary" time="0.0758303">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders employee status" time="0.0815521">
+        </testcase>
+        <testcase classname="tests/unit/pages/Dashboard.test.jsx" name="Dashboard &gt; renders payroll and performance" time="0.1068221">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/pages/Departments.test.jsx" timestamp="2026-08-12T06:07:18.164Z" hostname="Aaamod" tests="8" failures="0" errors="0" skipped="0" time="1.1004356">
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; shows loader while loading" time="0.1254086">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; loads and displays departments" time="0.1511724">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; renders department cards" time="0.0398344">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; shows empty state when departments are empty" time="0.0212234">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; navigates when department view is clicked" time="0.0454734">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; handles api failure and still stops loading" time="0.0286975">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; uses department and generic error fallbacks" time="0.0300503">
+        </testcase>
+        <testcase classname="tests/unit/pages/Departments.test.jsx" name="Departments Page &gt; supports create, edit, and delete actions" time="0.6480661">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/pages/Employees.test.jsx" timestamp="2026-08-12T06:07:18.169Z" hostname="Aaamod" tests="16" failures="0" errors="0" skipped="0" time="0.4896502">
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders filters" time="0.1530341">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders employee table when data exists" time="0.0159514">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; navigates to employee details when view clicked" time="0.0652741">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders pagination" time="0.0135814">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; restores focus on search input after loading completes" time="0.0426405">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; handles search focus and blur events" time="0.0122757">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; shows Loading text when loading more employees" time="0.0129252">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; shows loader while loading" time="0.0071667">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; shows empty state when no employees" time="0.0117384">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders employee cards on mobile" time="0.0116767">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders Load More button for mobile cards" time="0.0123109">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; dispatches load more action on mobile" time="0.0124125">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; fetches employees with correct filters" time="0.0121463">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; supports edit and delete actions" time="0.0524519">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders listing errors" time="0.02242">
+        </testcase>
+        <testcase classname="tests/unit/pages/Employees.test.jsx" name="Employees Page &gt; renders fallback text for listing errors without a message" time="0.0159947">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/pages/Login.test.jsx" timestamp="2026-08-12T06:07:18.182Z" hostname="Aaamod" tests="7" failures="0" errors="0" skipped="0" time="3.2238971">
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; renders login form correctly" time="0.7290724">
+        </testcase>
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; allows user to enter email and employee code" time="0.706213">
+        </testcase>
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; dispatches login with normalized employee code" time="0.7641861">
+        </testcase>
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; navigates after successful login" time="0.831228">
+        </testcase>
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; shows authentication error" time="0.098038">
+        </testcase>
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; shows loading state" time="0.0554665">
+        </testcase>
+        <testcase classname="tests/unit/pages/Login.test.jsx" name="Login Page &gt; redirects already logged in users" time="0.0201827">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/pages/Payroll.test.jsx" timestamp="2026-08-12T06:07:18.187Z" hostname="Aaamod" tests="10" failures="0" errors="0" skipped="0" time="0.374305">
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; shows loader while loading" time="0.1672045">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; calls employee api with filters" time="0.0359105">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; renders table and navigates" time="0.0392134">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; renders cards and load more" time="0.0290236">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; shows loading more" time="0.0139819">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; shows empty state" time="0.0103872">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; shows error state" time="0.0088915">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; uses fallback text for an error without a message" time="0.0080445">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; handles focus and blur callbacks" time="0.0170122">
+        </testcase>
+        <testcase classname="tests/unit/pages/Payroll.test.jsx" name="Payroll &gt; restores search focus after a focused request finishes" time="0.0261513">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/apiError.test.js" timestamp="2026-08-12T06:07:18.196Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="0.0165113">
+        <testcase classname="tests/unit/utils/apiError.test.js" name="api error helpers &gt; uses an API error or message and falls back for unreadable bodies" time="0.0080544">
+        </testcase>
+        <testcase classname="tests/unit/utils/apiError.test.js" name="api error helpers &gt; normalizes network and unexpected failures while preserving real errors" time="0.0026973">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/attendance.util.test.js" timestamp="2026-08-12T06:07:18.199Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.0176577">
+        <testcase classname="tests/unit/utils/attendance.util.test.js" name="getAttendancePercentageColor &gt; should return EXCELLENT for percentage greater than 95" time="0.0085658">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendance.util.test.js" name="getAttendancePercentageColor &gt; should return EXCELLENT for percentage equal to 95" time="0.0006015">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendance.util.test.js" name="getAttendancePercentageColor &gt; should return AVERAGE for percentage between 85 and 94.9" time="0.0008656">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendance.util.test.js" name="getAttendancePercentageColor &gt; should return AVERAGE for percentage equal to 85" time="0.0007968">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendance.util.test.js" name="getAttendancePercentageColor &gt; should return POOR for percentage less than 85" time="0.0006126">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendance.util.test.js" name="getAttendancePercentageColor &gt; should return POOR when no percentage is provided" time="0.0005195">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/attendanceDetails.util.test.js" timestamp="2026-08-12T06:07:18.206Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="0.0255923">
+        <testcase classname="tests/unit/utils/attendanceDetails.util.test.js" name="getAttendanceSummary &gt; should calculate attendance summary correctly" time="0.0117388">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendanceDetails.util.test.js" name="getAttendanceSummary &gt; should return zeros for empty attendance list" time="0.000779">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendanceDetails.util.test.js" name="getAttendanceSummary &gt; should include leave days in total absent days" time="0.0008527">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendanceDetails.util.test.js" name="getAttendanceSummary &gt; should calculate average attendance to one decimal place" time="0.0005506">
+        </testcase>
+        <testcase classname="tests/unit/utils/attendanceDetails.util.test.js" name="getAttendanceSummary &gt; should handle a single attendance record" time="0.0005561">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/department.util.test.js" timestamp="2026-08-12T06:07:18.213Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="0.0180085">
+        <testcase classname="tests/unit/utils/department.util.test.js" name="getDepartmentSummary &gt; should return correct department summary" time="0.0089014">
+        </testcase>
+        <testcase classname="tests/unit/utils/department.util.test.js" name="getDepartmentSummary &gt; should return all zeros for empty employee list" time="0.0008446">
+        </testcase>
+        <testcase classname="tests/unit/utils/department.util.test.js" name="getDepartmentSummary &gt; should count interns as permanent employees" time="0.0009073">
+        </testcase>
+        <testcase classname="tests/unit/utils/department.util.test.js" name="getDepartmentSummary &gt; should count full time employees as permanent employees" time="0.0006028">
+        </testcase>
+        <testcase classname="tests/unit/utils/department.util.test.js" name="getDepartmentSummary &gt; should not count contract employees as permanent employees" time="0.0006984">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/employeePayload.test.js" timestamp="2026-08-12T06:07:18.218Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="0.0247953">
+        <testcase classname="tests/unit/utils/employeePayload.test.js" name="buildEmployeeUpdatePayload &gt; builds employee update payload correctly" time="0.0134012">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeePayload.test.js" name="buildEmployeeUpdatePayload &gt; returns default values when employee fields are missing" time="0.0015634">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeePayload.test.js" name="buildEmployeeUpdatePayload &gt; converts salary values into numbers" time="0.0006716">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeePayload.test.js" name="buildEmployeeUpdatePayload &gt; converts IFSC code to uppercase" time="0.0006147">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeePayload.test.js" name="buildEmployeeUpdatePayload &gt; proper-cases only names and textual address fields" time="0.0028119">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/employeeValidation.test.js" timestamp="2026-08-12T06:07:18.233Z" hostname="Aaamod" tests="23" failures="0" errors="0" skipped="0" time="0.0530796">
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; normalizes every supported Indian phone format before validation" time="0.0158344">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; returns empty errors for valid employee" time="0.0011065">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates required personal information" time="0.0010364">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; rejects invalid names" time="0.000703">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates phone numbers" time="0.000703">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates employee age should be above 18" time="0.008655">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates address fields" time="0.0011171">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates employment required fields" time="0.0009857">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates employee hierarchy ids" time="0.0008166">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates bank details" time="0.0009322">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates emergency contact" time="0.0011017">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; rejects invalid email format" time="0.0010791">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates alternate phone number" time="0.0006282">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates invalid HR employee id" time="0.0005547">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates invalid lead employee id" time="0.0005495">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; returns error for invalid email format" time="0.0004827">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; validates missing date of birth" time="0.0004732">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; accepts valid marital status, nationality and phone" time="0.0006925">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; handles missing address object" time="0.0005576">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; accepts valid bank details" time="0.0005105">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; accepts valid emergency phone" time="0.0003938">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; handles completely missing nested objects" time="0.0010368">
+        </testcase>
+        <testcase classname="tests/unit/utils/employeeValidation.test.js" name="validateEmployee &gt; rejects invalid last name" time="0.0004866">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/fetchWithRetry.test.js" timestamp="2026-08-12T06:07:18.259Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.0540521">
+        <testcase classname="tests/unit/utils/fetchWithRetry.test.js" name="fetchWithRetry &gt; returns the first successful response" time="0.0166783">
+        </testcase>
+        <testcase classname="tests/unit/utils/fetchWithRetry.test.js" name="fetchWithRetry &gt; retries transient TypeErrors" time="0.0159646">
+        </testcase>
+        <testcase classname="tests/unit/utils/fetchWithRetry.test.js" name="fetchWithRetry &gt; does not retry non-network errors" time="0.0051205">
+        </testcase>
+        <testcase classname="tests/unit/utils/fetchWithRetry.test.js" name="fetchWithRetry &gt; throws after all network retries fail" time="0.0101161">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/utils/formatter.test.js" timestamp="2026-08-12T06:07:18.263Z" hostname="Aaamod" tests="40" failures="0" errors="0" skipped="0" time="0.041814">
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; formats Indian phone input %p" time="0.0079054">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; formats Indian phone input %p" time="0.0008423">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; formats Indian phone input %p" time="0.000538">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; formats Indian phone input %p" time="0.0003901">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; formats Indian phone input %p" time="0.0003091">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; returns the value when it exists" time="0.0007728">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; returns fallback for null, undefined and empty string" time="0.000709">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="display &gt; returns custom fallback" time="0.0005276">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="properCase &gt; capitalizes every word and lowercases remaining letters" time="0.0028762">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="properCase &gt; handles empty values and preserves whitespace" time="0.0006428">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="date &gt; formats a valid date" time="0.000836">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="date &gt; formats Date objects" time="0.0006648">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="date &gt; returns fallback for invalid date" time="0.0005547">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="date &gt; returns fallback for nullish values" time="0.0010066">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="date &gt; returns custom fallback" time="0.0006313">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="currency &gt; formats numeric values" time="0.0016022">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="currency &gt; returns fallback for invalid number" time="0.000467">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="currency &gt; returns fallback for nullish values" time="0.0005891">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="currency &gt; returns custom fallback" time="0.0004446">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; formats complete address" time="0.0007432">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; formats partial address" time="0.0005235">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; returns only pincode when no other fields exist" time="0.0004466">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; returns fallback for empty object" time="0.0003989">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; returns fallback for null" time="0.0003899">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; returns custom fallback" time="0.0003893">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; returns address with pincode" time="0.0004597">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="address &gt; returns fallback when address has only empty values" time="0.0004304">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; formats a plain number" time="0.0007751">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; removes non-digit characters" time="0.0004744">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; preserves +91 prefix with spacing" time="0.0005054">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; preserves already spaced +91 prefix" time="0.0004896">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; returns fallback for empty values" time="0.0006126">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; returns fallback when no digits exist" time="0.0004134">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; returns custom fallback" time="0.0003606">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="phone &gt; returns fallback when phone contains only symbols" time="0.0003641">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="mask &gt; masks all but last four characters" time="0.0006625">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="mask &gt; returns original value when length is four or less" time="0.0005159">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="mask &gt; trims whitespace before masking" time="0.0003991">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="mask &gt; returns fallback for empty values" time="0.0006231">
+        </testcase>
+        <testcase classname="tests/unit/utils/formatter.test.js" name="mask &gt; returns custom fallback" time="0.0003824">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/authSlice.test.js" timestamp="2026-08-12T06:07:18.293Z" hostname="Aaamod" tests="11" failures="0" errors="0" skipped="0" time="0.0576098">
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; returns initial state when no session exists" time="0.0189394">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; loads stored user from localStorage" time="0.0081728">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; clears user on logout" time="0.0041863">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; handles login pending state" time="0.0018051">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; handles successful login" time="0.0021015">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; handles failed login" time="0.0012546">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; login thunk succeeds" time="0.0060054">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; login thunk rejects for invalid credentials" time="0.0027135">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; login thunk rejects on server error" time="0.0020025">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; logs employee information when user logs out" time="0.0013032">
+        </testcase>
+        <testcase classname="tests/unit/store/authSlice.test.js" name="authSlice &gt; clears user on logout" time="0.0010197">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/dashboardSlice.test.js" timestamp="2026-08-12T06:07:18.300Z" hostname="Aaamod" tests="11" failures="0" errors="0" skipped="0" time="0.0455946">
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; returns initial state" time="0.017994">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; clears dashboard data" time="0.0038811">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; refreshes dashboard by clearing lastFetched" time="0.0015808">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; handles fetchDashboard pending state" time="0.0017499">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; handles fetchDashboard fulfilled state" time="0.0018055">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; handles fetchDashboard rejected state" time="0.000899">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; fetchDashboard thunk succeeds" time="0.0048291">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; fetchDashboard thunk rejects on API error" time="0.0021224">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; fetchDashboard thunk uses default error message when error.message is missing" time="0.0011866">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; handles rejected action without payload" time="0.0010048">
+        </testcase>
+        <testcase classname="tests/unit/store/dashboardSlice.test.js" name="dashboardSlice &gt; handles rejected action with default message" time="0.001244">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/departmentSlice.test.js" timestamp="2026-08-12T06:07:18.310Z" hostname="Aaamod" tests="10" failures="0" errors="0" skipped="0" time="0.0313281">
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; reducer &gt; should return the initial state" time="0.0141833">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; reducer &gt; should handle setDepartments" time="0.0030528">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; reducer &gt; should handle clearDepartments" time="0.0009374">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; reducer &gt; should handle invalidateDepartments" time="0.0010078">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; reducer &gt; should handle addDepartment" time="0.0024534">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; reducer &gt; should add department when list is empty" time="0.0009065">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; actions &gt; should create setDepartments action" time="0.0006321">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; actions &gt; should create clearDepartments action" time="0.0005559">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; actions &gt; should create invalidateDepartments action" time="0.0006484">
+        </testcase>
+        <testcase classname="tests/unit/store/departmentSlice.test.js" name="departmentSlice &gt; actions &gt; should create addDepartment action" time="0.0005243">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/designationSlice.test.js" timestamp="2026-08-12T06:07:18.318Z" hostname="Aaamod" tests="1" failures="0" errors="0" skipped="0" time="0.0255167">
+        <testcase classname="tests/unit/store/designationSlice.test.js" name="designationSlice &gt; manages the designation cache lifecycle" time="0.0196645">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/filterSlice.test.js" timestamp="2026-08-12T06:07:18.322Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.0333435">
+        <testcase classname="tests/unit/store/filterSlice.test.js" name="filterSlice &gt; returns initial state" time="0.0141838">
+        </testcase>
+        <testcase classname="tests/unit/store/filterSlice.test.js" name="filterSlice &gt; updates employee filters using setFilters" time="0.0048078">
+        </testcase>
+        <testcase classname="tests/unit/store/filterSlice.test.js" name="filterSlice &gt; updates only provided filter values" time="0.0016902">
+        </testcase>
+        <testcase classname="tests/unit/store/filterSlice.test.js" name="filterSlice &gt; resets a specific module filters" time="0.001586">
+        </testcase>
+        <testcase classname="tests/unit/store/filterSlice.test.js" name="filterSlice &gt; does not reset other modules when resetting one module" time="0.001211">
+        </testcase>
+        <testcase classname="tests/unit/store/filterSlice.test.js" name="filterSlice &gt; resets all filters" time="0.0011512">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/store.test.js" timestamp="2026-08-12T06:07:18.328Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="0.0243717">
+        <testcase classname="tests/unit/store/store.test.js" name="Redux store &gt; registers all application reducers" time="0.0104364">
+        </testcase>
+        <testcase classname="tests/unit/store/store.test.js" name="Redux store &gt; initializes each reducer with its expected state" time="0.0064881">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/store/uiSlice.test.js" timestamp="2026-08-12T06:07:18.332Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="0.0290133">
+        <testcase classname="tests/unit/store/uiSlice.test.js" name="uiSlice &gt; returns the initial state" time="0.015756">
+        </testcase>
+        <testcase classname="tests/unit/store/uiSlice.test.js" name="uiSlice &gt; opens sidebar" time="0.0040844">
+        </testcase>
+        <testcase classname="tests/unit/store/uiSlice.test.js" name="uiSlice &gt; closes sidebar" time="0.0007684">
+        </testcase>
+        <testcase classname="tests/unit/store/uiSlice.test.js" name="uiSlice &gt; does not change unrelated state when opening sidebar" time="0.0006939">
+        </testcase>
+        <testcase classname="tests/unit/store/uiSlice.test.js" name="uiSlice &gt; does not change unrelated state when closing sidebar" time="0.0007033">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/attendance/AttendanceCard.test.jsx" timestamp="2026-08-12T06:07:18.340Z" hostname="Aaamod" tests="7" failures="0" errors="0" skipped="0" time="1.0895079">
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; renders employee information" time="0.2480014">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; renders attendance percentage" time="0.0438131">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; renders attendance statistics" time="0.0741455">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; calls onView when action button is clicked" time="0.5483686">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; renders employee image" time="0.0813059">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; sets progress bar width from attendance percentage" time="0.0372116">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceCard.test.jsx" name="AttendanceCard &gt; falls back to zero values when attendance is missing" time="0.0433331">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/attendance/AttendanceDetails.test.jsx" timestamp="2026-08-12T06:07:18.345Z" hostname="Aaamod" tests="8" failures="0" errors="0" skipped="0" time="0.4738647">
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; shows loader initially" time="0.1355619">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; renders employee details after loading" time="0.1079016">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; renders attendance table" time="0.041052">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; renders stat cards" time="0.053618">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; renders NotFound when no attendance exists" time="0.0110564">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; calls both APIs with employee id" time="0.0356754">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; shows a graceful error when API request fails" time="0.0342441">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetails.test.jsx" name="AttendanceDetails &gt; uses fallback text when the request error has no message" time="0.0438722">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" timestamp="2026-08-12T06:07:18.349Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.4550164">
+        <testcase classname="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" name="AttendanceDetailsTable &gt; renders all table headers" time="0.2362567">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" name="AttendanceDetailsTable &gt; renders attendance records" time="0.0472909">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" name="AttendanceDetailsTable &gt; renders attendance values correctly" time="0.0645049">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" name="AttendanceDetailsTable &gt; renders empty table body when attendance is empty" time="0.024097">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" name="AttendanceDetailsTable &gt; applies attendance percentage color class" time="0.0354089">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceDetailsTable.test.jsx" name="AttendanceDetailsTable &gt; calls getAttendancePercentageColor for each attendance item" time="0.0345494">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" timestamp="2026-08-12T06:07:18.352Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.3207554">
+        <testcase classname="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" name="AttendanceMonthCard &gt; renders month and year" time="0.1617476">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" name="AttendanceMonthCard &gt; renders attendance percentage" time="0.0271921">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" name="AttendanceMonthCard &gt; renders attendance statistics" time="0.0412743">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" name="AttendanceMonthCard &gt; renders all card labels" time="0.0367007">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" name="AttendanceMonthCard &gt; applies attendance percentage color class" time="0.0212859">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceMonthCard.test.jsx" name="AttendanceMonthCard &gt; calls getAttendancePercentageColor with percentage value" time="0.0195834">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/attendance/AttendanceTable.test.jsx" timestamp="2026-08-12T06:07:18.356Z" hostname="Aaamod" tests="9" failures="0" errors="0" skipped="0" time="1.5883963">
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders all table headers" time="0.3688316">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders employee information" time="0.0981409">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders attendance values" time="0.1050876">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders employee images" time="0.6064174">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; calls onView when action button is clicked" time="0.2532881">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders progress bars with correct widths" time="0.0480617">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders empty table when employees array is empty" time="0.0114958">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; falls back to zero values when attendance is missing" time="0.0268993">
+        </testcase>
+        <testcase classname="tests/unit/components/attendance/AttendanceTable.test.jsx" name="AttendanceTable &gt; renders assignment fallbacks when employment is missing" time="0.0500398">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentCard.test.jsx" timestamp="2026-08-12T06:07:18.362Z" hostname="Aaamod" tests="9" failures="0" errors="0" skipped="0" time="1.2424272">
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; renders department information" time="0.2299492">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; renders employee statistics correctly" time="0.0690166">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; calls onView when eye action is clicked" time="0.5649313">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; calls edit and delete actions with the department" time="0.1142941">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; shows employee locations" time="0.0338172">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; shows extra location count when more than two locations exist" time="0.0428459">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; handles missing performance rating and salary" time="0.0640804">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; handles department with no employees" time="0.0524299">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCard.test.jsx" name="DepartmentCard &gt; ignores employees from other departments" time="0.0516546">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentCreate.test.jsx" timestamp="2026-08-12T06:07:18.367Z" hostname="Aaamod" tests="10" failures="0" errors="0" skipped="0" time="5.823335">
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; renders the create form" time="0.5037145">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; shows validation errors when submitting an empty form" time="0.1044476">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; adds and removes skills" time="0.4435345">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; adds a designation with Enter" time="0.2670555">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; does not add duplicate tags" time="0.6078862">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; creates a department successfully" time="1.2061865">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; shows server error when creation fails" time="1.3202547">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; navigates back when cancel is clicked" time="0.1122129">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; validates touched and empty fields during interaction" time="0.7791675">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentCreate.test.jsx" name="DepartmentCreate &gt; removes the last designation and restores its validation error" time="0.4659891">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentDetails.test.jsx" timestamp="2026-08-12T06:07:18.374Z" hostname="Aaamod" tests="8" failures="0" errors="0" skipped="0" time="0.6392652">
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; shows loader while fetching data" time="0.1502466">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; fetches department and employees using id" time="0.1043268">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; renders department information" time="0.1547795">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; renders employee table when employees exist" time="0.0817837">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; renders empty state when no employees exist" time="0.0617021">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; shows not found when department does not exist" time="0.0303104">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; handles api failure and stops loading" time="0.0188522">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetails.test.jsx" name="DepartmentDetails &gt; uses fallback text for an error without a message" time="0.0229138">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentDetailsTable.test.jsx" timestamp="2026-08-12T06:07:18.379Z" hostname="Aaamod" tests="7" failures="0" errors="0" skipped="0" time="1.0118673">
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; renders table headers" time="0.241814">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; renders employee information" time="0.0568513">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; renders employee link correctly" time="0.5678692">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; renders employee status" time="0.0599663">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; applies correct status class" time="0.0315157">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; uses default status class for unknown status" time="0.0291448">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentDetailsTable.test.jsx" name="DepartmentDetailsTable &gt; renders empty table when employees array is empty" time="0.012025">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentEdit.test.jsx" timestamp="2026-08-12T06:07:18.383Z" hostname="Aaamod" tests="16" failures="0" errors="0" skipped="0" time="2.8397069">
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; shows loader initially" time="0.1216604">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; shows department not found when api returns empty" time="0.0398918">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; renders department details" time="0.0573073">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; renders employee table when employees exist" time="0.0457589">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; renders empty state when no employees" time="0.0259572">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; adds new employee row when Add Employee clicked" time="0.6326462">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; adds employee successfully" time="0.2906703">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; handles add employee api failure" time="0.327557">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; does not add another row when row already exists" time="0.2237876">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; removes employee successfully" time="0.1537362">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; calls all api methods with department id" time="0.0216924">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; handles fetchData api error gracefully" time="0.0131097">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; handles remove employee api failure" time="0.2384758">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; shows designation required error while adding employee" time="0.114827">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; validates a missing designation and allows cancelling the row" time="0.3101211">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEdit.test.jsx" name="DepartmentEdit &gt; keeps the row when the entered employee cannot be found" time="0.2106054">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentEditTable.test.jsx" timestamp="2026-08-12T06:07:18.393Z" hostname="Aaamod" tests="18" failures="0" errors="0" skipped="0" time="3.5729047">
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; renders table headers correctly" time="0.1805317">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; renders employee details" time="0.0831097">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; renders employee link correctly" time="0.5366344">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; calls onRemoveEmployee when delete clicked" time="0.1491368">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; renders add employee row" time="0.0624656">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; updates employee id input" time="0.2314334">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; calls save employee when save button clicked" time="0.1412625">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; shows validation errors" time="0.1594624">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; calls cancel row" time="0.2020512">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; updates employee id with uppercase and clears error" time="0.3295421">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; updates designation and clears designation error" time="0.1991514">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; sets designation error when designation is cleared" time="0.1859113">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; uses default status color when status is unknown" time="0.0385077">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; covers designation select without error branch" time="0.1277422">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; shows saving state when row is loading" time="0.0397301">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; disables save button when employee data is incomplete" time="0.0406815">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; supports save, cancel, and remove actions in the mobile card layout" time="0.3774016">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEditTable.test.jsx" name="DepartmentEditTable &gt; updates and removes records through the desktop table controls" time="0.4751388">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" timestamp="2026-08-12T06:07:18.400Z" hostname="Aaamod" tests="10" failures="0" errors="0" skipped="0" time="0.4025442">
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders employee name" time="0.168809">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders employee id" time="0.0298942">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders employee status" time="0.03237">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; applies correct status color class" time="0.0190496">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders designation" time="0.0227771">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders employee type" time="0.0289737">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders work location" time="0.0248231">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; renders manager name" time="0.018354">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; shows dash when manager is unavailable" time="0.0229726">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentEmployeeCard.test.jsx" name="DepartmentEmployeeCard &gt; handles missing optional employee fields" time="0.0221228">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/department/DepartmentTable.test.jsx" timestamp="2026-08-12T06:07:18.408Z" hostname="Aaamod" tests="12" failures="0" errors="0" skipped="0" time="1.4417259">
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; renders table headers correctly" time="0.1911923">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; renders department details" time="0.0749723">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; calculates average rating correctly" time="0.0262734">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; calculates average CTC correctly" time="0.0348974">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; renders employee locations" time="0.0422796">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; calls onView when view button is clicked" time="0.6290941">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; calls onEdit when edit button is clicked" time="0.1264781">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; calls onDelete when delete button is clicked" time="0.1241873">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; renders empty table when departments are empty" time="0.0331202">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; handles departments without employees" time="0.0436761">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; renders icons" time="0.0408578">
+        </testcase>
+        <testcase classname="tests/unit/components/department/DepartmentTable.test.jsx" name="DepartmentTable Component &gt; uses zero metric fallbacks and summarizes additional locations" time="0.0608679">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/Breadcrumb.test.jsx" timestamp="2026-08-12T06:07:18.414Z" hostname="Aaamod" tests="7" failures="0" errors="0" skipped="0" time="0.7760806">
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; returns null when route is not found" time="0.075583">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; renders breadcrumb without parent" time="0.4985636">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; renders parent breadcrumb link" time="0.0844473">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; last breadcrumb is not a link" time="0.0556175">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; renders chevron icons" time="0.0179619">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; renders home icon" time="0.0088443">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Breadcrumb.test.jsx" name="Breadcrumb &gt; handles missing parent route gracefully" time="0.0230492">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/DataTable.test.jsx" timestamp="2026-08-12T06:07:18.417Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="0.1954211">
+        <testcase classname="tests/unit/components/common/DataTable.test.jsx" name="DataTable Components &gt; renders Table with children" time="0.138855">
+        </testcase>
+        <testcase classname="tests/unit/components/common/DataTable.test.jsx" name="DataTable Components &gt; renders TableHead" time="0.0103456">
+        </testcase>
+        <testcase classname="tests/unit/components/common/DataTable.test.jsx" name="DataTable Components &gt; renders TableBody" time="0.007474">
+        </testcase>
+        <testcase classname="tests/unit/components/common/DataTable.test.jsx" name="DataTable Components &gt; renders TableRow with custom class" time="0.0088498">
+        </testcase>
+        <testcase classname="tests/unit/components/common/DataTable.test.jsx" name="DataTable Components &gt; renders TableHeader with custom class" time="0.0096215">
+        </testcase>
+        <testcase classname="tests/unit/components/common/DataTable.test.jsx" name="DataTable Components &gt; renders TableCell with custom class" time="0.0073891">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/EmptyState.test.jsx" timestamp="2026-08-12T06:07:18.423Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="0.2257997">
+        <testcase classname="tests/unit/components/common/EmptyState.test.jsx" name="EmptyState &gt; renders default title and message" time="0.1848215">
+        </testcase>
+        <testcase classname="tests/unit/components/common/EmptyState.test.jsx" name="EmptyState &gt; renders custom title and message" time="0.0234038">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/ErrorState.test.jsx" timestamp="2026-08-12T06:07:18.426Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.7980862">
+        <testcase classname="tests/unit/components/common/ErrorState.test.jsx" name="ErrorState &gt; renders default title and message" time="0.6229396">
+        </testcase>
+        <testcase classname="tests/unit/components/common/ErrorState.test.jsx" name="ErrorState &gt; renders custom title and message" time="0.0497724">
+        </testcase>
+        <testcase classname="tests/unit/components/common/ErrorState.test.jsx" name="ErrorState &gt; runs the supplied retry action" time="0.0685418">
+        </testcase>
+        <testcase classname="tests/unit/components/common/ErrorState.test.jsx" name="ErrorState &gt; provides a working default retry action" time="0.0407343">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/Filters.test.jsx" timestamp="2026-08-12T06:07:18.429Z" hostname="Aaamod" tests="12" failures="0" errors="0" skipped="0" time="2.2263356">
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; renders search input" time="0.1424119">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; renders department dropdown" time="0.0739079">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; renders status dropdown" time="0.0237617">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; calls search change handler" time="0.9548576">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; calls department change handler" time="0.440785">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; calls status change handler" time="0.1481726">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; calls focus and blur handlers" time="0.2134646">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; hides search when showSearch is false" time="0.0168492">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; hides department filter when showDepartment is false" time="0.0161555">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; hides status filter when showStatus is false" time="0.0122577">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; renders new button and navigates" time="0.148294">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Filters.test.jsx" name="Filters Component &gt; renders search icon" time="0.0178725">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/Header.test.jsx" timestamp="2026-08-12T06:07:18.434Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="1.0594541">
+        <testcase classname="tests/unit/components/common/Header.test.jsx" name="Header &gt; renders the breadcrumb" time="0.2807926">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Header.test.jsx" name="Header &gt; opens the sidebar when the menu button is clicked" time="0.7656955">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/InfoCard.test.jsx" timestamp="2026-08-12T06:07:18.436Z" hostname="Aaamod" tests="15" failures="0" errors="0" skipped="0" time="0.8778678">
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders Card with children" time="0.1219574">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardHeader" time="0.0171878">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardTitle" time="0.4620054">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardSubtitle" time="0.0076122">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardContent" time="0.0075363">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardGrid with custom columns" time="0.0106443">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardItem with label and value" time="0.0130969">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardItem children when no label is provided" time="0.0057708">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders horizontal CardItem" time="0.0118579">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardFooter" time="0.057651">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; calls CardAction onClick" time="0.1073837">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardGrid with default columns" time="0.0060189">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders horizontal CardItem using children when value is missing" time="0.0075009">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardItem with custom class names" time="0.0077622">
+        </testcase>
+        <testcase classname="tests/unit/components/common/InfoCard.test.jsx" name="InfoCard Components &gt; renders CardAction with custom class" time="0.0217271">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/NotFound.test.jsx" timestamp="2026-08-12T06:07:18.446Z" hostname="Aaamod" tests="3" failures="0" errors="0" skipped="0" time="0.6974063">
+        <testcase classname="tests/unit/components/common/NotFound.test.jsx" name="NotFound &gt; renders default title and message" time="0.1460572">
+        </testcase>
+        <testcase classname="tests/unit/components/common/NotFound.test.jsx" name="NotFound &gt; renders custom title and message" time="0.0184617">
+        </testcase>
+        <testcase classname="tests/unit/components/common/NotFound.test.jsx" name="NotFound &gt; navigates back when Go Back button is clicked" time="0.5221429">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/PageLoader.test.jsx" timestamp="2026-08-12T06:07:18.448Z" hostname="Aaamod" tests="3" failures="0" errors="0" skipped="0" time="0.2376332">
+        <testcase classname="tests/unit/components/common/PageLoader.test.jsx" name="PageLoader &gt; renders default loading text" time="0.1595733">
+        </testcase>
+        <testcase classname="tests/unit/components/common/PageLoader.test.jsx" name="PageLoader &gt; renders helper message" time="0.0155258">
+        </testcase>
+        <testcase classname="tests/unit/components/common/PageLoader.test.jsx" name="PageLoader &gt; renders custom loading text" time="0.042084">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/Pagination.test.jsx" timestamp="2026-08-12T06:07:18.450Z" hostname="Aaamod" tests="9" failures="0" errors="0" skipped="0" time="1.4053391">
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; renders pagination information" time="0.2282201">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; shows correct item range" time="0.0403379">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; renders page size options" time="0.6154092">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; returns null when totalPages is zero" time="0.0050657">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; disables previous button on first page" time="0.0554093">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; disables next button on last page" time="0.0387386">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; calls onPageChange with previous page" time="0.1331451">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; calls onPageChange with next page" time="0.1191074">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Pagination.test.jsx" name="Pagination &gt; calls onPageSizeChange when page size changes" time="0.1427995">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/Popup.test.jsx" timestamp="2026-08-12T06:07:18.456Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="1.1318664">
+        <testcase classname="tests/unit/components/common/Popup.test.jsx" name="Popup &gt; renders nothing while the save operation is idle" time="0.0735149">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Popup.test.jsx" name="Popup &gt; announces an in-progress save and prevents dismissal" time="0.5896782">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Popup.test.jsx" name="Popup &gt; shows and dismisses an Error object" time="0.2084166">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Popup.test.jsx" name="Popup &gt; supports messages, fallback errors, and the icon close control" time="0.1334356">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Popup.test.jsx" name="Popup &gt; provides a safe default close handler" time="0.1150343">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/ProfileImage.test.jsx" timestamp="2026-08-12T06:07:18.460Z" hostname="Aaamod" tests="2" failures="0" errors="0" skipped="0" time="0.5955395">
+        <testcase classname="tests/unit/components/common/ProfileImage.test.jsx" name="ProfileImage &gt; uses custom images with explicit dimensions and lazy loading" time="0.506725">
+        </testcase>
+        <testcase classname="tests/unit/components/common/ProfileImage.test.jsx" name="ProfileImage &gt; replaces remote generated avatars and failed images with local SVG fallbacks" time="0.0781223">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/ProtectedRoute.test.jsx" timestamp="2026-08-12T06:07:18.462Z" hostname="Aaamod" tests="3" failures="0" errors="0" skipped="0" time="0.2097584">
+        <testcase classname="tests/unit/components/common/ProtectedRoute.test.jsx" name="ProtectedRoute &gt; redirects unauthenticated users to the login page" time="0.1714011">
+        </testcase>
+        <testcase classname="tests/unit/components/common/ProtectedRoute.test.jsx" name="ProtectedRoute &gt; renders children when the user is authenticated" time="0.0120937">
+        </testcase>
+        <testcase classname="tests/unit/components/common/ProtectedRoute.test.jsx" name="ProtectedRoute &gt; renders the outlet when authenticated and no children are provided" time="0.0124798">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/Sidebar.test.jsx" timestamp="2026-08-12T06:07:18.464Z" hostname="Aaamod" tests="10" failures="0" errors="0" skipped="0" time="2.860518">
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; renders application title" time="0.311071">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; renders all navigation links" time="0.1697407">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; renders logout button" time="1.0050944">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; shows overlay when sidebar is open" time="0.1634483">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; does not show overlay when sidebar is closed" time="0.049299">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; closes sidebar when close menu button is clicked" time="0.2268624">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; closes sidebar when navigation link is clicked" time="0.4086385">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; closes sidebar when overlay is clicked" time="0.1305884">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; logs out user and navigates to login" time="0.1827435">
+        </testcase>
+        <testcase classname="tests/unit/components/common/Sidebar.test.jsx" name="Sidebar &gt; highlights the active navigation link" time="0.1990166">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/common/StatCard.test.jsx" timestamp="2026-08-12T06:07:18.470Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="0.1980224">
+        <testcase classname="tests/unit/components/common/StatCard.test.jsx" name="StatCard &gt; renders label and value without icon" time="0.1261999">
+        </testcase>
+        <testcase classname="tests/unit/components/common/StatCard.test.jsx" name="StatCard &gt; renders string values correctly" time="0.010045">
+        </testcase>
+        <testcase classname="tests/unit/components/common/StatCard.test.jsx" name="StatCard &gt; renders icon when provided" time="0.0215346">
+        </testcase>
+        <testcase classname="tests/unit/components/common/StatCard.test.jsx" name="StatCard &gt; renders value with icon" time="0.0127175">
+        </testcase>
+        <testcase classname="tests/unit/components/common/StatCard.test.jsx" name="StatCard &gt; does not render icon when icon is not provided" time="0.0115217">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/employee/EmployeeCard.test.jsx" timestamp="2026-08-12T06:07:18.474Z" hostname="Aaamod" tests="8" failures="0" errors="0" skipped="0" time="1.2489553">
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; renders employee name and employee code" time="0.2091527">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; renders employee profile image" time="0.0388169">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; renders employee details" time="0.0583864">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; renders employee status badge" time="0.0366527">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; calls onView when action button is clicked" time="0.5957692">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; calls edit and delete actions with the employee" time="0.2153299">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; handles missing optional employee data" time="0.0526001">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCard.test.jsx" name="EmployeeCard Component &gt; uses default status class when status is unknown" time="0.0294828">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/employee/EmployeeCreate.test.jsx" timestamp="2026-08-12T06:07:18.480Z" hostname="Aaamod" tests="19" failures="0" errors="0" skipped="0" time="6.4359727">
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; wires every form control to its change and blur handler" time="0.5572597">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; sets the remote location when remote work mode is selected" time="0.1448854">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; handles a create request failure" time="1.3659955">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; shows blocking progress feedback while the employee is being saved" time="0.4221626">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; keeps Save disabled until the create form is valid" time="0.4234911">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; shows loader while loading" time="0.0186024">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; renders employee create form" time="0.2540457">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; renders validation feedback for every touched form field" time="0.2159679">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; renders default employee values" time="0.149616">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; renders department and designation options" time="0.6736129">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; formats a complete Indian phone number" time="0.1212911">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; formats alternate and emergency phone numbers" time="0.1159871">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; clears dependent bank fields when the bank changes" time="0.1155759">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; shows a reference-data load error instead of an endless loader" time="0.0245865">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; calls updateRootField when email changes" time="0.4707568">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; calls updateNestedField when first name changes" time="0.2350963">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; submits employee successfully" time="0.5853133">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; does not submit when validation fails" time="0.3295222">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeCreate.test.jsx" name="EmployeeCreate &gt; navigates back on cancel" time="0.1870586">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/employee/EmployeeDetails.test.jsx" timestamp="2026-08-12T06:07:18.492Z" hostname="Aaamod" tests="15" failures="0" errors="0" skipped="0" time="3.8669815">
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; shows loader initially" time="0.1533777">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; shows not found when api returns null" time="0.0409312">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; renders employee header" time="0.6701298">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; renders overview tab by default" time="0.0812348">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to employment tab" time="0.3594812">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to payroll tab" time="0.5568654">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to attendance tab" time="0.2876857">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to performance tab" time="0.3733725">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to documents tab" time="0.2532037">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to contact tab" time="0.2758928">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; switches to leave tab" time="0.3151426">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; calls employee api with route id" time="0.0449824">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; shows a useful error when employee loading fails" time="0.0191122">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; renders assignment, email, and performance fallbacks" time="0.3935502">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeDetails.test.jsx" name="EmployeeDetails &gt; uses fallback loading error text when the rejection has no message" time="0.0286378">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/employee/EmployeeEdit.test.jsx" timestamp="2026-08-12T06:07:18.500Z" hostname="Aaamod" tests="21" failures="0" errors="0" skipped="0" time="5.8700344">
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; wires every form control to its change and blur handler" time="0.4614994">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; sets the remote location when remote work mode is selected" time="0.1835674">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; handles an update request failure" time="1.4824332">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; enables Save for valid loaded data and disables it when the form is invalid" time="0.298887">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; shows required errors immediately for an unassigned employee" time="0.2724156">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; disables Save and Cancel while an update is in progress" time="0.4175718">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; shows loader while loading" time="0.0180593">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; renders employee edit form" time="0.1574715">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; renders validation feedback for every touched form field" time="0.2142388">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; renders empty editable values using safe form fallbacks" time="0.1570816">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; renders existing employee values" time="0.1315544">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; renders department options" time="0.6086826">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; formats a complete Indian phone number" time="0.1161745">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; formats alternate and emergency phone numbers" time="0.1001865">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; clears dependent bank fields when the bank changes" time="0.1516752">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; shows load errors and missing employees instead of an endless loader" time="0.0420005">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; calls updateRootField when email changes" time="0.3028475">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; calls updateNestedField when first name changes" time="0.1527161">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; updates employee successfully" time="0.2409314">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; does not submit when validation fails" time="0.1835619">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeEdit.test.jsx" name="EmployeeEdit &gt; navigates back on cancel" time="0.158223">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/employee/EmployeeTable.test.jsx" timestamp="2026-08-12T06:07:18.512Z" hostname="Aaamod" tests="8" failures="0" errors="0" skipped="0" time="1.1813433">
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; renders table headers correctly" time="0.1803525">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; renders employee details" time="0.0832557">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; renders employee profile image with correct alt text" time="0.0300237">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; renders employee status badge" time="0.0279538">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; calls onView when view button is clicked" time="0.5708873">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; calls edit and delete handlers" time="0.2175013">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; renders empty table when employees array is empty" time="0.0171655">
+        </testcase>
+        <testcase classname="tests/unit/components/employee/EmployeeTable.test.jsx" name="EmployeeTable Component &gt; handles missing optional employee fields" time="0.0376352">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/payroll/PayrollCard.test.jsx" timestamp="2026-08-12T06:07:18.516Z" hostname="Aaamod" tests="5" failures="0" errors="0" skipped="0" time="1.0006027">
+        <testcase classname="tests/unit/components/payroll/PayrollCard.test.jsx" name="PayrollCard &gt; renders employee payroll information" time="0.2278222">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollCard.test.jsx" name="PayrollCard &gt; renders profile image correctly" time="0.5296512">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollCard.test.jsx" name="PayrollCard &gt; calls onView when action button is clicked" time="0.1025929">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollCard.test.jsx" name="PayrollCard &gt; handles missing optional employee details" time="0.0713654">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollCard.test.jsx" name="PayrollCard &gt; handles a missing recent payslip" time="0.0585102">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/payroll/PayrollDetailCard.test.jsx" timestamp="2026-08-12T06:07:18.520Z" hostname="Aaamod" tests="3" failures="0" errors="0" skipped="0" time="0.3088841">
+        <testcase classname="tests/unit/components/payroll/PayrollDetailCard.test.jsx" name="PayrollDetailCard &gt; renders payroll information correctly" time="0.2367571">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetailCard.test.jsx" name="PayrollDetailCard &gt; uses 0 deductions when deductions object is missing" time="0.0340062">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetailCard.test.jsx" name="PayrollDetailCard &gt; applies the status text" time="0.0227048">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/payroll/PayrollDetails.test.jsx" timestamp="2026-08-12T06:07:18.524Z" hostname="Aaamod" tests="7" failures="0" errors="0" skipped="0" time="0.7536858">
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; shows loader while payroll data is loading" time="0.1626634">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; loads payroll data and renders payroll table/cards" time="0.2491496">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; aggregates summary values across payroll history" time="0.1227789">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; shows not found when payroll is empty" time="0.0339807">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; stops loading when API throws error" time="0.0531811">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; uses zero totals for missing payroll amounts" time="0.0897148">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetails.test.jsx" name="PayrollDetails &gt; shows fallback text when a request error has no message" time="0.0284543">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/payroll/PayrollDetailsTable.test.jsx" timestamp="2026-08-12T06:07:18.529Z" hostname="Aaamod" tests="4" failures="0" errors="0" skipped="0" time="0.7736506">
+        <testcase classname="tests/unit/components/payroll/PayrollDetailsTable.test.jsx" name="PayrollDetailsTable &gt; renders all table headers" time="0.1985688">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetailsTable.test.jsx" name="PayrollDetailsTable &gt; renders payroll rows with formatted values" time="0.0631358">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetailsTable.test.jsx" name="PayrollDetailsTable &gt; renders payroll statuses" time="0.0413368">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollDetailsTable.test.jsx" name="PayrollDetailsTable &gt; renders no data rows when payroll is empty" time="0.4575535">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/payroll/PayrollTable.test.jsx" timestamp="2026-08-12T06:07:18.532Z" hostname="Aaamod" tests="6" failures="0" errors="0" skipped="0" time="1.0864838">
+        <testcase classname="tests/unit/components/payroll/PayrollTable.test.jsx" name="PayrollTable &gt; renders payroll table headers" time="0.2026662">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollTable.test.jsx" name="PayrollTable &gt; renders employee payroll information" time="0.0813976">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollTable.test.jsx" name="PayrollTable &gt; renders employee image" time="0.5558424">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollTable.test.jsx" name="PayrollTable &gt; calls onView when view button is clicked" time="0.1218177">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollTable.test.jsx" name="PayrollTable &gt; renders empty table body when payroll list is empty" time="0.0814553">
+        </testcase>
+        <testcase classname="tests/unit/components/payroll/PayrollTable.test.jsx" name="PayrollTable &gt; renders assignment fallbacks when employment data is missing" time="0.0312547">
+        </testcase>
+    </testsuite>
+</testsuites>

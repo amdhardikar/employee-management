@@ -1,10 +1,25 @@
+/**
+ * @fileoverview Loads dashboard totals from Redux and presents employee, attendance, department, and payroll overview cards with explicit loading and error states.
+ *
+ * @description
+ * This module is part of the Employee Management System client. The summary above describes
+ * its ownership boundary so maintainers can quickly identify why it exists and how it participates
+ * in the surrounding UI, state, or data flow.
+ *
+ * @module src/pages/Dashboard
+ */
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Users, UserPlus, Briefcase, Calendar } from "lucide-react";
 import PageLoader from "../components/common/PageLoader";
 import ErrorState from "../components/common/ErrorState";
 import { fetchDashboard } from "../store/dashboardSlice";
+import { currency } from "../utils/formatter";
 
+/**
+ * Renders the dashboard interface and coordinates its presentation behavior.
+ * @returns {JSX.Element} Rendered React user interface.
+ */
 const Dashboard = () => {
 	const dispatch = useDispatch();
 
@@ -87,7 +102,7 @@ const Dashboard = () => {
 								{dashboard.recentEmployees.map((emp) => (
 									<div key={emp.id} className="flex items-center justify-between border-b pb-3">
 										<div>
-											<p className="font-medium">{emp.personalInfo.fullName}</p>
+											<p className="font-medium">{emp.fullName}</p>
 											<p className="text-sm text-gray-500">{emp.employment.designation}</p>
 										</div>
 
@@ -177,7 +192,7 @@ const Dashboard = () => {
 
 							<div className="py-6 text-center">
 								<h2 className="text-4xl font-bold text-indigo-600">
-									₹{dashboard.stats.monthlyPayroll?.toLocaleString("en-IN")}
+									{currency(dashboard.stats.monthlyPayroll)}
 								</h2>
 
 								<p className="mt-2 text-gray-500">Total Net Salary Payout</p>
