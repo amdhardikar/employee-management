@@ -13,6 +13,7 @@ describe("AttendanceCard", () => {
 		},
 		employment: {
 			departmentName: "Engineering",
+			designation: "Software Engineer",
 		},
 		attendance: {
 			attendancePercentage: 95,
@@ -28,7 +29,7 @@ describe("AttendanceCard", () => {
 
 		expect(screen.getByText("John Doe")).toBeInTheDocument();
 		expect(screen.getByText("E001 | EMP001")).toBeInTheDocument();
-		expect(screen.getByText("Engineering")).toBeInTheDocument();
+		expect(screen.getByText("Engineering | Software Engineer")).toBeInTheDocument();
 	});
 
 	it("renders attendance percentage", () => {
